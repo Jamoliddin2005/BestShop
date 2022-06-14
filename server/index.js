@@ -3,14 +3,29 @@ const cors = require("cors");
 const cookieSession = require("cookie-session");
 const passport = require("passport");
 const session = require("express-session");
-// const MongoDBStore = require("connect-mongodb-session")(session);
+const users = require("./models/User");
 const app = express();
+
+const initializePassport = require("./middleware/passport-config");
+initializePassport(
+  passport,
+  (email) => users.find((user) => user.email === email),
+  (id) => users.find((user) => user.id === id)
+);
 
 require("dotenv").config();
 require("./helper/db")();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
 app.use(
   cookieSession({ name: "session", keys: ["lama"], maxAge: 24 * 60 * 60 * 100 })

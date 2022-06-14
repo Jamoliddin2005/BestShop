@@ -1,0 +1,16 @@
+.eyePass {
+  position: absolute;
+  font-size: 18px;
+  cursor: pointer;
+  right: 20px;
+  padding: 15px;
+  right: 0;
+}
+.passwordDIve {
+  position: relative;
+}
+
+.register .wrapperRegister {
+  width: 805px;
+  height: 400px;
+}

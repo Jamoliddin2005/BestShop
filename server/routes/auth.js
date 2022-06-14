@@ -7,6 +7,7 @@ const {
   logout,
   Google,
   GoogleCallBack,
+  register,
 } = require("../controllers/auth");
 
 router.route("/login/success").get(loginSuccess);
@@ -38,5 +39,9 @@ router.route("/google/callback").get(GoogleCallBack);
 //         failureRedirect: "/login/failed",
 //     })
 // );
+
+////// Register
+
+router.route("/register").post(register);
 
 module.exports = router;

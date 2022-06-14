@@ -33,7 +33,7 @@ function SwiperHead({ contacts, deleteCarousel, loading }) {
                     <div className="row">
                       <div className="left">
                         <h1>{item.title}</h1>
-                        <h3>{item.select.toString()}</h3>
+                        <h3>{item.select}</h3>
                         <p>{item.desc}</p>
                         <div className="buttons admin">
                           <button onClick={(e) => deleteCarousel(item._id)}>

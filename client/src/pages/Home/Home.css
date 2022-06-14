@@ -1,0 +1,112 @@
+.image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.carousel {
+  background: #efefef;
+  height: auto;
+}
+
+.swiper {
+  height: 600px;
+}
+
+.carousel .row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  height: 600px;
+}
+
+.carousel .row .left {
+  width: 50%;
+  height: auto;
+}
+
+.carousel .row .right {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  color: #59ab6e;
+  font-weight: 900;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  opacity: 0.5;
+  transition: 0.3s;
+}
+
+.swiper-button-next {
+  right: 0;
+  width: 70px;
+  height: 100%;
+  background-color: transparent;
+  top: 20px;
+}
+
+.swiper-button-prev {
+  left: 0;
+  width: 70px;
+  height: 100%;
+  background-color: transparent;
+  top: 20px;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  opacity: 1;
+  background: #d8d8d8;
+}
+
+.swiper-pagination-bullet {
+  width: 30px;
+  background-color: rgb(212, 212, 212);
+  height: 5px;
+  border-radius: 0;
+}
+
+.carousel .row .left h1 {
+  color: #59ab6e;
+  font-family: "Roboto", sans-serif;
+  font-size: 48px;
+  font-weight: 200 !important;
+  margin-bottom: 0.5rem;
+}
+
+.carousel .row .left h3 {
+  font-family: "Roboto", sans-serif;
+  font-size: 30px;
+  font-weight: 300;
+  margin-bottom: 0.5rem;
+}
+
+.carousel .row .left p {
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+.carousel .row .left button {
+  background: #59ab6e;
+  border: 1px solid #212934;
+  padding: 13px 35px;
+  cursor: pointer;
+  color: #efefef;
+}
+
+.swiper-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal,
+.swiper-pagination-custom,
+.swiper-pagination-fraction {
+  bottom: 30px;
+}

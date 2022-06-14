@@ -1,0 +1,241 @@
+.navbar_top {
+  background: #212934;
+  padding: 10px 0;
+}
+
+.navbar_top .container .row {
+  justify-content: space-between;
+}
+
+.navbar_top ul {
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+
+.navbar_top ul li {
+  margin: 0 10px;
+}
+
+.navbar_top ul li a {
+  color: #cfd6e1;
+  font-size: 0.9em;
+  transition: 0.3s;
+}
+
+.navbar_top ul li a:hover {
+  color: white;
+}
+
+/* nav */
+nav {
+  padding: 25px 0;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+nav .container .row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+nav .container .row ul {
+  display: flex;
+  align-items: center;
+}
+
+nav .navbar_left {
+  color: #59ab6e;
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+  font-size: 48px;
+}
+
+nav .navbar_center {
+  width: auto;
+}
+
+nav .navbar_center li {
+  margin: 0 30px;
+}
+
+nav .navbar_center li a {
+  color: #212934;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  transition: 0.3s;
+}
+
+nav .navbar_center li a:hover {
+  color: #69bb7e;
+}
+
+nav .navbar_right li {
+  margin-left: 40px;
+  position: relative;
+}
+
+.d_none_div {
+  display: none;
+}
+
+nav .navbar_right li .userIcon {
+  display: flex;
+  align-items: center;
+  color: #212934;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+nav .navbar_right li .userIcon i {
+  width: auto;
+  height: auto;
+}
+
+nav .navbar_right li .userIcon .downIcon i {
+  color: #a0a0a0;
+  font-size: 16px;
+  height: 22px;
+  margin-left: 3px;
+}
+
+nav .navbar_right li a {
+  color: #212934;
+  font-size: 18px;
+}
+
+nav .navbar_right li span {
+  position: absolute;
+  top: -12px;
+  right: -14px;
+  width: 25px;
+  height: 20px;
+  background-color: #e9eef5;
+  color: #212529;
+  font-size: 0.75em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  border-radius: 40%;
+}
+
+nav .navbar_right li .register {
+  position: absolute;
+  display: none;
+}
+
+nav .navbar_right li .register_clicked {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background: #ebebeb;
+  border-radius: 5px;
+  z-index: 10;
+  box-shadow: 1px 0 5px 2px #b4b4b4;
+  padding: 5px 0;
+}
+
+nav .navbar_right li .register_clicked a {
+  padding: 10px 20px;
+  transition: 0.2s;
+  color: #212934;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+nav .navbar_right li .register_clicked a:hover {
+  background-color: #59ab6e;
+  color: white;
+}
+
+nav .navbar_right .registerClick {
+  position: relative;
+}
+
+nav .navbar_right a {
+  display: flex;
+  align-items: center;
+  color: #212934;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  transition: 0.3s;
+}
+
+nav .navbar_right a:hover,
+nav .AdminIcon_logout span:hover {
+  color: #59ab6e;
+}
+
+nav .navbar_right img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+nav .disabled_bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 3;
+}
+
+nav .dropdownAdmin {
+  cursor: pointer;
+  display: flex;
+  margin-left: 10px;
+  color: #212934;
+}
+
+nav .AdminIcon_logout {
+  font-family: "Roboto", sans-serif;
+  position: absolute;
+  top: 30px;
+  right: -60px;
+  z-index: 10;
+  background-color: #f1f1f1;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+}
+nav .AdminIcon_logout a {
+  border-bottom: 1px solid #59ab6e;
+  padding: 6px 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  display: block;
+}
+
+nav .AdminIcon_logout i {
+  font-size: 15px;
+  margin-right: 5px;
+}
+
+nav .AdminIcon_logout span i {
+  color: #ff4242;
+}
+
+nav .AdminIcon_logout span {
+  color: #212934;
+  font-size: 18px;
+  font-weight: 300;
+  transition: 0.3s;
+  margin-bottom: 5px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+nav ul.AdminRight {
+  position: relative;
+}
+nav ul.AdminRight .User {
+  margin-left: 40px;
+}

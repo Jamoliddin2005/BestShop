@@ -1,0 +1,152 @@
+.adminPage .adminTitle .CarouselHomeHeaderBigDiv .carouselHome .image {
+  width: 100%;
+  height: 300px;
+  object-fit: contain;
+}
+
+.adminPage .adminTitle .CarouselHomeHeaderBigDiv .carouselHome h1 {
+  font-size: 30px;
+  text-align: left;
+}
+
+.adminPage .adminTitle .CarouselHomeHeaderBigDiv .carouselHome h3 {
+  font-size: 23px;
+}
+
+.adminPage .adminTitle .CarouselHomeHeaderBigDiv .carouselHome p {
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.adminPage .adminTitle .CarouselHomeHeaderBigDiv .swiper-button-prev,
+.adminPage .adminTitle .CarouselHomeHeaderBigDiv .swiper-button-next {
+  width: 50px;
+}
+
+.adminPage .adminTitle .CarouselHomeHeaderBigDiv .swiper-button-prev::after,
+.adminPage .adminTitle .CarouselHomeHeaderBigDiv .swiper-button-next::after {
+  font-size: 23px;
+}
+
+.adminPage .adminTitle .CarouselHomeHeaderBigDiv .carouselHome p {
+  font-size: 16px;
+}
+
+.adminPage .adminTitle .CarouselHomeHeaderBigDiv .carouselHome .row {
+  justify-content: space-around;
+}
+
+.adminPage .adminTitle .CarouselHomeHeaderBigDiv .carouselHome .container {
+  width: 80%;
+  margin: auto;
+}
+
+.adminPage
+  .adminTitle
+  .CarouselHomeHeaderBigDiv
+  .carouselHome
+  .carousel
+  .swiper {
+  height: 300px;
+}
+
+.adminPage
+  .adminTitle
+  .CarouselHomeHeaderBigDiv
+  .swiper-horizontal
+  > .adminPage
+  .adminTitle
+  .CarouselHomeHeaderBigDiv
+  .swiper-pagination-bullets,
+.adminPage
+  .adminTitle
+  .CarouselHomeHeaderBigDiv
+  .swiper-pagination-bullets.swiper-pagination-horizontal,
+.adminPage .adminTitle .CarouselHomeHeaderBigDiv .swiper-pagination-custom,
+.adminPage .adminTitle .CarouselHomeHeaderBigDiv .swiper-pagination-fraction {
+  bottom: 10px;
+}
+
+.adminPage
+  .adminTitle
+  .CarouselHomeHeaderBigDiv
+  .carouselHome
+  .carousel
+  .swiper
+  .buttons {
+  display: flex;
+  align-items: center;
+}
+
+.adminPage
+  .adminTitle
+  .CarouselHomeHeaderBigDiv
+  .carouselHome
+  .carousel
+  .swiper
+  .buttons
+  button {
+  border: none;
+  margin-right: 10px;
+  transition: 0.3s;
+  border: 1px solid transparent;
+}
+
+.adminPage
+  .adminTitle
+  .CarouselHomeHeaderBigDiv
+  .carouselHome
+  .carousel
+  .swiper
+  .buttons
+  button:hover {
+  border: 1px solid #212934;
+  color: #212934;
+}
+
+.updateForm {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 50px 30px;
+  width: 70%;
+  z-index: 5;
+  height: auto;
+}
+
+.bigUpdateDiv .bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 4;
+}
+
+.adminPage .container .row {
+  height: 300px;
+}
+
+.css-1s2u09g-control {
+  background: transparent !important;
+  border-color: #2d343f !important;
+}
+
+.selectReact {
+  box-shadow: none !important;
+  border-color: #2d343f !important;
+}
+
+.css-1pahdxg-control {
+  border-color: #2d343f !important;
+  box-shadow: none !important;
+}
+.css-1pahdxg-control:hover {
+  border-color: #2d343f !important;
+  box-shadow: none !important;
+}

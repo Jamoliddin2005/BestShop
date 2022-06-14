@@ -1,0 +1,117 @@
+.Footer {
+  width: 100%;
+  background: #212934;
+  padding: 50px 0;
+}
+
+.Footer .Footer_Top .container .row {
+  padding-bottom: 20px;
+  align-items: flex-start;
+  border-bottom: 1px solid #2d343f;
+}
+
+.Footer .Footer_Top .container ul {
+  width: 400px;
+}
+
+.Footer .Footer_Top .container ul h3 {
+  border-bottom: 1px solid #2d343f;
+  padding-bottom: 15px;
+  font-weight: 300;
+  font-family: "Roboto", sans-serif;
+  font-size: 30px;
+  color: #cfd6e1;
+}
+
+.Footer .Footer_Top .container .Home_Logo h3 {
+  color: #59ab6e;
+  font-weight: 500;
+}
+.Footer .Footer_Top .container ul li {
+  padding-top: 10px;
+}
+
+.Footer .Footer_Top .container ul li a {
+  color: #dcdde1;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  transition: 0.3s;
+}
+
+.Footer .Footer_Top .container ul li a:hover {
+  color: #68bb7d;
+}
+.footer_bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer_bottom ul {
+  display: flex;
+  align-items: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  padding-top: 20px;
+}
+
+.footer_bottom ul li {
+  width: 50px;
+  height: 50px;
+  border: 2px solid #2d343f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  padding-top: 0 !important;
+  cursor: pointer;
+  margin: 0 10px;
+  transition: 0.3s;
+}
+
+.footer_bottom ul li a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer_bottom ul li:hover {
+  border-color: #68bb7d;
+}
+.footer_bottom ul li:hover a {
+  color: #68bb7d !important;
+}
+.footer_bottom form {
+  display: flex;
+  align-items: center;
+}
+
+form input {
+  padding: 10px;
+  outline: none;
+  box-shadow: none;
+  border: none;
+  border-color: #2d343f;
+  border-radius: 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border: 1px solid #adadad;
+  background-color: #212934;
+  color: #e4e4e4;
+  background-clip: padding-box;
+}
+
+form button {
+  background-color: #59ab6e !important;
+  border-color: #56ae6c !important;
+  color: #cfd6e1 !important;
+  padding: 8px 20px;
+  line-height: 1.5;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  border-left: none;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}

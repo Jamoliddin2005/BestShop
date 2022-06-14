@@ -1,0 +1,24 @@
+.NewProducts {
+    display: flex;
+    width: 100%;
+    margin-top: 150px;
+    justify-content: space-between;
+    position: relative !important;
+    min-height: 250px;
+}
+
+
+.ProductsDiv {
+    width: 65%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    position: relative !important;
+}
+
+
+.productNull {
+    font-size: 30px;
+    color: rgb(59, 59, 59);
+}

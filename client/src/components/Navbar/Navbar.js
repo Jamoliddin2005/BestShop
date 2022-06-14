@@ -25,9 +25,7 @@ function Navbar({ user }) {
     e.preventDefault();
     setToggle(!toggle)
   };
-  const AdminPage = () => {
-    setActive(!isActive);
-  };
+
 
   return (
     <>
@@ -123,11 +121,11 @@ function Navbar({ user }) {
                 </div>
                 <div className={toggle ? "d_none_div" : "AdminIcon_logout"}>
                   <Link to={"/"} >
-                  <i className="fa-solid fa-gear"></i>
+                    <i className="fa-solid fa-gear"></i>
                     Settings
                   </Link>
                   <span onClick={logout}>
-                  <i className="fa-solid fa-arrow-right-from-bracket"></i>
+                    <i className="fa-solid fa-arrow-right-from-bracket"></i>
                     Logout</span>
                 </div>
               </ul>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Admin.css";
 import Administrator from "./Administrator/Administrator";
+import ClientPage from "./ClientPage/ClientPage";
 
 function Admin({ user, getCategory, ProductMore }) {
   const [loading, setLoading] = useState(false);
@@ -34,7 +35,7 @@ function Admin({ user, getCategory, ProductMore }) {
           setContacts={setContacts}
         />
       ) : (
-        <h1>asd</h1>
+        <ClientPage user={user}/>
       )}
     </>
   );

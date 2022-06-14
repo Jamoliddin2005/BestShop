@@ -23,6 +23,9 @@ const Schema = mongoose.Schema({
   isAdmin: {
     type: Boolean,
   },
+  password: {
+    type: String,
+  }
 });
 
 module.exports = mongoose.model("User", Schema);

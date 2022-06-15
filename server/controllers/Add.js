@@ -4,18 +4,31 @@ const Categories = require("../models/Categories");
 const Products = require("../models/Product");
 exports.addHomeCarousel = async (req, res) => {
   try {
-    console.log(req.body);
-    const carouselAdd = new CarouselHome({
-      title: req.body.title,
-      desc: req.body.desc,
-      select: req.body.select,
-      photo: req.file.filename,
-    });
-    await carouselAdd.save();
+    if (req.file) {
+      const carouselAdd = new CarouselHome({
+        title: req.body.title,
+        desc: req.body.desc,
+        select: req.body.select,
+        photo: req.file.filename,
+      });
+      await carouselAdd.save();
 
-    const swipers = await CarouselHome.find();
+      const swipers = await CarouselHome.find();
 
-    res.status(201).json({ success: true, data: swipers });
+      res.status(201).json({ success: true, data: swipers });
+    } else {
+      const carouselAdd = new CarouselHome({
+        title: req.body.title,
+        desc: req.body.desc,
+        select: req.body.select,
+        photo: "noimage.jpg",
+      });
+      await carouselAdd.save();
+
+      const swipers = await CarouselHome.find();
+
+      res.status(201).json({ success: true, data: swipers });
+    }
   } catch (error) {
     console.log(error);
   }

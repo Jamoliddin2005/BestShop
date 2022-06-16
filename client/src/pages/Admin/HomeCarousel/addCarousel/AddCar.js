@@ -24,7 +24,7 @@ const AddCar = ({
 
   const handleChange = (selectedOption) => {
     setSelectedOption(selectedOption);
-    setSelect(JSON.stringify(selectedOption));
+    setSelect(selectedOption.value);
   };
 
   const AnimatedSelect = makeAnimated();
@@ -54,7 +54,6 @@ const AddCar = ({
       <Select
         className="selectReact"
         components={AnimatedSelect}
-        isMulti
         isSearchable={true}
         options={selects}
         hideSelectedOptions={true}

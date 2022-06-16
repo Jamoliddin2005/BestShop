@@ -23,8 +23,7 @@ function HomeCarousel({ user }) {
   ]);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (title && desc && photo && contacts && select) {
-      console.log(select);
+    if (title && desc && photo && contacts && select.length > 2) {
       try {
         toast.success("Product Added!");
         e.preventDefault();

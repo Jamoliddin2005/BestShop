@@ -1,11 +1,15 @@
+import React, { useState } from 'react';
 import Google from "../img/google.png";
 import Facebook from "../img/facebook.png";
 import Github from "../img/github.png";
-import { Link } from "react-router-dom";
+
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
 
 import "./Login.css";
 
 const Login = () => {
+  const [value, setValue] = useState()
   const google = () => {
     window.open("http://localhost:5000/auth/google", "_self");
   };
@@ -17,6 +21,11 @@ const Login = () => {
   const facebook = () => {
     window.open("http://localhost:5000/auth/facebook", "_self");
   };
+
+  const SubmitHandler = (e) => {
+    e.preventDefault()
+    console.log(value);
+  }
 
   return (
     <div className="login">
@@ -41,12 +50,13 @@ const Login = () => {
           <div className="or">OR</div>
         </div>
         <div className="right">
-          <input type="text" placeholder="Username" />
-          <input type="text" placeholder="Password" />
-          <button className="submit">Login</button>
-          <Link to="/register" className="createAccount">
-            Create Account
-          </Link>
+          <PhoneInput
+            className='input'
+            placeholder="Enter phone number"
+            value={value}
+            onChange={setValue} />
+
+          <button className="submit" onClick={SubmitHandler}>Login</button>
         </div>
       </div>
     </div>

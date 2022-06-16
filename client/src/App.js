@@ -6,7 +6,6 @@ import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
 import Footer from "./components/Footer/Footer";
 import Login from "./pages/Login/Login";
-import Register from "./pages/Register/Register";
 import Admin from "./pages/Admin/Admin";
 import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
@@ -112,7 +111,6 @@ function App() {
         />
         <Route path="/about" element={<About />} />
         <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
-        <Route path="/register" element={<Register />} />
         <Route path="*" element={<Navigate to="/" />} />
         <Route
           path="/product/more/:id"

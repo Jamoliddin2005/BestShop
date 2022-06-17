@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Google from "../img/google.png";
 import Facebook from "../img/facebook.png";
 import Github from "../img/github.png";
+import { toast } from "react-toastify"
 
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
@@ -62,26 +63,32 @@ const Login = () => {
   };
 
   const SubmitHandler = (e) => {
-    SetTrueFalse(true)
-    e.preventDefault()
+    if (value.length > 10) {
+      SetTrueFalse(true)
+      e.preventDefault()
 
-    e.preventDefault();
-    const phoneNumber = value
+      e.preventDefault();
+      const phoneNumber = value
 
-    console.log(phoneNumber);
-    configureCaptcha();
-    const appVerifier = window.recaptchaVerifier;
 
-    firebase
-      .auth()
-      .signInWithPhoneNumber(phoneNumber, appVerifier)
-      .then((confirmationResult) => {
-        window.confirmationResult = confirmationResult;
-        console.log(`SEND `);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      configureCaptcha();
+      const appVerifier = window.recaptchaVerifier;
+
+      firebase
+        .auth()
+        .signInWithPhoneNumber(phoneNumber, appVerifier)
+        .then((confirmationResult) => {
+          window.confirmationResult = confirmationResult;
+          console.log(`SEND `);
+        })
+        .catch((error) => {
+          console.log(error);
+          SetTrueFalse(false)
+          toast.error("Siz Ko'p bora urunganingiz sababli bloklandingiz!!!")
+        });
+    }else{
+      toast.success("Nomerni tog'ri kiriting")
+    }
   }
 
   return (

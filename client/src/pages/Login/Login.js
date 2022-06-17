@@ -6,10 +6,49 @@ import Github from "../img/github.png";
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 
+import firebase from "../../firebase"
+
+// import PhoneInput from 'react-phone-input-2'
+
 import "./Login.css";
 
 const Login = () => {
   const [value, setValue] = useState()
+  const [code, setCode] = useState()
+  const [trueFalse, SetTrueFalse] = useState(false)
+
+
+
+  const configureCaptcha = () => {
+    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
+      "sign-in-button",
+      {
+        size: "invisible",
+        callback: (response) => {
+          SubmitHandler();
+          console.log("Recaptcha verified!");
+        },
+      }
+    );
+  }
+
+
+  const onSubmitOTP = (e) => {
+    e.preventDefault();
+    const code1 = code;
+    window.confirmationResult
+      .confirm(code1)
+      .then((result) => {
+        const user = result.user;
+        console.log(JSON.stringify(user));
+        alert("VERIFIED");
+      })
+      .catch((error) => {
+        alert("XATO");
+      });
+  };
+
+
   const google = () => {
     window.open("http://localhost:5000/auth/google", "_self");
   };
@@ -23,8 +62,26 @@ const Login = () => {
   };
 
   const SubmitHandler = (e) => {
+    SetTrueFalse(true)
     e.preventDefault()
-    console.log(value);
+
+    e.preventDefault();
+    const phoneNumber = value
+
+    console.log(phoneNumber);
+    configureCaptcha();
+    const appVerifier = window.recaptchaVerifier;
+
+    firebase
+      .auth()
+      .signInWithPhoneNumber(phoneNumber, appVerifier)
+      .then((confirmationResult) => {
+        window.confirmationResult = confirmationResult;
+        console.log(`SEND `);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   return (
@@ -51,12 +108,30 @@ const Login = () => {
         </div>
         <div className="right">
           <PhoneInput
+            international
+            defaultCountry="UZ"
             className='input'
             placeholder="Enter phone number"
             value={value}
             onChange={setValue} />
+          {/* 
+          <PhoneInput
+            // country={'uz'}
+            // className='input'
+            value={value}
+            onChange={setValue}
+          /> */}
 
-          <button className="submit" onClick={SubmitHandler}>Login</button>
+
+          <div id="sign-in-button"></div>
+
+
+          {trueFalse ? (<>
+            <input className='input' placeholder='Code' value={code} onChange={(e) => setCode(e.target.value)} />
+            <button className="submit" onClick={onSubmitOTP}>Login</button>
+
+          </>) : (<button className="submit" onClick={SubmitHandler}>Login</button>)}
+
         </div>
       </div>
     </div>

@@ -29,15 +29,12 @@ exports.Google =
   ("/google", passport.authenticate("google", { scope: ["profile"] }));
 exports.GoogleCallBack =
   ("/google/callback",
-    passport.authenticate("google", {
-      successRedirect: process.env.CLIENT_URL,
-      failureRedirect: "/login/failed",
-    }));
+  passport.authenticate("google", {
+    successRedirect: process.env.CLIENT_URL,
+    failureRedirect: "/login/failed",
+  }));
 
 /////Register
-
-
-
 
 exports.register = async (req, res) => {
   const initializePassport = require("../middleware/passport-config");
@@ -56,8 +53,12 @@ exports.register = async (req, res) => {
       isAdmin: req.body.isAdmin,
       password: hashedPassword,
     });
-    await users.save()
+    await users.save();
   } catch (error) {
     console.log(error);
   }
+};
+
+exports.registerNumber = async (req, res) => {
+  console.log(req.body);
 };

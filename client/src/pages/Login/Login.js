@@ -1,24 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import Google from "../img/google.png";
 import Facebook from "../img/facebook.png";
 import Github from "../img/github.png";
-import { toast } from "react-toastify"
+import { toast } from "react-toastify";
 
-import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input'
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
 
-import firebase from "../../firebase"
-
-// import PhoneInput from 'react-phone-input-2'
+import firebase from "../../firebase";
 
 import "./Login.css";
+import axios from "axios";
 
 const Login = () => {
-  const [value, setValue] = useState()
-  const [code, setCode] = useState()
-  const [trueFalse, SetTrueFalse] = useState(false)
-
-
+  const [value, setValue] = useState();
+  const [code, setCode] = useState();
+  const [trueFalse, SetTrueFalse] = useState(false);
 
   const configureCaptcha = () => {
     window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
@@ -31,24 +28,36 @@ const Login = () => {
         },
       }
     );
-  }
-
-
-  const onSubmitOTP = (e) => {
-    e.preventDefault();
-    const code1 = code;
-    window.confirmationResult
-      .confirm(code1)
-      .then((result) => {
-        const user = result.user;
-        console.log(JSON.stringify(user));
-        alert("VERIFIED");
-      })
-      .catch((error) => {
-        alert("XATO");
-      });
   };
 
+  const onSubmitOTP = async (e) => {
+    e.preventDefault();
+    if (code) {
+      if (code.length > 5) {
+        const code1 = code;
+        window.confirmationResult
+          .confirm(code1)
+          .then((result) => {
+            const user = result.user;
+            console.log(JSON.stringify(user.uid));
+            console.log(JSON.stringify(user.phoneNumber));
+
+            const { data } = axios.post(
+              "/localhost:5000/auth/registerNumber",
+              user
+            );
+            console.log(data);
+          })
+          .catch((error) => {
+            toast.error("Kod xato!!!");
+          });
+      } else {
+        toast.error("Kodni to'gri kiriting");
+      }
+    } else {
+      toast.error("Kodni to'gri kiriting");
+    }
+  };
 
   const google = () => {
     window.open("http://localhost:5000/auth/google", "_self");
@@ -64,12 +73,11 @@ const Login = () => {
 
   const SubmitHandler = (e) => {
     if (value.length > 10) {
-      SetTrueFalse(true)
-      e.preventDefault()
+      SetTrueFalse(true);
+      e.preventDefault();
 
       e.preventDefault();
-      const phoneNumber = value
-
+      const phoneNumber = value;
 
       configureCaptcha();
       const appVerifier = window.recaptchaVerifier;
@@ -82,14 +90,13 @@ const Login = () => {
           console.log(`SEND `);
         })
         .catch((error) => {
-          console.log(error);
-          SetTrueFalse(false)
-          toast.error("Siz Ko'p bora urunganingiz sababli bloklandingiz!!!")
+          SetTrueFalse(false);
+          toast.error("Siz Ko'p bora urunganingiz sababli bloklandingiz!!!");
         });
-    }else{
-      toast.success("Nomerni tog'ri kiriting")
+    } else {
+      toast.success("Nomerni tog'ri kiriting");
     }
-  }
+  };
 
   return (
     <div className="login">
@@ -117,10 +124,11 @@ const Login = () => {
           <PhoneInput
             international
             defaultCountry="UZ"
-            className='input'
+            className="input"
             placeholder="Enter phone number"
             value={value}
-            onChange={setValue} />
+            onChange={setValue}
+          />
           {/* 
           <PhoneInput
             // country={'uz'}
@@ -129,16 +137,25 @@ const Login = () => {
             onChange={setValue}
           /> */}
 
-
           <div id="sign-in-button"></div>
 
-
-          {trueFalse ? (<>
-            <input className='input' placeholder='Code' value={code} onChange={(e) => setCode(e.target.value)} />
-            <button className="submit" onClick={onSubmitOTP}>Login</button>
-
-          </>) : (<button className="submit" onClick={SubmitHandler}>Login</button>)}
-
+          {trueFalse ? (
+            <>
+              <input
+                className="input"
+                placeholder="Code"
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+              />
+              <button className="submit" onClick={onSubmitOTP}>
+                Login
+              </button>
+            </>
+          ) : (
+            <button className="submit" onClick={SubmitHandler}>
+              Login
+            </button>
+          )}
         </div>
       </div>
     </div>

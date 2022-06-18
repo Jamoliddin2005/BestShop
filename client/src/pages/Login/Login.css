@@ -136,12 +136,18 @@
   justify-content: space-between;
 }
 
-.PhoneInputCountry {
+.PhoneInput {
   width: 60px;
   height: 60px;
 }
 .PhoneInput {
   margin-bottom: 20px;
+  width: 300px;
+}
+
+.PhoneInputCountry {
+  width: 60px;
+  height: 60px;
 }
 
 .PhoneInputCountryIcon--border {
@@ -150,4 +156,8 @@
   background-color: transparent;
   box-shadow: none !important;
   border: none;
+}
+
+#sign-in-button {
+  width: 300px;
 }

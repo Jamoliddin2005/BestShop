@@ -29,6 +29,7 @@
   align-items: center;
   justify-content: center;
   height: 600px;
+  cursor: zoom-in;
 }
 
 .img {
@@ -121,4 +122,9 @@
 .buttonBuyCartAdd .minus {
   padding: 8px 20px;
   border-right: 1px solid #cfd6e1;
+}
+
+.react-transform-wrapper,
+.react-transform-component {
+  cursor: zoom-in;
 }

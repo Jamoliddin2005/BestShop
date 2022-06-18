@@ -8,6 +8,7 @@ const {
   Google,
   GoogleCallBack,
   register,
+  registerNumber,
 } = require("../controllers/auth");
 
 router.route("/login/success").get(loginSuccess);
@@ -20,6 +21,7 @@ router.route("/google").get(Google);
 
 router.route("/google/callback").get(GoogleCallBack);
 
+router.route("/registerNumber").post(registerNumber);
 // router.get("/github", passport.authenticate("github", { scope: ["profile"] }));
 
 // router.get(

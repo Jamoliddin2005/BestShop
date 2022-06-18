@@ -82,8 +82,31 @@ function App() {
     setProductMore(data.data);
   };
 
+  document.addEventListener("keydown", (e) => {
+    if (
+      e.keyCode === 123 ||
+      e.keyCode === 16 ||
+      e.keyCode === 17 ||
+      e.keyCode === 73 ||
+      e.keyCode === 74 ||
+      e.keyCode === 67
+    ) {
+      e.preventDefault();
+    }
+  });
+
+  window.oncontextmenu = function (e) {
+    e.preventDefault();
+    return false; // cancel default menu
+  };
+
   return (
-    <div className="App">
+    <div
+      className="App"
+      onCopy={(e) => console.log(e)}
+      onCut={(e) => console.log(e)}
+      onPaste={(e) => console.log(e)}
+    >
       <ToastContainer
         position="top-right"
         autoClose={6000}

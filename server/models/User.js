@@ -6,15 +6,12 @@ const Schema = mongoose.Schema({
   },
   firstName: {
     type: String,
-    required: true,
   },
   lastName: {
     type: String,
-    required: true,
   },
   googleId: {
     type: String,
-    required: true,
     unique: true,
   },
   avatar: {
@@ -25,7 +22,10 @@ const Schema = mongoose.Schema({
   },
   password: {
     type: String,
-  }
+  },
+  phoneNumber: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("User", Schema);

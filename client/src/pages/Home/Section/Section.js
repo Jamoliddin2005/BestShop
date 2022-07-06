@@ -11,7 +11,6 @@ function Section({ setCategoryBig, categoryBig, getCategory }) {
     },
   ]);
 
-  const [color, setColor] = useState("");
 
   useEffect(() => {
     const getCategories = async () => {
@@ -24,12 +23,7 @@ function Section({ setCategoryBig, categoryBig, getCategory }) {
   }, []);
 
   return (
-    <div className={classes.container} style={{ background: color }}>
-      <input
-        type={"color"}
-        value={color}
-        onChange={(e) => setColor(e.target.value)}
-      />
+    <div className={classes.container}>
 
       <div className={classes.top}>
         <h1 className={classes.h1}>Categories of The Month</h1>

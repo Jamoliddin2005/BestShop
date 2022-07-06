@@ -12,9 +12,7 @@ exports.addHomeCarousel = async (req, res) => {
         photo: req.file.filename,
       });
       await carouselAdd.save();
-
       const swipers = await CarouselHome.find();
-
       res.status(201).json({ success: true, data: swipers });
     } else {
       const carouselAdd = new CarouselHome({
@@ -24,19 +22,23 @@ exports.addHomeCarousel = async (req, res) => {
         photo: "noimage.jpg",
       });
       await carouselAdd.save();
-
       const swipers = await CarouselHome.find();
-
       res.status(201).json({ success: true, data: swipers });
     }
   } catch (error) {
-    console.log(error);
+    return res.status(400).send("ERROR ADDING: " + error)
   }
 };
 exports.show = async (req, res) => {
-  await CarouselHome.find()
-    .then((result) => res.json(result))
-    .catch((err) => console.log(err));
+  try {
+    await CarouselHome.find()
+      .then((result) => res.json(result))
+      .catch((err) => {
+        return res.status(400).send("ERROR: " + err)
+      });
+  } catch (error) {
+    return res.status(400).send("ERROR: " + error)
+  }
 };
 exports.addCategory = async (req, res) => {
   try {
@@ -45,17 +47,18 @@ exports.addCategory = async (req, res) => {
       photo: req.file.filename,
     });
     await categories.save();
-
     const categoriesFind = await Categories.find();
     res.status(202).json({ success: true, data: categoriesFind });
   } catch (error) {
-    console.log(error);
+    return res.status(400).send("ERROR: " + error)
   }
 };
 exports.showCategory = async (req, res) => {
   await Categories.find()
     .then((result) => res.json(result))
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      return res.status(400).send("ERROR: " + err)
+    });
 };
 exports.addProduct = async (req, res) => {
   if (req.file) {
@@ -77,7 +80,6 @@ exports.addProduct = async (req, res) => {
     });
     await product.save();
   }
-
   const ProductFind = await Products.find();
   res.status(202).json({ success: true, data: ProductFind });
 };
@@ -86,9 +88,10 @@ exports.showProducts = async (req, res) => {
     .sort({ photo: -1 })
     .limit(8)
     .then((result) => res.json(result))
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      return res.status(400).send("ERROR: " + err)
+    });
 };
-
 exports.categoryFind = async (req, res) => {
   const categoryFind = await Products.aggregate([
     {

@@ -4,11 +4,15 @@ const Products = require('../models/Product')
 const toDelete = require("../middleware/toDelete");
 
 exports.deleteHeaderSwiper = async (req, res) => {
-    const { id } = req.params
-    const { photo } = await HeaderSwiper.findById(id)
-    toDelete(photo)
-    await HeaderSwiper.findByIdAndDelete(id)
-    res.status(201).json({ success: true, data: await HeaderSwiper.find() })
+    try {
+        const { id } = req.params
+        const { photo } = await HeaderSwiper.findById(id)
+        toDelete(photo)
+        await HeaderSwiper.findByIdAndDelete(id)
+        res.status(201).json({ success: true, data: await HeaderSwiper.find() })
+    } catch (error) {
+
+    }
 }
 
 exports.deleteCategories = async (req, res) => {

@@ -1,49 +1,43 @@
 const router = require("express").Router();
-const User = require("../models/User");
+const passport = require('passport')
 
+// Google Authenticated
 const {
   loginSuccess,
   loginFailed,
   logout,
   Google,
   GoogleCallBack,
-  register,
-  registerNumber,
-} = require("../controllers/auth");
-
+} = require("../controllers/auth.google");
 router.route("/login/success").get(loginSuccess);
-
 router.route("/login/failed").get(loginFailed);
-
 router.route("/login/logout").get(logout);
-
 router.route("/google").get(Google);
-
 router.route("/google/callback").get(GoogleCallBack);
 
-router.route("/registerNumber").post(registerNumber);
-// router.get("/github", passport.authenticate("github", { scope: ["profile"] }));
+// Github Authenticated
 
-// router.get(
-//     "/github/callback",
-//     passport.authenticate("github", {
-//         successRedirect: CLIENT_URL,
-//         failureRedirect: "/login/failed",
-//     })
-// );
+router.get("/github", passport.authenticate("github", { scope: ["profile"] }));
+router.get(
+  "/github/callback",
+  passport.authenticate("github", {
+    successRedirect: process.env.CLIENT_URL,
+    failureRedirect: "/login/failed",
+  })
+);
 
-// router.get("/facebook", passport.authenticate("facebook", { scope: ["profile"] }));
+// Facebook Authenticated 
 
-// router.get(
-//     "/facebook/callback",
-//     passport.authenticate("facebook", {
-//         successRedirect: CLIENT_URL,
-//         failureRedirect: "/login/failed",
-//     })
-// );
+router.get("/facebook", passport.authenticate("facebook"));
+router.get("/facebook/callback", passport.authenticate("facebook", {
+  successRedirect: process.env.CLIENT_URL,
+  failureRedirect: "/login/failed",
+}))
 
-////// Register
 
-router.route("/register").post(register);
+// Phone Number Authenticated
+const { NumberAuth } = require('../controllers/auth.phone')
+
+router.route("/registerNumber").post(NumberAuth)
 
 module.exports = router;

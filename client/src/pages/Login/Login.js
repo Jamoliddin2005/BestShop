@@ -39,11 +39,10 @@ const Login = () => {
           .confirm(code1)
           .then((result) => {
             const user = result.user;
-            console.log(JSON.stringify(user.uid));
-            console.log(JSON.stringify(user.phoneNumber));
+            console.log(JSON.stringify(user));
 
             const { data } = axios.post(
-              "/localhost:5000/auth/registerNumber",
+              "http://localhost:5000/auth/registerNumber",
               user
             );
             console.log(data);

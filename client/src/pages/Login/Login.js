@@ -14,8 +14,12 @@ import axios from "axios";
 
 const Login = () => {
   const [value, setValue] = useState();
-  const [code, setCode] = useState();
+  const [code, setCode] = useState("");
   const [trueFalse, SetTrueFalse] = useState(false);
+  const [accountCode, SetAccountCode] = useState(false);
+  const [switcher, SetSwitcher] = useState(false);
+  const [password, SetPassword] = useState("");
+  const [repeatpassword, SetRepeatPassword] = useState("");
 
   const configureCaptcha = () => {
     window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
@@ -39,35 +43,35 @@ const Login = () => {
           .confirm(code1)
           .then((result) => {
             const user = result.user;
+            SetAccountCode(true);
             console.log(JSON.stringify(user));
-
-            const { data } = axios.post(
-              "http://localhost:5000/auth/registerNumber",
-              user
-            );
-            console.log(data);
+            // const { data } = axios.post(
+            //   "http://localhost:5000/auth/registerNumber",
+            //   user
+            // );
+            // console.log(data);
           })
           .catch((error) => {
-            toast.error("Kod xato!!!");
+            return toast.error("Kod xato!!!");
           });
       } else {
-        toast.error("Kodni to'gri kiriting");
+        return toast.error("Kodni to'gri kiriting");
       }
     } else {
-      toast.error("Kodni to'gri kiriting");
+      return toast.error("Kodni to'gri kiriting");
     }
   };
 
   const google = () => {
-    window.open("http://localhost:5000/auth/google", "_self");
+    return window.open("http://localhost:5000/auth/google", "_self");
   };
 
   const github = () => {
-    window.open("http://localhost:5000/auth/github", "_self");
+    return window.open("http://localhost:5000/auth/github", "_self");
   };
 
   const facebook = () => {
-    window.open("http://localhost:5000/auth/facebook", "_self");
+    return window.open("http://localhost:5000/auth/facebook", "_self");
   };
 
   const SubmitHandler = (e) => {
@@ -75,7 +79,6 @@ const Login = () => {
       SetTrueFalse(true);
       e.preventDefault();
 
-      e.preventDefault();
       const phoneNumber = value;
 
       configureCaptcha();
@@ -86,14 +89,30 @@ const Login = () => {
         .signInWithPhoneNumber(phoneNumber, appVerifier)
         .then((confirmationResult) => {
           window.confirmationResult = confirmationResult;
-          console.log(`SEND `);
         })
         .catch((error) => {
           SetTrueFalse(false);
-          toast.error("Siz Ko'p bora urunganingiz sababli bloklandingiz!!!");
+          return toast.error(
+            "Siz Ko'p bora urunganingiz sababli bloklandingiz!!!"
+          );
         });
     } else {
-      toast.success("Nomerni tog'ri kiriting");
+      return toast.success("Nomerni tog'ri kiriting");
+    }
+  };
+
+  const RepeatPass = (e) => {
+    SetRepeatPassword(e.target.value);
+    const btn = document.querySelector(".codeAccountBtn");
+    btn.setAttribute("disabled", "true");
+    if (password === e.target.value) {
+      e.target.className = "input active";
+      btn.setAttribute("disabled", "false");
+      btn.className = "submit codeAccountBtn activeBTN";
+    } else {
+      e.target.className = "input notactive";
+      btn.setAttribute("disabled", "true");
+      btn.className = "submit codeAccountBtn NotactiveBTN";
     }
   };
 
@@ -128,32 +147,75 @@ const Login = () => {
             value={value}
             onChange={setValue}
           />
-          {/* 
-          <PhoneInput
-            // country={'uz'}
-            // className='input'
-            value={value}
-            onChange={setValue}
-          /> */}
 
           <div id="sign-in-button"></div>
-
           {trueFalse ? (
             <>
-              <input
-                className="input"
-                placeholder="Code"
-                value={code}
-                onChange={(e) => setCode(e.target.value)}
-              />
-              <button className="submit" onClick={onSubmitOTP}>
-                Login
-              </button>
+              {accountCode ? (
+                <>
+                  <div className="inputsLoginPass">
+                    <input
+                      className="input"
+                      placeholder="Create Password"
+                      value={password}
+                      type={switcher ? "text" : "password"}
+                      onChange={(e) => SetPassword(e.target.value)}
+                    />
+                    <div className="switcher">
+                      {switcher ? (
+                        <div
+                          className="on"
+                          onClick={() => {
+                            SetSwitcher(false);
+                          }}
+                        >
+                          🙈
+                        </div>
+                      ) : (
+                        <div
+                          className="off"
+                          onClick={() => {
+                            SetSwitcher(true);
+                          }}
+                        >
+                          🐵
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  <input
+                    className={"input notactive"}
+                    placeholder="Account Password"
+                    value={repeatpassword}
+                    onChange={(e) => {
+                      RepeatPass(e);
+                    }}
+                  />
+                </>
+              ) : (
+                <>
+                  <input
+                    className="input"
+                    placeholder="Code"
+                    value={code}
+                    onChange={(e) => setCode(e.target.value)}
+                  />
+                  <button className="submit" onClick={onSubmitOTP}>
+                    Login
+                  </button>
+                </>
+              )}
             </>
           ) : (
             <button className="submit" onClick={SubmitHandler}>
               Login
             </button>
+          )}
+
+          {accountCode ? (
+            <button className="submit codeAccountBtn">Code Account</button>
+          ) : (
+            ""
           )}
         </div>
       </div>

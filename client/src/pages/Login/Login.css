@@ -88,6 +88,20 @@
   width: 300px;
   padding: 15px 20px;
   margin-bottom: 0;
+  outline: none;
+}
+
+.login input.notactive {
+  border: 2px solid red;
+  outline: none;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+.login input.active {
+  border: 2px solid #11c73f;
+  outline: none;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .login .submit {
@@ -100,6 +114,11 @@
   border-radius: 5px;
   cursor: pointer;
   margin: auto;
+}
+
+.login .submit.NotactiveBTN {
+  opacity: 0.5;
+  cursor: auto;
 }
 
 .login .loginTitle {
@@ -160,4 +179,20 @@
 
 #sign-in-button {
   width: 300px;
+}
+
+.inputsLoginPass {
+  position: relative;
+}
+
+.inputsLoginPass .switcher {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.inputsLoginPass .switcher .off,
+.inputsLoginPass .switcher .on {
+  padding: 13px;
+  cursor: pointer;
 }

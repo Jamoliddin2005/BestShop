@@ -34,37 +34,37 @@ function Navbar({ user }) {
           <div className="row">
             <ul>
               <li>
-                <Link to="mailto:jamoliddindev@gmail.com">
+                <a href="mailto:jamoliddindev@gmail.com">
                   <i className="fa-solid fa-envelope"></i>{" "}
                   jamoliddindev@gmail.com
-                </Link>
+                </a>
               </li>
               <li>
-                <Link to="tel:+998946239777">
-                  <i className="fa-solid fa-phone"></i> +998946239777
-                </Link>
+                <a href="tel:+998946239777">
+                  <i className="fa-solid fa-phone"></i> +998942245606
+                </a>
               </li>
             </ul>
             <ul>
               <li>
-                <Link to="">
+                <a href="https://www.facebook.com/profile.php?id=100078919103944" target={"_blank"} rel="noopener noreferrer">
                   <i className="fa-brands fa-facebook-f"></i>
-                </Link>
+                </a>
               </li>
               <li>
-                <Link to="">
+                <a target={"_blank"} href="https://www.instagram.com/jamoliddin__05/" rel="noopener noreferrer">
                   <i className="fa-brands fa-instagram"></i>
-                </Link>
+                </a>
               </li>
               <li>
-                <Link to="">
+                <a target={"_blank"} href="https://t.me/Jamoliddin9717" rel="noopener noreferrer">
                   <i className="fa-brands fa-telegram"></i>
-                </Link>
+                </a>
               </li>
               <li>
-                <Link to="">
+                <a target={"_blank"} href="https://www.linkedin.com/in/jamoliddin-kucharov-8a6193234/" rel="noopener noreferrer">
                   <i className="fa-brands fa-linkedin"></i>
-                </Link>
+                </a>
               </li>
             </ul>
           </div>

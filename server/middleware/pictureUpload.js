@@ -8,12 +8,12 @@ const storage = multer.diskStorage({
   },
   filename(req, file, cb) {
     const date = moment().format("DDMMYYYY-HHmmss_SSS");
-    cb(null, `${date}-${file.fieldname}`);
+    cb(null, `${date}-${file.fieldname}.jpg`);
   },
 });
 
 const fileFilter = (req, file, cb) => {
-  const allowedTypes = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
+  const allowedTypes = ["image/png", "image/jpeg", "image/jpg", "image/webp", "image/jfif", "image/ai", "image/eps", "image/gif", "image/psd", "image/tiff", "image/bmp", "image/pdf"];
   if (allowedTypes.includes(file.mimetype)) {
     cb(null, true);
   } else {

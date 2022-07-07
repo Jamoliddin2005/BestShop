@@ -11,8 +11,8 @@ const Abouts = [
   },
   {
     icon: "fa fa-phone fa-fw",
-    name: "+998946239777",
-    hrefs: "tel:+998946239777",
+    name: "+998942245606",
+    hrefs: "tel:+998942245606",
   },
   {
     icon: "fa fa-envelope fa-fw",
@@ -127,24 +127,24 @@ export default function Footer() {
           <div className="footer_bottom">
             <ul>
               <li>
-                <Link to="/">
-                  <i className="fab fa-facebook-f fa-lg fa-fw"></i>
-                </Link>
+                <a href="https://www.facebook.com/profile.php?id=100078919103944" target={"_blank"} rel="noopener noreferrer">
+                  <i className="fa-brands fa-facebook-f"></i>
+                </a>
               </li>
               <li>
-                <Link to="/">
-                  <i className="fab fa-instagram fa-lg fa-fw"></i>
-                </Link>
+                <a target={"_blank"} href="https://www.instagram.com/jamoliddin__05/" rel="noopener noreferrer">
+                  <i className="fa-brands fa-instagram"></i>
+                </a>
               </li>
               <li>
-                <Link to="/">
-                  <i className="fab fa-twitter fa-lg fa-fw"></i>
-                </Link>
+                <a target={"_blank"} href="https://t.me/Jamoliddin9717" rel="noopener noreferrer">
+                  <i className="fa-brands fa-telegram"></i>
+                </a>
               </li>
               <li>
-                <Link to="/">
-                  <i className="fab fa-linkedin fa-lg fa-fw"></i>
-                </Link>
+                <a target={"_blank"} href="https://www.linkedin.com/in/jamoliddin-kucharov-8a6193234/" rel="noopener noreferrer">
+                  <i className="fa-brands fa-linkedin"></i>
+                </a>
               </li>
             </ul>
             <div className="form">

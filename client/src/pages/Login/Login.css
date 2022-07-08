@@ -196,3 +196,11 @@
   padding: 13px;
   cursor: pointer;
 }
+
+.codeSubmit {
+  margin-bottom: 20px !important ;
+}
+
+.min6 {
+  border: 2px solid red;
+}

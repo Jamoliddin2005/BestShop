@@ -13,13 +13,16 @@ import "./Login.css";
 import axios from "axios";
 
 const Login = () => {
-  const [value, setValue] = useState();
+  const [value, setValue] = useState("");
   const [code, setCode] = useState("");
   const [trueFalse, SetTrueFalse] = useState(false);
   const [accountCode, SetAccountCode] = useState(false);
   const [switcher, SetSwitcher] = useState(false);
   const [password, SetPassword] = useState("");
   const [repeatpassword, SetRepeatPassword] = useState("");
+  const [inputActive, setInputActive] = useState("input notactive");
+  const [user, setUser] = useState("")
+  const [inputClass, setInputClass] = useState("input")
 
   const configureCaptcha = () => {
     window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
@@ -44,12 +47,8 @@ const Login = () => {
           .then((result) => {
             const user = result.user;
             SetAccountCode(true);
-            console.log(JSON.stringify(user));
-            // const { data } = axios.post(
-            //   "http://localhost:5000/auth/registerNumber",
-            //   user
-            // );
-            // console.log(data);
+            setUser(user)
+
           })
           .catch((error) => {
             return toast.error("Kod xato!!!");
@@ -61,6 +60,15 @@ const Login = () => {
       return toast.error("Kodni to'gri kiriting");
     }
   };
+
+  const SubmitCode = (req, res) => {
+    console.log(user);
+    // const { data } = axios.post(
+    //   "http://localhost:5000/auth/registerNumber",
+    //   user
+    // );
+    // console.log(data);
+  }
 
   const google = () => {
     return window.open("http://localhost:5000/auth/google", "_self");
@@ -76,7 +84,7 @@ const Login = () => {
 
   const SubmitHandler = (e) => {
     if (value.length > 10) {
-      SetTrueFalse(true);
+
       e.preventDefault();
 
       const phoneNumber = value;
@@ -88,7 +96,10 @@ const Login = () => {
         .auth()
         .signInWithPhoneNumber(phoneNumber, appVerifier)
         .then((confirmationResult) => {
+          SetTrueFalse(true);
           window.confirmationResult = confirmationResult;
+          // const btn = document.querySelector(".codeAccountBtn");
+          // btn.setAttribute("disabled", "true");
         })
         .catch((error) => {
           SetTrueFalse(false);
@@ -97,23 +108,46 @@ const Login = () => {
           );
         });
     } else {
-      return toast.success("Nomerni tog'ri kiriting");
+      return toast.error("Nomerni tog'ri kiriting");
     }
   };
 
+
+
   const RepeatPass = (e) => {
-    SetRepeatPassword(e.target.value);
-    const btn = document.querySelector(".codeAccountBtn");
-    btn.setAttribute("disabled", "true");
-    if (password === e.target.value) {
-      e.target.className = "input active";
-      btn.setAttribute("disabled", "false");
-      btn.className = "submit codeAccountBtn activeBTN";
-    } else {
-      e.target.className = "input notactive";
+    if (e.target.placeholder === "Account Password") {
+      SetRepeatPassword(e.target.value);
+      const btn = document.querySelector(".codeAccountBtn");
       btn.setAttribute("disabled", "true");
-      btn.className = "submit codeAccountBtn NotactiveBTN";
+      if (password === e.target.value) {
+        setInputActive("input active")
+        btn.setAttribute("disabled", "false");
+        btn.className = "submit codeAccountBtn activeBTN";
+      } else {
+        setInputActive("input notactive")
+        btn.setAttribute("disabled", "true");
+        btn.className = "submit codeAccountBtn NotactiveBTN";
+      }
+
+      if (password.length > 5) {
+        setInputClass("input min6")
+      }
+    } else {
+      SetPassword(e.target.value);
+      const btn = document.querySelector(".codeAccountBtn");
+      btn.setAttribute("disabled", "true");
+      setInputActive("input active")
+      if (repeatpassword === e.target.value) {
+        setInputActive("input active")
+        btn.setAttribute("disabled", "false");
+        btn.className = "submit codeAccountBtn activeBTN";
+      } else {
+        setInputActive("input notactive")
+        btn.setAttribute("disabled", "true");
+        btn.className = "submit codeAccountBtn NotactiveBTN";
+      }
     }
+
   };
 
   return (
@@ -155,11 +189,13 @@ const Login = () => {
                 <>
                   <div className="inputsLoginPass">
                     <input
-                      className="input"
+                      className={inputClass}
                       placeholder="Create Password"
                       value={password}
                       type={switcher ? "text" : "password"}
-                      onChange={(e) => SetPassword(e.target.value)}
+                      onChange={(e) =>
+                        RepeatPass(e)
+                      }
                     />
                     <div className="switcher">
                       {switcher ? (
@@ -184,7 +220,8 @@ const Login = () => {
                     </div>
                   </div>
                   <input
-                    className={"input notactive"}
+                    type={"password"}
+                    className={inputActive}
                     placeholder="Account Password"
                     value={repeatpassword}
                     onChange={(e) => {
@@ -195,7 +232,7 @@ const Login = () => {
               ) : (
                 <>
                   <input
-                    className="input"
+                    className="input codeSubmit"
                     placeholder="Code"
                     value={code}
                     onChange={(e) => setCode(e.target.value)}
@@ -213,7 +250,7 @@ const Login = () => {
           )}
 
           {accountCode ? (
-            <button className="submit codeAccountBtn">Code Account</button>
+            <button className="submit codeAccountBtn" onClick={SubmitCode}>Code Account</button>
           ) : (
             ""
           )}

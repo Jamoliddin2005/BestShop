@@ -75,27 +75,26 @@ module.exports = async (passport) => {
         callbackURL: "/auth/facebook/callback",
       },
       async (accessToken, refreshToken, profile, done) => {
-        console.log(profile);
-        // // const account = await User.findOne({ googleId: profile.id });
-        // // try {
-        // //   if (account) {
-        // //     return done(null, account);
-        // //   } else {
-        // //     const user = new User({
-        // //       fullName: profile.displayName,
-        // //       firstName: profile.username,
-        // //       lastName: profile.displayName,
-        // //       googleId: profile.id,
-        // //       avatar: profile.photos[0].value,
-        // //       isAdmin: profile.id == "101992761898538917962" || "94215047" || "144115834895719" ? true : false,
-        // //     });
+        const account = await User.findOne({ googleId: profile.id });
+        try {
+          if (account) {
+            return done(null, account);
+          } else {
+            const user = new User({
+              fullName: profile.displayName,
+              firstName: profile.displayName,
+              lastName: profile.displayName,
+              googleId: profile.id,
+              avatar: "/uploads/user.png" || profile.photos[0].value,
+              isAdmin: profile.id == "101992761898538917962" || "94215047" || "144115834895719" ? true : false,
+            });
 
-        // //     await user.save();
-        // //     return done(null, user);
-        // //   }
-        // } catch (error) {
-        //   console.log(error);
-        // }
+            await user.save();
+            return done(null, user);
+          }
+        } catch (error) {
+          console.log(error);
+        }
       }
     )
   );

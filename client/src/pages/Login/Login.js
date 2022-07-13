@@ -12,7 +12,8 @@ import firebase from "../../firebase";
 import "./Login.css";
 import axios from "axios";
 
-const Login = () => {
+const Login = ({ user,
+  setUser }) => {
   const [value, setValue] = useState("");
   const [code, setCode] = useState("");
   const [trueFalse, SetTrueFalse] = useState(false);
@@ -21,8 +22,12 @@ const Login = () => {
   const [password, SetPassword] = useState("");
   const [repeatpassword, SetRepeatPassword] = useState("");
   const [inputActive, setInputActive] = useState("input notactive");
-  const [user, setUser] = useState("")
-  const [inputClass, setInputClass] = useState("input")
+  const [account, setAccount] = useState("")
+  const [passwordNumber, setPasswordNumber] = useState("")
+  const [Disableed, setDisableed] = useState(false)
+  const [accountPassword, setAccountPassword] = useState(false)
+
+
 
   const configureCaptcha = () => {
     window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
@@ -45,10 +50,9 @@ const Login = () => {
         window.confirmationResult
           .confirm(code1)
           .then((result) => {
-            const user = result.user;
+            const user = result.user.phoneNumber;
             SetAccountCode(true);
-            setUser(user)
-
+            setAccount(user)
           })
           .catch((error) => {
             return toast.error("Kod xato!!!");
@@ -60,68 +64,79 @@ const Login = () => {
       return toast.error("Kodni to'gri kiriting");
     }
   };
-
-  const SubmitCode = (req, res) => {
-    console.log(user);
-    // const { data } = axios.post(
-    //   "http://localhost:5000/auth/registerNumber",
-    //   user
-    // );
-    // console.log(data);
+  const SubmitCode = async (req, res) => {
+    if (password !== "") {
+      if (password.length > 5) {
+        const { data } = await axios.post(
+          "http://localhost:5000/auth/registerNumber",
+          {
+            phoneNumber: account,
+            password: password
+          }
+        );
+        // return toast.success(data.data)
+        console.log(data.data);
+      } else {
+        setDisableed(true)
+        return toast.error("Parol juda qisqa")
+      }
+    } else {
+      setDisableed(true)
+      return toast.error("Parol juda qisqa")
+    }
   }
-
   const google = () => {
     return window.open("http://localhost:5000/auth/google", "_self");
   };
-
   const github = () => {
     return window.open("http://localhost:5000/auth/github", "_self");
   };
-
   const facebook = () => {
     return window.open("http://localhost:5000/auth/facebook", "_self");
   };
 
-  const SubmitHandler = (e) => {
+  const SubmitHandler = async (e) => {
     if (value.length > 10) {
+      const { data } = await axios.post('http://localhost:5000/auth/userFind', {
+        phoneNumber: value
+      })
+      if (data.data) {
+        const phoneNumber = value;
+        configureCaptcha();
+        const appVerifier = window.recaptchaVerifier;
 
-      e.preventDefault();
+        firebase
+          .auth()
+          .signInWithPhoneNumber(phoneNumber, appVerifier)
+          .then((confirmationResult) => {
+            SetTrueFalse(true);
+            window.confirmationResult = confirmationResult;
+            setDisableed(true)
+          })
+          .catch((error) => {
+            SetTrueFalse(false);
+            return toast.error(
+              "Siz Ko'p bora urunganingiz sababli bloklandingiz!!!"
+            );
+          });
+      } else {
+        setAccountPassword(true)
+      }
 
-      const phoneNumber = value;
-
-      configureCaptcha();
-      const appVerifier = window.recaptchaVerifier;
-
-      firebase
-        .auth()
-        .signInWithPhoneNumber(phoneNumber, appVerifier)
-        .then((confirmationResult) => {
-          SetTrueFalse(true);
-          window.confirmationResult = confirmationResult;
-          // const btn = document.querySelector(".codeAccountBtn");
-          // btn.setAttribute("disabled", "true");
-        })
-        .catch((error) => {
-          SetTrueFalse(false);
-          return toast.error(
-            "Siz Ko'p bora urunganingiz sababli bloklandingiz!!!"
-          );
-        });
     } else {
       return toast.error("Nomerni tog'ri kiriting");
     }
   };
 
-
-
   const RepeatPass = (e) => {
-    if (e.target.placeholder === "Account Password") {
+    if (e.target.placeholder === "Repeat Password") {
       SetRepeatPassword(e.target.value);
       const btn = document.querySelector(".codeAccountBtn");
-      btn.setAttribute("disabled", "true");
+      setDisableed(true)
+
       if (password === e.target.value) {
         setInputActive("input active")
-        btn.setAttribute("disabled", "false");
+        setDisableed(false)
         btn.className = "submit codeAccountBtn activeBTN";
       } else {
         setInputActive("input notactive")
@@ -129,26 +144,53 @@ const Login = () => {
         btn.className = "submit codeAccountBtn NotactiveBTN";
       }
 
-      if (password.length > 5) {
-        setInputClass("input min6")
-      }
+
     } else {
       SetPassword(e.target.value);
       const btn = document.querySelector(".codeAccountBtn");
-      btn.setAttribute("disabled", "true");
+      setDisableed(true)
       setInputActive("input active")
+
       if (repeatpassword === e.target.value) {
         setInputActive("input active")
-        btn.setAttribute("disabled", "false");
+        setDisableed(false)
         btn.className = "submit codeAccountBtn activeBTN";
       } else {
+        const btn = document.querySelector(".codeAccountBtn");
         setInputActive("input notactive")
-        btn.setAttribute("disabled", "true");
+        setDisableed(true)
         btn.className = "submit codeAccountBtn NotactiveBTN";
       }
+
     }
 
   };
+
+  const AccountPasswordSubmitHandler = async (req, res) => {
+    const { data } = await axios.post('http://localhost:5000/auth/PostPasswordSubmit', {
+      phoneNumber: value,
+      password: passwordNumber
+    })
+    if (data.success) {
+      if (!data.data.user[0].avatar) {
+        const userInfo = {
+          googleId: data.data.user[0].googleId,
+          password: data.data.user[0].password,
+          phoneNumber: data.data.user[0].phoneNumber,
+          firstName: data.data.user[0].phoneNumber,
+          avatar: "/uploads/user.png",
+        }
+        setUser(userInfo)
+        return toast.success("SUCCESS")
+      }
+
+      console.log(data.data.user[0]);
+
+    } else {
+      return toast.error("Password is Incorrect")
+    }
+
+  }
 
   return (
     <div className="login">
@@ -181,76 +223,121 @@ const Login = () => {
             value={value}
             onChange={setValue}
           />
+          {accountPassword ? (
+            <>
+              <div className="inputsLoginPass">
+                <input
+                  className={"input accountPass"}
+                  placeholder="Password"
+                  value={passwordNumber}
+                  minLength={6}
+                  type={switcher ? "text" : "password"}
+                  onChange={(e) =>
+                    setPasswordNumber(e.target.value)
+                  }
+                />
+                <div className="switcher">
+                  {switcher ? (
+                    <div
+                      className="on"
+                      onClick={() => {
+                        SetSwitcher(false);
+                      }}
+                    >
+                      🙈
+                    </div>
+                  ) : (
+                    <div
+                      className="off"
+                      onClick={() => {
+                        SetSwitcher(true);
+                      }}
+                    >
+                      🐵
+                    </div>
+                  )}
+                </div>
+              </div>
+              <button className="submit" onClick={AccountPasswordSubmitHandler}>
+                Login
+              </button>
+            </>
+
+          ) : (<>
+            {trueFalse ? (
+              <>
+                {accountCode ? (
+                  <>
+                    <div className="inputsLoginPass">
+                      <input
+                        className={"input"}
+                        placeholder="Create Password"
+                        value={password}
+                        minLength={6}
+                        type={switcher ? "text" : "password"}
+                        onChange={(e) =>
+                          RepeatPass(e)
+                        }
+                      />
+                      <div className="switcher">
+                        {switcher ? (
+                          <div
+                            className="on"
+                            onClick={() => {
+                              SetSwitcher(false);
+                            }}
+                          >
+                            🙈
+                          </div>
+                        ) : (
+                          <div
+                            className="off"
+                            onClick={() => {
+                              SetSwitcher(true);
+                            }}
+                          >
+                            🐵
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    <input
+                      type={"password"}
+                      className={inputActive}
+                      placeholder="Repeat Password"
+                      value={repeatpassword}
+                      minLength={6}
+                      onChange={(e) => {
+                        RepeatPass(e);
+                      }}
+                    />
+                  </>
+                ) : (
+                  <>
+                    <input
+                      className="input codeSubmit"
+                      placeholder="Code"
+                      value={code}
+                      onChange={(e) => setCode(e.target.value)}
+                    />
+                    <button className="submit" onClick={onSubmitOTP}>
+                      Login
+                    </button>
+                  </>
+                )}
+              </>
+            ) : (
+              <button className="submit" onClick={SubmitHandler}>
+                Login
+              </button>
+            )}
+
+          </>)}
 
           <div id="sign-in-button"></div>
-          {trueFalse ? (
-            <>
-              {accountCode ? (
-                <>
-                  <div className="inputsLoginPass">
-                    <input
-                      className={inputClass}
-                      placeholder="Create Password"
-                      value={password}
-                      type={switcher ? "text" : "password"}
-                      onChange={(e) =>
-                        RepeatPass(e)
-                      }
-                    />
-                    <div className="switcher">
-                      {switcher ? (
-                        <div
-                          className="on"
-                          onClick={() => {
-                            SetSwitcher(false);
-                          }}
-                        >
-                          🙈
-                        </div>
-                      ) : (
-                        <div
-                          className="off"
-                          onClick={() => {
-                            SetSwitcher(true);
-                          }}
-                        >
-                          🐵
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                  <input
-                    type={"password"}
-                    className={inputActive}
-                    placeholder="Account Password"
-                    value={repeatpassword}
-                    onChange={(e) => {
-                      RepeatPass(e);
-                    }}
-                  />
-                </>
-              ) : (
-                <>
-                  <input
-                    className="input codeSubmit"
-                    placeholder="Code"
-                    value={code}
-                    onChange={(e) => setCode(e.target.value)}
-                  />
-                  <button className="submit" onClick={onSubmitOTP}>
-                    Login
-                  </button>
-                </>
-              )}
-            </>
-          ) : (
-            <button className="submit" onClick={SubmitHandler}>
-              Login
-            </button>
-          )}
 
           {accountCode ? (
-            <button className="submit codeAccountBtn" onClick={SubmitCode}>Code Account</button>
+            <button className="submit codeAccountBtn" disabled={Disableed} onClick={SubmitCode}>Code Account</button>
           ) : (
             ""
           )}

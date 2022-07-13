@@ -36,6 +36,7 @@ function App() {
     categoryId: "",
   });
 
+
   useEffect(() => {
     const getUser = () => {
       fetch("http://localhost:5000/auth/login/success", {
@@ -133,7 +134,8 @@ function App() {
           }
         />
         <Route path="/about" element={<About />} />
-        <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
+        <Route path="/login" element={user ? <Navigate to="/" /> : <Login user={user}
+          setUser={setUser} />} />
         <Route path="*" element={<Navigate to="/" />} />
         <Route
           path="/product/more/:id"

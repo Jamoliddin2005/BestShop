@@ -204,3 +204,7 @@
 .min6 {
   border: 2px solid red;
 }
+
+.accountPass {
+  margin-bottom: 20px !important;
+}

@@ -28,7 +28,7 @@ router.get(
 
 // Facebook Authenticated 
 
-router.get("/facebook", passport.authenticate("facebook"));
+router.get("/facebook", passport.authenticate("facebook", { scope: ['email', 'user_location'] }));
 router.get("/facebook/callback", passport.authenticate("facebook", {
   successRedirect: process.env.CLIENT_URL,
   failureRedirect: "/login/failed",
@@ -36,8 +36,11 @@ router.get("/facebook/callback", passport.authenticate("facebook", {
 
 
 // Phone Number Authenticated
-const { NumberAuth } = require('../controllers/auth.phone')
+const { NumberAuth, usersGet, userFind, PostPasswordSubmit } = require('../controllers/auth.phone')
 
+router.route("/users").get(usersGet)
+router.route("/userFind").post(userFind)
+router.route("/PostPasswordSubmit").post(PostPasswordSubmit)
 router.route("/registerNumber").post(NumberAuth)
 
 module.exports = router;

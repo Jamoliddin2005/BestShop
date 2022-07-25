@@ -2,48 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./Footer.css";
-
-const Abouts = [
-  {
-    icon: "fas fa-map-marker-alt fa-fw",
-    name: "123 Consectetur at ligula 10660",
-    hrefs: "/",
-  },
-  {
-    icon: "fa fa-phone fa-fw",
-    name: "+998942245606",
-    hrefs: "tel:+998942245606",
-  },
-  {
-    icon: "fa fa-envelope fa-fw",
-    name: "jamoliddindev@gmail.com",
-    hrefs: "mailto:jamoliddindev@gmail.com",
-  },
-];
-
-const Products = [
-  {
-    name: "Luxury",
-  },
-  {
-    name: "Sport Wear",
-  },
-  {
-    name: "Men's Shoes",
-  },
-  {
-    name: "Women's Shoes",
-  },
-  {
-    name: "Popular Dress",
-  },
-  {
-    name: "Gym Accessories",
-  },
-  {
-    name: "Sport Shoes",
-  },
-];
+import { toast } from "react-toastify";
 
 const Pages = [
   {
@@ -63,30 +22,34 @@ const Pages = [
   },
 ];
 
-export default function Footer() {
-  const [input, setInput] = useState({
-    name: "",
-  });
+export default function Footer({ categories, Abouts }) {
+  const [input, setInput] = useState("");
 
-  const handleChange = (e) => {
-    e.preventDefault();
-    const { name, value } = e.target;
-    setInput((prev) => {
-      return {
-        ...prev,
-        [name]: value,
-      };
-    });
-  };
+  const TOKEN = "5597892555:AAEzeESTwhMim-4zLSZQjoGZSZ9Q4Niqles";
+  const CHAT_ID = "-1001663787427";
+  const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    setInput({ name: "" });
-    const news = {
-      name: input.name,
-    };
-    console.log(news);
-    axios.post("/auth", news);
+    let message = `<b>#BestShop</b>\n\n`;
+    message += `<b>Email: </b> ${input}\n`;
+    message += `<b>Time: </b> ${new Date().toLocaleString()}`;
+
+    await axios
+      .post(URI_API, {
+        chat_id: CHAT_ID,
+        parse_mode: "html",
+        text: message,
+      })
+      .then((res) => {
+        setInput("");
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        return toast.success("Success!");
+      });
   };
 
   return (
@@ -96,22 +59,26 @@ export default function Footer() {
           <div className="row">
             <ul>
               <Link to="/" className="Home_Logo">
-                <h3>Zay Shop</h3>
+                <img src="/uploads/greenlogo.png" alt="" />
               </Link>
               {Abouts.map((item, index) => (
                 <li key={index}>
-                  <Link to={item.hrefs}>
+                  <a
+                    href={item.hrefs}
+                    target={"_blank"}
+                    rel="noopener noreferrer"
+                  >
                     <i className={item.icon}></i>
                     {item.name}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
             <ul>
               <h3>Products</h3>
-              {Products.map((item, index) => (
+              {categories.map((item, index) => (
                 <li key={index}>
-                  <Link to={index}>{item.name}</Link>
+                  <Link to={`/category/${item._id}`}>{item.name}</Link>
                 </li>
               ))}
             </ul>
@@ -127,22 +94,38 @@ export default function Footer() {
           <div className="footer_bottom">
             <ul>
               <li>
-                <a href="https://www.facebook.com/profile.php?id=100078919103944" target={"_blank"} rel="noopener noreferrer">
+                <a
+                  href="https://www.facebook.com/profile.php?id=100078919103944"
+                  target={"_blank"}
+                  rel="noopener noreferrer"
+                >
                   <i className="fa-brands fa-facebook-f"></i>
                 </a>
               </li>
               <li>
-                <a target={"_blank"} href="https://www.instagram.com/jamoliddin__05/" rel="noopener noreferrer">
+                <a
+                  target={"_blank"}
+                  href="https://www.instagram.com/jamoliddin__05/"
+                  rel="noopener noreferrer"
+                >
                   <i className="fa-brands fa-instagram"></i>
                 </a>
               </li>
               <li>
-                <a target={"_blank"} href="https://t.me/Jamoliddin9717" rel="noopener noreferrer">
+                <a
+                  target={"_blank"}
+                  href="https://t.me/BestShopWeb"
+                  rel="noopener noreferrer"
+                >
                   <i className="fa-brands fa-telegram"></i>
                 </a>
               </li>
               <li>
-                <a target={"_blank"} href="https://www.linkedin.com/in/jamoliddin-kucharov-8a6193234/" rel="noopener noreferrer">
+                <a
+                  target={"_blank"}
+                  href="https://www.linkedin.com/in/jamoliddin-ko-charov-8a6193234/"
+                  rel="noopener noreferrer"
+                >
                   <i className="fa-brands fa-linkedin"></i>
                 </a>
               </li>
@@ -150,13 +133,15 @@ export default function Footer() {
             <div className="form">
               <form action="/auth" onSubmit={submitHandler}>
                 <input
-                  type="text"
-                  name="name"
+                  type="email"
                   id=""
                   placeholder="Email address"
-                  onChange={handleChange}
-                  value={input.name}
+                  onChange={(e) => setInput(e.target.value)}
+                  value={input}
+                  autoComplete="off"
+                  required={true}
                 />
+
                 <button type="submit">Send</button>
               </form>
             </div>

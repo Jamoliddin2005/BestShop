@@ -35,7 +35,30 @@ function App() {
     desc: "",
     categoryId: "",
   });
+  const [categories, setCategories] = useState([
+    {
+      name: "",
+      photo: "",
+    },
+  ]);
 
+  const Abouts = [
+    {
+      icon: "fas fa-map-marker-alt fa-fw",
+      name: "Uzbekistan / Almalik",
+      hrefs: "https://www.google.com/maps/@40.8422655,69.6106512,21z",
+    },
+    {
+      icon: "fa fa-phone fa-fw",
+      name: "+998942245606",
+      hrefs: "tel:+998942245606",
+    },
+    {
+      icon: "fa fa-envelope fa-fw",
+      name: "jamoliddindev@gmail.com",
+      hrefs: "mailto:jamoliddindev@gmail.com",
+    },
+  ];
 
   useEffect(() => {
     const getUser = () => {
@@ -98,19 +121,14 @@ function App() {
 
   window.oncontextmenu = function (e) {
     e.preventDefault();
-    return false; // cancel default menu
+    return false;
   };
 
   return (
-    <div
-      className="App"
-      onCopy={(e) => console.log(e)}
-      onCut={(e) => console.log(e)}
-      onPaste={(e) => console.log(e)}
-    >
+    <div className="App" onCopy={(e) => console.log(e.preventDefault())}>
       <ToastContainer
         position="top-right"
-        autoClose={6000}
+        autoClose={2000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -126,6 +144,8 @@ function App() {
           path="/"
           element={
             <Home
+              categories={categories}
+              setCategories={setCategories}
               ProductMore={ProductMore}
               getCategory={getCategory}
               categoryBig={categoryBig}
@@ -134,8 +154,12 @@ function App() {
           }
         />
         <Route path="/about" element={<About />} />
-        <Route path="/login" element={user ? <Navigate to="/" /> : <Login user={user}
-          setUser={setUser} />} />
+        <Route
+          path="/login"
+          element={
+            user ? <Navigate to="/" /> : <Login user={user} setUser={setUser} />
+          }
+        />
         <Route path="*" element={<Navigate to="/" />} />
         <Route
           path="/product/more/:id"
@@ -151,6 +175,7 @@ function App() {
           element={
             user ? (
               <Admin
+                Abouts={Abouts}
                 ProductMore={ProductMore}
                 getCategory={getCategory}
                 user={user}
@@ -180,7 +205,7 @@ function App() {
           }
         />
       </Routes>
-      <Footer />
+      <Footer categories={categories} Abouts={Abouts} />
     </div>
   );
 }

@@ -3,7 +3,7 @@ import "./Admin.css";
 import Administrator from "./Administrator/Administrator";
 import ClientPage from "./ClientPage/ClientPage";
 
-function Admin({ user, getCategory, ProductMore }) {
+function Admin({ user, getCategory, ProductMore,Abouts }) {
   const [loading, setLoading] = useState(false);
   const [contacts, setContacts] = useState([
     {

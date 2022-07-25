@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const CarouselHome = require("../models/CarouselHome");
 const Categories = require("../models/Categories");
 const Products = require("../models/Product");
+
 exports.addHomeCarousel = async (req, res) => {
   try {
     if (req.file) {
@@ -26,7 +27,7 @@ exports.addHomeCarousel = async (req, res) => {
       res.status(201).json({ success: true, data: swipers });
     }
   } catch (error) {
-    return res.status(400).send("ERROR ADDING: " + error)
+    return res.status(400).send("ERROR ADDING: " + error);
   }
 };
 exports.show = async (req, res) => {
@@ -34,10 +35,10 @@ exports.show = async (req, res) => {
     await CarouselHome.find()
       .then((result) => res.json(result))
       .catch((err) => {
-        return res.status(400).send("ERROR: " + err)
+        return res.status(400).send("ERROR: " + err);
       });
   } catch (error) {
-    return res.status(400).send("ERROR: " + error)
+    return res.status(400).send("ERROR: " + error);
   }
 };
 exports.addCategory = async (req, res) => {
@@ -50,14 +51,14 @@ exports.addCategory = async (req, res) => {
     const categoriesFind = await Categories.find();
     res.status(202).json({ success: true, data: categoriesFind });
   } catch (error) {
-    return res.status(400).send("ERROR: " + error)
+    return res.status(400).send("ERROR: " + error);
   }
 };
 exports.showCategory = async (req, res) => {
   await Categories.find()
     .then((result) => res.json(result))
     .catch((err) => {
-      return res.status(400).send("ERROR: " + err)
+      return res.status(400).send("ERROR: " + err);
     });
 };
 exports.addProduct = async (req, res) => {
@@ -89,7 +90,7 @@ exports.showProducts = async (req, res) => {
     .limit(8)
     .then((result) => res.json(result))
     .catch((err) => {
-      return res.status(400).send("ERROR: " + err)
+      return res.status(400).send("ERROR: " + err);
     });
 };
 exports.categoryFind = async (req, res) => {
@@ -107,3 +108,4 @@ exports.productMore = async (req, res) => {
   const product = await Products.findById(id);
   res.status(201).json({ success: true, data: product });
 };
+

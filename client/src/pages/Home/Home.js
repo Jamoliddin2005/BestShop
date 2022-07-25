@@ -10,11 +10,15 @@ function Home({
   getCategory,
   ProductMore,
   productMore,
+  categories,
+  setCategories,
 }) {
   return (
     <div className="about">
       <Header />
       <Section
+        categories={categories}
+        setCategories={setCategories}
         getCategory={getCategory}
         categoryBig={categoryBig}
         setCategoryBig={setCategoryBig}

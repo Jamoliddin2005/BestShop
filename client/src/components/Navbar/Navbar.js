@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
 import "./Navbar.css";
 
 function Navbar({ user }) {
@@ -23,9 +22,8 @@ function Navbar({ user }) {
 
   const DropdownAdmin = (e) => {
     e.preventDefault();
-    setToggle(!toggle)
+    setToggle(!toggle);
   };
-
 
   return (
     <>
@@ -47,22 +45,38 @@ function Navbar({ user }) {
             </ul>
             <ul>
               <li>
-                <a href="https://www.facebook.com/profile.php?id=100078919103944" target={"_blank"} rel="noopener noreferrer">
+                <a
+                  href="https://www.facebook.com/profile.php?id=100078919103944"
+                  target={"_blank"}
+                  rel="noopener noreferrer"
+                >
                   <i className="fa-brands fa-facebook-f"></i>
                 </a>
               </li>
               <li>
-                <a target={"_blank"} href="https://www.instagram.com/jamoliddin__05/" rel="noopener noreferrer">
+                <a
+                  target={"_blank"}
+                  href="https://www.instagram.com/jamoliddin__05/"
+                  rel="noopener noreferrer"
+                >
                   <i className="fa-brands fa-instagram"></i>
                 </a>
               </li>
               <li>
-                <a target={"_blank"} href="https://t.me/Jamoliddin9717" rel="noopener noreferrer">
+                <a
+                  target={"_blank"}
+                  href="https://t.me/BestShopWeb"
+                  rel="noopener noreferrer"
+                >
                   <i className="fa-brands fa-telegram"></i>
                 </a>
               </li>
               <li>
-                <a target={"_blank"} href="https://www.linkedin.com/in/jamoliddin-kucharov-8a6193234/" rel="noopener noreferrer">
+                <a
+                  target={"_blank"}
+                  href="https://www.linkedin.com/in/jamoliddin-ko-charov-8a6193234/"
+                  rel="noopener noreferrer"
+                >
                   <i className="fa-brands fa-linkedin"></i>
                 </a>
               </li>
@@ -74,7 +88,7 @@ function Navbar({ user }) {
         <div className="container">
           <div className="row">
             <Link to="/" className="navbar_left">
-              Zay
+              <img src="/uploads/logo.png" alt="" />
             </Link>
             <ul className="navbar_center">
               <li>
@@ -109,7 +123,7 @@ function Navbar({ user }) {
                 </li>
                 <Link to="/admin" className="User">
                   <img src={user.avatar} alt="" />
-                  {user.firstName}
+                  {user.firstName ? user.firstName : user.phoneNumber}
                 </Link>
                 <div className="dropdownAdmin" onClick={DropdownAdmin}>
                   <div className="userIcon">
@@ -120,13 +134,14 @@ function Navbar({ user }) {
                   </div>
                 </div>
                 <div className={toggle ? "d_none_div" : "AdminIcon_logout"}>
-                  <Link to={"/"} >
+                  <Link to={"/"}>
                     <i className="fa-solid fa-gear"></i>
                     Settings
                   </Link>
                   <span onClick={logout}>
                     <i className="fa-solid fa-arrow-right-from-bracket"></i>
-                    Logout</span>
+                    Logout
+                  </span>
                 </div>
               </ul>
             ) : (
@@ -153,7 +168,16 @@ function Navbar({ user }) {
                   </div>
                   <div className={isActive ? "register" : "register_clicked"}>
                     <Link to="/login">Login</Link>
-                    <Link to="/register">Register</Link>
+                    <a
+                      onClick={() => {
+                        window.open("https://t.me/ZayShopUz");
+                      }}
+                      href="https://t.me/ZayShopUz"
+                      target={"_blank"}
+                      rel="noopener noreferrer"
+                    >
+                      Telegram
+                    </a>
                   </div>
                 </li>
               </ul>

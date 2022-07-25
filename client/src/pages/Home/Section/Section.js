@@ -2,15 +2,14 @@ import React, { useEffect, useState } from "react";
 import Loading from "../../../components/Loading/Loading";
 import classes from "./section.module.css";
 
-function Section({ setCategoryBig, categoryBig, getCategory }) {
+function Section({
+  setCategoryBig,
+  categoryBig,
+  getCategory,
+  categories,
+  setCategories,
+}) {
   const [loading, setLoading] = useState(false);
-  const [categories, setCategories] = useState([
-    {
-      name: "",
-      photo: "",
-    },
-  ]);
-
 
   useEffect(() => {
     const getCategories = async () => {
@@ -24,7 +23,6 @@ function Section({ setCategoryBig, categoryBig, getCategory }) {
 
   return (
     <div className={classes.container}>
-
       <div className={classes.top}>
         <h1 className={classes.h1}>Categories of The Month</h1>
         <p className={classes.p}>

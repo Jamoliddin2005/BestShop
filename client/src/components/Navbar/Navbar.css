@@ -29,7 +29,7 @@
 
 /* nav */
 nav {
-  padding: 25px 0;
+  padding: 10px 0;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 }
 
@@ -45,12 +45,13 @@ nav .container .row ul {
 }
 
 nav .navbar_left {
-  color: #59ab6e;
-  font-weight: 500;
-  font-family: "Roboto", sans-serif;
-  font-size: 48px;
+  height: 75px;
 }
 
+nav .navbar_left img {
+  width: 75px;
+  height: 75px;
+}
 nav .navbar_center {
   width: auto;
 }

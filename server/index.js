@@ -34,6 +34,7 @@ app.use(
 const Auth = require("./routes/auth");
 const AddRoutes = require("./routes/Add");
 const HeaderCarouselDelete = require("./routes/Delete");
+
 app.use("/auth", Auth);
 app.use("/add", AddRoutes);
 app.use("/delete", HeaderCarouselDelete)

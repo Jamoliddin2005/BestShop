@@ -170,9 +170,9 @@ function Navbar({ user }) {
                     <Link to="/login">Login</Link>
                     <a
                       onClick={() => {
-                        window.open("https://t.me/ZayShopUz");
+                        window.open("https://t.me/BestShopWeb");
                       }}
-                      href="https://t.me/ZayShopUz"
+                      href="https://t.me/BestShopWeb"
                       target={"_blank"}
                       rel="noopener noreferrer"
                     >

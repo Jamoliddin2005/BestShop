@@ -134,7 +134,6 @@ export default function Footer({ categories, Abouts }) {
               <form action="/auth" onSubmit={submitHandler}>
                 <input
                   type="email"
-                  id=""
                   placeholder="Email address"
                   onChange={(e) => setInput(e.target.value)}
                   value={input}

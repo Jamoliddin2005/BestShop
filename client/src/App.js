@@ -107,14 +107,7 @@ function App() {
   };
 
   document.addEventListener("keydown", (e) => {
-    if (
-      e.keyCode === 123 ||
-      e.keyCode === 16 ||
-      e.keyCode === 17 ||
-      e.keyCode === 73 ||
-      e.keyCode === 74 ||
-      e.keyCode === 67
-    ) {
+    if (e.keyCode === 123) {
       e.preventDefault();
     }
   });

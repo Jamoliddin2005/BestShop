@@ -68,12 +68,15 @@ const Login = ({ user, setUser }) => {
           {
             phoneNumber: account,
             password: password,
+          },
+          {
+            withCredentials: true,
           }
         );
         const user = {
-          googleId: data.data[data.data.length - 1].googleId,
-          password: data.data[data.data.length - 1].password,
-          phoneNumber: data.data[data.data.length - 1].phoneNumber,
+          googleId: data.data.googleId,
+          password: data.data.password,
+          phoneNumber: data.data.phoneNumber,
           avatar: "/uploads/user.png",
         };
         setUser(user);
@@ -154,25 +157,23 @@ const Login = ({ user, setUser }) => {
   const AccountPasswordSubmitHandler = async (req, res) => {
     const { data } = await axios.post(
       "http://localhost:5000/auth/PostPasswordSubmit",
+      { phoneNumber: value, password: passwordNumber },
       {
-        phoneNumber: value,
-        password: passwordNumber,
+        withCredentials: true,
       }
     );
     if (data.success) {
-      if (!data.data.user[0].avatar) {
+      if (!data.data.user.avatar) {
         const userInfo = {
-          googleId: data.data.user[0].googleId,
-          password: data.data.user[0].password,
-          phoneNumber: data.data.user[0].phoneNumber,
-          firstName: data.data.user[0].phoneNumber,
+          googleId: data.data.user.googleId,
+          password: data.data.user.password,
+          phoneNumber: data.data.user.phoneNumber,
+          firstName: data.data.user.phoneNumber,
           avatar: "/uploads/user.png",
         };
         setUser(userInfo);
         return toast.success("SUCCESS");
       }
-
-      console.log(data.data.user[0]);
     } else {
       return toast.error("Password is Incorrect");
     }

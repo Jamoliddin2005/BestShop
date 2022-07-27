@@ -1,7 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const cookieSession = require("cookie-session");
-const session = require('express-session');
+const session = require("express-session");
 const passport = require("passport");
 const app = express();
 
@@ -10,16 +9,15 @@ require("./helper/db")();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// app.use(
-//   cookieSession({ name: "session", keys: ["lama"], maxAge: 24 * 60 * 60 * 100 })
-// );
 
-app.use(session({
-  secret: process.env.SessionSecretKey,
-  resave: false,
-  saveUninitialized: true,
-  cookie: { maxAge: 60 * 60 * 1000 } // 1 hour
-}));
+app.use(
+  session({
+    secret: process.env.SessionSecretKey,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 60 * 60 * 1000 }, // 1 hour
+  })
+);
 
 require("./middleware/passport")(passport);
 app.use(passport.initialize());
@@ -37,7 +35,12 @@ const HeaderCarouselDelete = require("./routes/Delete");
 
 app.use("/auth", Auth);
 app.use("/add", AddRoutes);
-app.use("/delete", HeaderCarouselDelete)
+app.use("/delete", HeaderCarouselDelete);
+
+app.get("/isAdmin", async (req, res) => {
+  return res.status(200).json({ data: req.session });
+});
+
 app.listen(5000, () => {
   console.log(`Server running on port 5000`);
 });

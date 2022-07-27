@@ -122,7 +122,12 @@ function Navbar({ user }) {
                   </Link>
                 </li>
                 <Link to="/admin" className="User">
-                  <img src={user.avatar} alt="" />
+                  {user.avatar ? (
+                    <img src={user.avatar} alt="" />
+                  ) : (
+                    <img src="/uploads/user.png" alt="" />
+                  )}
+
                   {user.firstName ? user.firstName : user.phoneNumber}
                 </Link>
                 <div className="dropdownAdmin" onClick={DropdownAdmin}>

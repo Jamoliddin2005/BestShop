@@ -201,10 +201,11 @@ nav .AdminIcon_logout {
   top: 30px;
   right: -60px;
   z-index: 10;
-  background-color: #f1f1f1;
+  background-color: #d4d4d4;
   border-radius: 3px;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 0 20px 2px #d8d8d8;
 }
 nav .AdminIcon_logout a {
   border-bottom: 1px solid #59ab6e;

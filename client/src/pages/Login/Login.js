@@ -32,7 +32,6 @@ const Login = ({ user, setUser }) => {
         size: "invisible",
         callback: (response) => {
           SubmitHandler();
-          console.log("Recaptcha verified!");
         },
       }
     );
@@ -73,13 +72,25 @@ const Login = ({ user, setUser }) => {
             withCredentials: true,
           }
         );
-        const user = {
-          googleId: data.data.googleId,
-          password: data.data.password,
-          phoneNumber: data.data.phoneNumber,
-          avatar: "/uploads/user.png",
-        };
-        setUser(user);
+        if (data.data.phoneNumber === "+998942245606") {
+          const user = {
+            googleId: data.data.googleId,
+            password: data.data.password,
+            phoneNumber: data.data.phoneNumber,
+            isAdmin: true,
+            avatar: "/uploads/user.png",
+          };
+          setUser(user);
+        } else {
+          const user = {
+            googleId: data.data.googleId,
+            password: data.data.password,
+            phoneNumber: data.data.phoneNumber,
+            avatar: "/uploads/user.png",
+          };
+          setUser(user);
+        }
+
         return toast.success("Success");
       } else {
         return toast.error("Parol juda qisqa");

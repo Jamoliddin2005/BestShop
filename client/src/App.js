@@ -96,7 +96,9 @@ function App() {
           throw new Error("authentication has been failed!");
         })
         .then((resObject) => {
-          setUser(resObject.data.user);
+          if (resObject.data.user) {
+            setUser(resObject.data.user);
+          }
         })
         .catch((err) => {
           console.log(err);

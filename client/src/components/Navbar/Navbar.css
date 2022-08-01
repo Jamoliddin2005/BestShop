@@ -241,3 +241,51 @@ nav ul.AdminRight {
 nav ul.AdminRight .User {
   margin-left: 40px;
 }
+
+.navbar_right .Search-item {
+  position: relative;
+  overflow: hidden;
+  z-index: 5;
+  padding: 8.6px 10px;
+}
+
+.border_left {
+  border-left: 1px solid #212934;
+  border-radius: 5px;
+}
+
+.navbar_right .search-input {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 2;
+}
+
+.navbar_right .search-input input {
+  outline: none;
+  padding: 9px 5px 9px 12px;
+  width: 300px;
+  border: 1px solid #212934;
+  border-radius: 5px;
+  color: #59ab6e;
+  font-weight: 700;
+}
+
+.navbar_right .dataResult {
+  position: absolute;
+  top: 45px;
+  right: 0;
+  z-index: 10;
+  background-color: #ccc;
+  width: 350px;
+  height: 300px;
+}
+
+.navbar_search_bg {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 3;
+}

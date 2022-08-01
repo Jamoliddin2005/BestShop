@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 
@@ -9,6 +9,19 @@ function Navbar({ user }) {
 
   const [isActive, setActive] = useState("false");
   const [toggle, setToggle] = useState("false");
+  const [search, setSearch] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [wordEntered, setWordEntered] = useState("");
+  const [searchDivBg, setSearchDivBg] = useState(false);
+  const [filteredData, setFilteredData] = useState([]);
+  const [products, setProducts] = useState([
+    {
+      name: "",
+      price: "",
+      desc: "",
+      photo: "",
+    },
+  ]);
 
   const RegisterClickHandler = (e) => {
     e.preventDefault();
@@ -23,6 +36,35 @@ function Navbar({ user }) {
   const DropdownAdmin = (e) => {
     e.preventDefault();
     setToggle(!toggle);
+  };
+
+  const SearchHandler = (e) => {
+    setSearch(true);
+    productBase();
+  };
+
+  const productBase = async () => {
+    setLoading(true);
+    const response = await fetch("http://localhost:5000/add/showProducts");
+    setProducts(await response.json());
+    setLoading(false);
+  };
+
+  const SearchChangeHandler = (e) => {
+    setSearchDivBg(true);
+    productBase();
+    const searchWord = e.target.value;
+    setWordEntered(searchWord);
+    const newFilter = products.filter((value) => {
+      return value.name.toLowerCase().includes(searchWord.toLowerCase());
+    });
+
+    if (searchWord === "") {
+      setFilteredData([]);
+      setSearchDivBg(false);
+    } else {
+      setFilteredData(newFilter);
+    }
   };
 
   return (
@@ -86,6 +128,20 @@ function Navbar({ user }) {
       </div>
       <nav>
         <div className="container">
+          {searchDivBg ? (
+            <div
+              className="navbar_search_bg"
+              onClick={(e) => {
+                setSearch(false);
+                setSearchDivBg(false);
+                setFilteredData([]);
+                setWordEntered("");
+              }}
+            ></div>
+          ) : (
+            ""
+          )}
+
           <div className="row">
             <Link to="/" className="navbar_left">
               <img src="/uploads/logo.png" alt="" />
@@ -110,11 +166,58 @@ function Navbar({ user }) {
             ></div>
             {user ? (
               <ul className="navbar_right AdminRight">
-                <li>
-                  <Link to="/">
-                    <i className="fa-solid fa-magnifying-glass"></i>
-                  </Link>
-                </li>
+                {window.location.href.split("/")[3] !== "product" ? (
+                  <li>
+                    <Link
+                      to="#"
+                      className={
+                        search ? "Search-item border_left" : "Search-item"
+                      }
+                      onClick={SearchHandler}
+                    >
+                      <i className="fa-solid fa-magnifying-glass"></i>
+                    </Link>
+                    {search ? (
+                      <div className="search-input">
+                        <input
+                          onChange={SearchChangeHandler}
+                          value={wordEntered}
+                          type="text"
+                          placeholder="Search..."
+                          name=""
+                          id=""
+                        />
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                    {filteredData.length !== 0 && (
+                      <div className="dataResult">
+                        {filteredData.slice(0, 15).map((value, key) => {
+                          return (
+                            <Link
+                              to={`/product/more/${value._id}`}
+                              className="dataItem"
+                              href={value.link}
+                              key={key}
+                              onClick={(e) => {
+                                setSearch(false);
+                                setSearchDivBg(false);
+                                setFilteredData([]);
+                                setWordEntered("");
+                              }}
+                            >
+                              <p>{value.name} </p>
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </li>
+                ) : (
+                  ""
+                )}
+
                 <li>
                   <Link to="/">
                     <i className="fa-solid fa-cart-arrow-down"></i>
@@ -151,11 +254,57 @@ function Navbar({ user }) {
               </ul>
             ) : (
               <ul className="navbar_right">
-                <li>
-                  <Link to="/">
-                    <i className="fa-solid fa-magnifying-glass"></i>
-                  </Link>
-                </li>
+                {window.location.href.split("/")[3] !== "product" ? (
+                  <li>
+                    <Link
+                      to="#"
+                      className={
+                        search ? "Search-item border_left" : "Search-item"
+                      }
+                      onClick={SearchHandler}
+                    >
+                      <i className="fa-solid fa-magnifying-glass"></i>
+                    </Link>
+                    {search ? (
+                      <div className="search-input">
+                        <input
+                          onChange={SearchChangeHandler}
+                          value={wordEntered}
+                          type="text"
+                          placeholder="Search..."
+                          name=""
+                          id=""
+                        />
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                    {filteredData.length !== 0 && (
+                      <div className="dataResult">
+                        {filteredData.slice(0, 15).map((value, key) => {
+                          return (
+                            <Link
+                              to={`/product/more/${value._id}`}
+                              className="dataItem"
+                              href={value.link}
+                              key={key}
+                              onClick={(e) => {
+                                setSearch(false);
+                                setSearchDivBg(false);
+                                setFilteredData([]);
+                                setWordEntered("");
+                              }}
+                            >
+                              <p>{value.name} </p>
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </li>
+                ) : (
+                  ""
+                )}
                 <li>
                   <Link to="/">
                     <i className="fa-solid fa-cart-arrow-down"></i>

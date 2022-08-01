@@ -23,7 +23,7 @@ function Home({
         categoryBig={categoryBig}
         setCategoryBig={setCategoryBig}
       />
-      <NewProducts productMore={productMore} ProductMore={ProductMore} />
+      <NewProducts productMore={productMore} />
     </div>
   );
 }

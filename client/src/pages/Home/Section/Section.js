@@ -8,19 +8,9 @@ function Section({
   getCategory,
   categories,
   setCategories,
+  loading,
+  setLoading,
 }) {
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const getCategories = async () => {
-      setLoading(true);
-      const response = await fetch("http://localhost:5000/add/showCategory");
-      setCategories(await response.json());
-      setLoading(false);
-    };
-    getCategories();
-  }, []);
-
   return (
     <div className={classes.container}>
       <div className={classes.top}>

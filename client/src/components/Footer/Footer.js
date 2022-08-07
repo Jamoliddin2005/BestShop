@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import "./Footer.css";
 import { toast } from "react-toastify";
+import Loading from "../Loading/Loading";
 
 const Pages = [
   {
@@ -22,7 +23,7 @@ const Pages = [
   },
 ];
 
-export default function Footer({ categories, Abouts }) {
+export default function Footer({ categories, Abouts, loading }) {
   const [input, setInput] = useState("");
 
   const TOKEN = "5597892555:AAEzeESTwhMim-4zLSZQjoGZSZ9Q4Niqles";
@@ -74,13 +75,13 @@ export default function Footer({ categories, Abouts }) {
                 </li>
               ))}
             </ul>
-            <ul>
+            <ul className="footer_center">
               <h3>Products</h3>
-              {categories.map((item, index) => (
-                <li key={index}>
-                  <Link to={`/category/${item._id}`}>{item.name}</Link>
-                </li>
-              ))}
+              {loading ? (
+                <Loading />
+              ) : (
+                <Loading />
+              )}
             </ul>
             <ul>
               <h3>Further Info</h3>

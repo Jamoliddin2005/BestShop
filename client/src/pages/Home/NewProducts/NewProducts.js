@@ -2,29 +2,26 @@ import React, { useEffect, useState } from "react";
 import Loading from "../../../components/Loading/Loading";
 import classes from "./NewProducts.module.css";
 function NewProducts({ ProductMore }) {
-
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([
     {
       name: "",
       price: "",
       desc: "",
       photo: "",
-    }
-  ])
-
+    },
+  ]);
 
   useEffect(() => {
     const productBase = async () => {
-      setLoading(true)
-      const response = await fetch("http://localhost:5000/add/showProducts")
-      setProducts(await response.json())
-      setLoading(false)
-    }
+      setLoading(true);
+      const response = await fetch("http://localhost:5000/add/showProducts");
+      setProducts(await response.json());
+      setLoading(false);
+    };
 
-    productBase()
-  }, [])
-
+    productBase();
+  }, []);
 
   return (
     <div className={classes.NewProducts}>
@@ -36,13 +33,23 @@ function NewProducts({ ProductMore }) {
             pariatur. Excepteur sint occaecat cupidatat non proident.
           </p>
         </div>
-        {products.length ? <div className={classes.newProds}>
-          {
-            loading ? <Loading /> :
+        {products.length ? (
+          <div className={classes.newProds}>
+            {loading ? (
+              <Loading />
+            ) : (
               products.map((item, index) => (
-                <div className={classes.product} key={index} onClick={() => ProductMore(item._id)}>
-                  <div className={classes.image} >
-                    <img src={"/uploads/" + item.photo} className={classes.img} alt="" />
+                <div
+                  className={classes.product}
+                  key={index}
+                  onClick={() => {ProductMore(item._id)}}
+                >
+                  <div className={classes.image}>
+                    <img
+                      src={"/uploads/" + item.photo}
+                      className={classes.img}
+                      alt=""
+                    />
                   </div>
                   <div className={classes.texts}>
                     <div className={classes.price__name}>
@@ -53,8 +60,9 @@ function NewProducts({ ProductMore }) {
                   </div>
                 </div>
               ))
-          }
-        </div> : null}
+            )}
+          </div>
+        ) : null}
       </div>
     </div>
   );

@@ -60,6 +60,18 @@ function App() {
     },
   ];
 
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const getCategories = async () => {
+      setLoading(true);
+      const response = await fetch("http://localhost:5000/add/showCategory");
+      setCategories(await response.json());
+      setLoading(false);
+    };
+    getCategories();
+  }, []);
+
   useEffect(() => {
     const getUser = () => {
       fetch("http://localhost:5000/auth/login/success", {
@@ -159,6 +171,8 @@ function App() {
           path="/"
           element={
             <Home
+              loading={loading}
+              setLoading={setLoading}
               categories={categories}
               setCategories={setCategories}
               ProductMore={ProductMore}
@@ -220,7 +234,7 @@ function App() {
           }
         />
       </Routes>
-      <Footer categories={categories} Abouts={Abouts} />
+      <Footer categories={categories} Abouts={Abouts} loading={loading} />
     </div>
   );
 }

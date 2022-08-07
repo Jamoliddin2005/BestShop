@@ -9,21 +9,24 @@ function Home({
   categoryBig,
   getCategory,
   ProductMore,
-  productMore,
   categories,
   setCategories,
+  loading,
+  setLoading,
 }) {
   return (
     <div className="about">
       <Header />
       <Section
+        loading={loading}
+        setLoading={setLoading}
         categories={categories}
         setCategories={setCategories}
         getCategory={getCategory}
         categoryBig={categoryBig}
         setCategoryBig={setCategoryBig}
       />
-      <NewProducts productMore={productMore} />
+      <NewProducts ProductMore={ProductMore} />
     </div>
   );
 }

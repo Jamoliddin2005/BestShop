@@ -80,7 +80,11 @@ export default function Footer({ categories, Abouts, loading }) {
               {loading ? (
                 <Loading />
               ) : (
-                <Loading />
+                categories.map((item, index) => (
+                  <li key={index}>
+                  <Link to={`/category/${item._id}`}>{item.name}</Link>
+                </li>
+              ))
               )}
             </ul>
             <ul>

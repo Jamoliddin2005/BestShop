@@ -12,6 +12,7 @@ import { ToastContainer } from "react-toastify";
 import Categories from "./pages/Categories/Categories";
 import ProductMorePage from "./pages/ProductMorePage/ProductMore";
 import axios from "axios";
+import Contact from "./pages/Contact/Contact";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -218,6 +219,7 @@ function App() {
             )
           }
         />
+        <Route path="/contact" element={<Contact />} />
         <Route
           path="/category/:id"
           element={

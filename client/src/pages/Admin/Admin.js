@@ -40,5 +40,4 @@ function Admin({ user, getCategory, ProductMore, Abouts }) {
     </>
   );
 }
-
 export default Admin;

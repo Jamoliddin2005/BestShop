@@ -13,6 +13,7 @@ import Categories from "./pages/Categories/Categories";
 import ProductMorePage from "./pages/ProductMorePage/ProductMore";
 import axios from "axios";
 import Contact from "./pages/Contact/Contact";
+import AdminHome from "./pages/Admin/Administrator/Home/Home";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -61,6 +62,13 @@ function App() {
     },
   ];
 
+  const [contacts, setContacts] = useState([
+    {
+      name: "",
+      photo: "",
+    },
+  ]);
+
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -68,6 +76,16 @@ function App() {
       setLoading(true);
       const response = await fetch("http://localhost:5000/add/showCategory");
       setCategories(await response.json());
+      setLoading(false);
+    };
+    getCategories();
+  }, []);
+
+  useEffect(() => {
+    const getCategories = async () => {
+      setLoading(true);
+      const response = await fetch("http://localhost:5000/add/showCategory");
+      setContacts(await response.json());
       setLoading(false);
     };
     getCategories();
@@ -233,6 +251,28 @@ function App() {
               categoryBig={categoryBig}
               ProductMore={ProductMore}
             />
+          }
+        />
+        <Route
+          path="/admin/homePage"
+          element={
+            user ? (
+              <AdminHome
+                categoryBig={categoryBig}
+                setCategoryBig={setCategoryBig}
+                categoryLoading={categoryLoading}
+                setCategoryLoading={setCategoryLoading}
+                getCategory={getCategory}
+                ProductMore={ProductMore}
+                user={user}
+                loading={loading}
+                contacts={contacts}
+                setLoading={setLoading}
+                setContacts={setContacts}
+              />
+            ) : (
+              <Navigate to="/" />
+            )
           }
         />
       </Routes>

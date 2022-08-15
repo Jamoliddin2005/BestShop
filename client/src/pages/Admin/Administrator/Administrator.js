@@ -1,8 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
 // import classes from "./Administrator.module.css";
-import HomeCarousel from "../HomeCarousel/HomeCarousel";
-import Categories from "../Categories/Categories";
-import NewProducts from "../NewProducts/NewProducts";
 
 const Administrator = ({
   categoryBig,
@@ -21,28 +19,17 @@ const Administrator = ({
     <div>
       <div className="adminPage">
         <div className="adminTitle">
-          <h1>Welcome {user.firstName}</h1>
-          <HomeCarousel user={user} />
-          <Categories
-            getCategory={getCategory}
-            categoryLoading={categoryLoading}
-            setCategoryLoading={setCategoryLoading}
-            categoryBig={categoryBig}
-            setCategoryBig={setCategoryBig}
-            user={user}
-            loading={loading}
-            setLoading={setLoading}
-            contacts={contacts}
-            setContacts={setContacts}
-          />
-          <NewProducts
-            user={user}
-            loading={loading}
-            setLoading={setLoading}
-            contacts={contacts}
-            setContacts={setContacts}
-            ProductMore={ProductMore}
-          />
+          {user.firstName ? (
+            <h1>Welcome {user.firstName}</h1>
+          ) : (
+            <h1>Welcome {user.phoneNumber}</h1>
+          )}
+
+          <ul>
+            <li>
+              <Link to={"/admin/homePage"}>home</Link>
+            </li>
+          </ul>
         </div>
       </div>
     </div>

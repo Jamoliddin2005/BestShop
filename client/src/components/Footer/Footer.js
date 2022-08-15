@@ -82,9 +82,9 @@ export default function Footer({ categories, Abouts, loading }) {
               ) : (
                 categories.map((item, index) => (
                   <li key={index}>
-                  <Link to={`/category/${item._id}`}>{item.name}</Link>
-                </li>
-              ))
+                    <Link to={`/category/${item._id}`}>{item.name}</Link>
+                  </li>
+                ))
               )}
             </ul>
             <ul>

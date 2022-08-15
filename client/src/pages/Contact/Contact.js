@@ -1,5 +1,6 @@
 import React from "react";
 import classes from "./Contact.module.css";
+import Form from "./Form/Form";
 import Map from "./Map/Map.js";
 export default function Contact() {
   return (
@@ -14,6 +15,7 @@ export default function Contact() {
         </div>
         <Map />
       </div>
+        <Form />  
     </div>
   );
 }

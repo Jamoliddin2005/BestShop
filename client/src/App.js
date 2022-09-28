@@ -14,6 +14,7 @@ import ProductMorePage from "./pages/ProductMorePage/ProductMore";
 import axios from "axios";
 import Contact from "./pages/Contact/Contact";
 import AdminHome from "./pages/Admin/Administrator/Home/Home";
+import Shop from "./pages/Shop/Shop";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -238,6 +239,7 @@ function App() {
           }
         />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/shop" element={<Shop loading={loading} categories={categories} />} />
         <Route
           path="/category/:id"
           element={

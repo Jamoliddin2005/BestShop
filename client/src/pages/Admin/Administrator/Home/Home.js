@@ -4,7 +4,8 @@ import Categories from "../../Categories/Categories";
 import NewProducts from "../../NewProducts/NewProducts";
 import { AiOutlineRight } from "react-icons/ai";
 
-import "../Administrator.module.css";
+import "../Administrator.css";
+import { Link } from "react-router-dom";
 
 function Home({
   user,
@@ -21,9 +22,8 @@ function Home({
 }) {
   return (
     <div className="adminPage">
-      <p>
-        {" "}
-        Admin <AiOutlineRight /> Home Page{" "}
+      <p className="p_admin_pages">
+        <Link to={"/admin"}>Admin</Link> <AiOutlineRight />    <Link to={"/admin/homePage"}>Home Page</Link>
       </p>
       <div className="adminTitle">
         <h1>Home Page for Admin</h1>

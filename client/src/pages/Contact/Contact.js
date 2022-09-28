@@ -15,7 +15,7 @@ export default function Contact() {
         </div>
         <Map />
       </div>
-        <Form />  
+      <Form />
     </div>
   );
 }

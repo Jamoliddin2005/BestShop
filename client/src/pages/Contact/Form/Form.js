@@ -37,13 +37,11 @@ export default function Form() {
           setMessage("");
         })
         .catch((err) => {
-          console.log(err);
+          return toast.error("ERROR")
         })
         .finally(() => {
           return toast.success("Success!");
         });
-
-      return toast.success("Success");
     } else {
       return toast.error("Write to all");
     }

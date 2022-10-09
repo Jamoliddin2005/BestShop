@@ -36,7 +36,7 @@ function Shop({ categories, loading }) {
                                 <>
                                     <h4>Categories</h4>
                                     {categories.map((item, index) => (
-                                        <li>
+                                        <li key={index}>
                                             <Link to={`/category/${item._id}`}>{item.name}</Link>
                                         </li>
                                     ))}

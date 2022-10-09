@@ -1,12 +1,11 @@
 import React from 'react'
 import "./Loading2.css"
 
-function Loading2() {
+function Loading2({ style }) {
     return (
-        <div className="loadingio-spinner-ellipsis-jcjcwbmq8p"><div className="ldio-98yll5jdiu5">
-            <div></div><div></div><div></div><div></div><div></div>
-        </div></div>
-
+        <div className="loading2" >
+            <h4 style={style}>Loading<span>.</span><span>.</span><span>.</span></h4>
+        </div>
     )
 }
 

@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Loading from '../../components/Loading/Loading'
 import Loading2 from '../../components/Loading2/Loading2'
 import Brands from '../About/Brands/Brands'
 import classes from "./Shop.module.css"
@@ -30,20 +29,17 @@ function Shop({ categories, loading }) {
                                 <>
                                     <h4>Categories</h4>
                                     <div className={classes.LoadingDiv}>
-                                        <Loading2 />
+                                        <Loading2 style={{ color: "#9bd85a", textAlign: "left" }} />
                                     </div>
                                 </>
                             ) : (
                                 <>
                                     <h4>Categories</h4>
-                                    <div className={classes.LoadingDiv}>
-                                        <Loading2 />
-                                    </div>
-                                    {/* {categories.map((item, index) => (
+                                    {categories.map((item, index) => (
                                         <li>
                                             <Link to={`/category/${item._id}`}>{item.name}</Link>
                                         </li>
-                                    ))} */}
+                                    ))}
 
                                 </>
                             )}

@@ -172,7 +172,7 @@ function App() {
   };
 
   return (
-    <div className="App" onCopy={(e) => console.log(e.preventDefault())}>
+    <div className="App" onCopy={(e) => e.preventDefault()}>
       <ToastContainer
         position="top-right"
         autoClose={2000}

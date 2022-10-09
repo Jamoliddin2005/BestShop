@@ -82,10 +82,11 @@
 .ldio-98yll5jdiu5 {
   width: 100%;
   height: 100px;
-  position: relative;
+  position: absolute;
   transform: translateZ(0) scale(1);
   backface-visibility: hidden;
   transform-origin: 0 0;
+  top: 0;
 }
 .ldio-98yll5jdiu5 div {
   box-sizing: content-box;

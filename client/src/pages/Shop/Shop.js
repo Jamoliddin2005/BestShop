@@ -39,6 +39,12 @@ function Shop({ categories, loading }) {
                                     <div className={classes.LoadingDiv}>
                                         <Loading2 />
                                     </div>
+                                    {/* {categories.map((item, index) => (
+                                        <li>
+                                            <Link to={`/category/${item._id}`}>{item.name}</Link>
+                                        </li>
+                                    ))} */}
+
                                 </>
                             )}
                         </ul>
@@ -52,7 +58,7 @@ function Shop({ categories, loading }) {
             </div>
             <Brands />
 
-        </div>
+        </div >
     )
 }
 

@@ -1,14 +1,43 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Loading2 from '../../components/Loading2/Loading2'
 import Brands from '../About/Brands/Brands'
 import classes from "./Shop.module.css"
 
+
+
 function Shop({ categories, loading }) {
+
+    const [seasons, setSeasons] = useState([
+        {
+            name: "Spring",
+            isActive: false,
+            id: 1
+        },
+        {
+            name: "Summer",
+            isActive: false,
+            id: 2
+        },
+        {
+            name: "Autumn",
+            isActive: false,
+            id: 3
+        },
+        {
+            name: "Winter",
+            isActive: false,
+            id: 4
+        },
+        {
+            name: "All",
+            isActive: true,
+            id: 5
+        },
+    ])
 
     return (
         <div className={classes.ShoppingPage}>
-            <h1>Shopping Page</h1>
             <div className="container">
                 <div className={classes.row}>
                     <div className={classes.Left}>
@@ -29,7 +58,7 @@ function Shop({ categories, loading }) {
                                 <>
                                     <h4>Categories</h4>
                                     <div className={classes.LoadingDiv}>
-                                        <Loading2 style={{ color: "#9bd85a", textAlign: "left" }} />
+                                        <Loading2 style={{ color: "#9bd85a", textAlign: "left", fontSize: "20px", marginTop: "20px", marginLeft: "10px", marginBottom: "30px" }} />
                                     </div>
                                 </>
                             ) : (
@@ -43,6 +72,16 @@ function Shop({ categories, loading }) {
 
                                 </>
                             )}
+                        </ul>
+                        <ul>
+                            <h4>Seasons</h4>
+                            {seasons.map((item, index) => (
+                                <li key={index} className={item.isActive ? classes.SeasonsActive : classes.noActive}>
+                                    <Link to={"#"} onClick={(e) => {
+                                        e.preventDefault() 
+                                    }}>{item.name}</Link>
+                                </li>
+                            ))}
                         </ul>
                     </div>
                     <div className={classes.Right}>

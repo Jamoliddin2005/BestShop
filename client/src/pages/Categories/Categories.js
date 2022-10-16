@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useEffect } from "react";
+import Currency from "../../components/Currency/Currency";
 import Loading from "../../components/Loading/Loading";
+import NameLength from "../../components/NameLength/NameLength";
 import classes from "./Categories.module.css";
 
 const Categories = ({
@@ -39,15 +41,15 @@ const Categories = ({
                 >
                   <div className={classes.image}>
                     <img
-                      src={"/uploads/" + item.photo}
+                      src={"/uploads/" + item.photo[0]}
                       className={classes.img}
                       alt=""
                     />
                   </div>
                   <div className={classes.texts}>
                     <div className={classes.price_name}>
-                      <h2 className={classes.name}>{item.name}</h2>
-                      <h3 className={classes.price}>{"$ " + item.price}</h3>
+                      <h2 className={classes.name}>{NameLength(item.name, 6)}</h2>
+                      <h3 className={classes.price}>{Currency(item.price)}</h3>
                     </div>
                     <div className={classes.desc}>
                       <p className={classes.desc}>{item.desc}</p>

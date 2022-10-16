@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import Currency from "../../../components/Currency/Currency";
 import Loading from "../../../components/Loading/Loading";
+import NameLength from "../../../components/NameLength/NameLength";
 import classes from "./NewProducts.module.css";
 function NewProducts({ ProductMore }) {
   const [loading, setLoading] = useState(false);
@@ -23,6 +25,7 @@ function NewProducts({ ProductMore }) {
     productBase();
   }, []);
 
+
   return (
     <div className={classes.NewProducts}>
       <div className={classes.container}>
@@ -42,19 +45,19 @@ function NewProducts({ ProductMore }) {
                 <div
                   className={classes.product}
                   key={index}
-                  onClick={() => {ProductMore(item._id)}}
+                  onClick={() => { ProductMore(item._id) }}
                 >
                   <div className={classes.image}>
                     <img
-                      src={"/uploads/" + item.photo}
+                      src={"/uploads/" + item.photo[0]}
                       className={classes.img}
                       alt=""
                     />
                   </div>
                   <div className={classes.texts}>
                     <div className={classes.price__name}>
-                      <h2 className={classes.name}>{item.name}</h2>
-                      <h3 className={classes.price}>$ {item.price}</h3>
+                      <h2 className={classes.name}>{NameLength(item.name, 6)}</h2>
+                      <h3 className={classes.price}>{Currency(item.price)}</h3>
                     </div>
                     <p className={classes.desc}>{item.desc}</p>
                   </div>

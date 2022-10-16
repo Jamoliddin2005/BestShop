@@ -44,6 +44,8 @@ nav .container .row {
 nav .container .row ul {
   display: flex;
   align-items: center;
+  position: relative;
+  z-index: 4;
 }
 
 nav .navbar_left {
@@ -271,6 +273,8 @@ nav ul.AdminRight .User {
   border-radius: 5px;
   color: #59ab6e;
   font-weight: 700;
+  position: relative;
+  z-index: 500;
 }
 
 .navbar_right .dataResult {
@@ -290,4 +294,36 @@ nav ul.AdminRight .User {
   top: 0;
   left: 0;
   z-index: 3;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.navbar_right .dataResult .Search_span {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3px 10px;
+  transition: 0.5s;
+}
+
+.navbar_right .dataResult .Search_span p {
+  transition: 0.5s;
+}
+
+.navbar_right .dataResult .Search_span .currency {
+  color: #212934;
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+}
+
+.navbar_right .dataResult .Search_span:hover {
+  background-color: gray;
+}
+
+.navbar_right .dataResult .Search_span:hover p {
+  color: white;
+}
+
+.navbar_right .dataResult .Search_span img {
+  object-fit: cover;
 }

@@ -63,3 +63,13 @@
   margin-top: 20px;
   color: white !important;
 }
+
+.adminPage .adminTitle .headerCarousel form select {
+  background: transparent;
+  width: 100%;
+  border-radius: 5px;
+  padding: 7px;
+  display: block;
+  color: #212934;
+  outline: none;
+}

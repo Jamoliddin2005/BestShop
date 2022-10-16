@@ -17,7 +17,8 @@ const NewProducts = ({
   const [price, setPrice] = useState("");
   const [desc, setDesc] = useState("");
   const [categoryId, setCategoryId] = useState("");
-  const [photo, setPhoto] = useState("");
+  const [gender, setGender] = useState("");
+  const [photo, setPhoto] = useState(null);
   const [photoone, setPhotoOne] = useState("https://bref.sh/img/logo-null.png");
 
   const [products, setProducts] = useState([
@@ -27,8 +28,21 @@ const NewProducts = ({
       photo: "",
       desc: "",
       categoryId: "",
+      gender: ""
     },
   ]);
+
+  const ProductForm = new FormData();
+  ProductForm.append("name", name);
+  ProductForm.append("price", price.replace("e"));
+  ProductForm.append("desc", desc);
+  ProductForm.append("gender", gender);
+  ProductForm.append("categoryId", categoryId);
+  if (photo) {
+    for (let i = 0; i < photo.length; i++) {
+      ProductForm.append("photo", photo[i]);
+    }
+  }
 
   const CreateProductHandler = async (e) => {
     e.preventDefault();
@@ -38,18 +52,14 @@ const NewProducts = ({
       e.preventDefault();
       if (name && price && desc && photo && categoryId) {
         e.preventDefault();
-        const ProductForm = new FormData();
-        ProductForm.append("name", name);
-        ProductForm.append("price", price);
-        ProductForm.append("desc", desc);
-        ProductForm.append("categoryId", categoryId);
-        ProductForm.append("photo", photo);
+
         setPhoto("");
         setName("");
         setPrice("");
         setDesc("");
         setLoading("");
         setProducts("");
+        setGender("")
         const { data } = await axios.post(
           "http://localhost:5000/add/addProduct",
           ProductForm
@@ -61,7 +71,7 @@ const NewProducts = ({
         toast.error("Productni to'liq kiriting");
       }
     } catch (error) {
-      console.log(error);
+      return toast.error("ERROR!!!")
     }
   };
 
@@ -106,6 +116,8 @@ const NewProducts = ({
         setLoading={setLoading}
         contacts={contacts}
         setContacts={setContacts}
+        gender={gender}
+        setGender={setGender}
       />
 
       <div className={classes.ProductsDiv}>
@@ -115,6 +127,8 @@ const NewProducts = ({
           ) : (
             products.map((item, index) => (
               <Products
+                gender={gender}
+                setGender={setGender}
                 key={index}
                 id={item._id}
                 name={item.name}

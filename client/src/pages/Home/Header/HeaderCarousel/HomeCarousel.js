@@ -3,6 +3,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay } from "swiper";
 import { Pagination, Navigation } from "swiper";
 import Loading from "../../../../components/Loading/Loading";
+import NameLength from "../../../../components/NameLength/NameLength"
+import { Link } from "react-router-dom"
 
 SwiperCore.use([Autoplay]);
 
@@ -53,9 +55,10 @@ const HomeCarousel = () => {
             <div className="container">
               <div className="row">
                 <div className="left">
-                  <h1>{item.desc}</h1>
+                  <h1>{NameLength(item.title, 27)}</h1>
                   <h3>{item.select}</h3>
-                  <p>{item.title}</p>
+                  <p>{NameLength(item.desc, 200)}</p>
+                  {item.categoryId ? <Link to={`/category/${item.categoryId}`}>Shopping</Link> : ""}
                 </div>
                 <div className="right">
                   <img

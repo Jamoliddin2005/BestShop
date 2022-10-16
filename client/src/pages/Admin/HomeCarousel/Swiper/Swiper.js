@@ -2,6 +2,7 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Loading from "../../../../components/Loading/Loading";
 import { Pagination, Navigation } from "swiper";
+import NameLength from "../../../../components/NameLength/NameLength";
 
 function SwiperHead({ contacts, deleteCarousel, loading }) {
   return (
@@ -32,9 +33,9 @@ function SwiperHead({ contacts, deleteCarousel, loading }) {
                   <div className="container">
                     <div className="row">
                       <div className="left">
-                        <h1>{item.title}</h1>
+                        <h1>{NameLength(item.title, 25)}</h1>
                         <h3>{item.select}</h3>
-                        <p>{item.desc}</p>
+                        <p>{NameLength(item.desc, 200)}</p>
                         <div className="buttons admin">
                           <button onClick={(e) => deleteCarousel(item._id)}>
                             Delete

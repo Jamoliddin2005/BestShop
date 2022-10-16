@@ -2,13 +2,17 @@ import React, { useEffect, useState } from "react";
 import Loading from "../../components/Loading/Loading";
 import classes from "./ProductMore.module.css";
 
+
+
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 import axios from "axios";
+import Currency from "../../components/Currency/Currency";
 
 const ProductMore = ({ productMore, setProductMore }) => {
   const [loading, setLoading] = useState(false);
   const [savetoCart, setSavetoCart] = useState(0);
+  const [activeImage, setImageActive] = useState(null)
 
   window.scroll(0, 0);
 
@@ -33,6 +37,7 @@ const ProductMore = ({ productMore, setProductMore }) => {
       setProductMore(data.data);
       setLoading(false);
     };
+
     CategoryFind();
   }, []);
 
@@ -40,7 +45,6 @@ const ProductMore = ({ productMore, setProductMore }) => {
     setSavetoCart(1);
     await setLocalstorage(productMore);
     await localStorage.setItem("product", localstorage);
-    console.log(localstorage);
   };
 
   return (
@@ -51,19 +55,37 @@ const ProductMore = ({ productMore, setProductMore }) => {
         ) : (
           <div className={classes.row}>
             <div className={classes.left}>
-              <TransformWrapper>
-                <TransformComponent>
-                  <img
-                    src={"/uploads/" + productMore.photo}
-                    alt=""
-                    className={classes.img}
-                  />
-                </TransformComponent>
-              </TransformWrapper>
+              <div className={classes.Left_left}>
+                {productMore.photo ? productMore.photo.map((item, index) => (
+                  <div className={classes.images_nth} key={index} onClick={(e) => {
+                    setImageActive(item)
+                    window.scroll(0, 0);
+                  }}>
+                    <img src={"/uploads/" + item} alt="" width={"100%"} />
+                  </div>
+                )) : ""}
+
+              </div>
+              <div className={classes.Left_Right}>
+                <TransformWrapper>
+                  <TransformComponent>
+                    {activeImage !== null ? <img
+                      src={"/uploads/" + activeImage}
+                      alt=""
+                      className={classes.img}
+                    /> : <img
+                      src={"/uploads/" + productMore.photo[0]}
+                      alt=""
+                      className={classes.img}
+                    />}
+                  </TransformComponent>
+                </TransformWrapper>
+              </div>
             </div>
+
             <div className={classes.right}>
               <h2 className={classes.name}>{productMore.name}</h2>
-              <h4 className={classes.price}>{"$ " + productMore.price}</h4>
+              <h4 className={classes.price}>{Currency(productMore.price)}</h4>
               <div className={classes.description}>
                 <h3 className={classes.desc_title}>Description:</h3>
                 <p className={classes.desc}>{productMore.desc}</p>

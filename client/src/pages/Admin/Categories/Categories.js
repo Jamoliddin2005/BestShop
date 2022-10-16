@@ -35,7 +35,7 @@ const Categories = ({ getCategory,
                 setContacts(data.data)
                 setPhotoOne('https://bref.sh/img/logo-null.png')
             } catch (error) {
-                console.log(error);
+                return toast.error("ERROR!!!")
             }
         } else {
             e.preventDefault()

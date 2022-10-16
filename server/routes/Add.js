@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+// const multer = require("multer")
 const {
   addHomeCarousel,
   show,
@@ -14,7 +15,7 @@ const fileUpload = require("../middleware/pictureUpload");
 
 router.post("/addCarouselHome", fileUpload.single("photo"), addHomeCarousel);
 router.post("/addCategory", fileUpload.single("photo"), addCategory);
-router.post("/addProduct", fileUpload.single("photo"), addProduct);
+router.post("/addProduct", fileUpload.array("photo", 20), addProduct);
 router.get("/show", show);
 router.get("/showCategory", showCategory);
 router.get("/showProducts", showProducts);

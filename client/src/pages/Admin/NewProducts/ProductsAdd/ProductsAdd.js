@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import classes from "./ProductsAdd.module.css"
 const ProductsAdd = ({
     setName,
@@ -17,15 +17,13 @@ const ProductsAdd = ({
     setLoading,
     contacts,
     setContacts,
+    gender,
+    setGender
 }) => {
 
 
-
-
-
-
     const imageHandler = (e) => {
-        setPhoto(e.target.files[0])
+        setPhoto(e.target.files)
         const reader = new FileReader()
         reader.onload = () => {
             if (reader.readyState === 2) {
@@ -49,7 +47,7 @@ const ProductsAdd = ({
                 <label className={classes.label} htmlFor="ProductName">Product Name</label>
                 <input className={classes.input} type="text" name="name" id="ProductName" placeholder='Product Name' value={name} onChange={(e) => setName(e.target.value)} required />
                 <label className={classes.label} htmlFor="ProductPrice">Product Price</label>
-                <input className={classes.input} type="text" name="price" id="ProductPrice" placeholder='Product Price' value={price} onChange={(e) => setPrice(e.target.value)} required />
+                <input className={classes.input} type="number" name="price" id="ProductPrice" placeholder='Product Price' value={price} onChange={(e) => setPrice(e.target.value)} required />
                 <label className={classes.label} htmlFor="ProductDesc">Product Description</label>
                 <input className={classes.input} type="text" name="desc" id="ProductDesc" placeholder='Product Description' value={desc} onChange={(e) => setDesc(e.target.value)} required />
                 <label className={classes.label} htmlFor="categoryId">Product Category</label>
@@ -64,8 +62,21 @@ const ProductsAdd = ({
                         </select>
                     }
                 </div>
+                <label className={classes.label} htmlFor="gender">Gender</label>
+                <div className={classes.categoryDiv}>
+                    {loading ?
+                        <h3 className={classes.textLoading}>Loading...</h3> :
+                        <select className={classes.input} name="gender" id="gender" onChange={(e) => setGender(e.target.value)} required>
+                            <option hidden>Gender</option>
+                            <option value="Woman">Woman</option>
+                            <option value="Baby">Baby</option>
+                            <option value="Man">Man</option>
+                            <option value="All">All</option>
+                        </select>
+                    }
+                </div>
                 <label className={classes.label} htmlFor="ProductPhoto">Product Photo</label>
-                <input className={classes.input} type="file" accept='image/*' name="photo" id="ProductPhoto" onChange={imageHandler} required />
+                <input className={classes.input} type="file" accept='image/*' multiple name="photo" id="ProductPhoto" onChange={imageHandler} required />
                 <button className={classes.btn} type='button' onClick={CreateProductHandler}>Create Product</button>
                 <div className={classes.images}>
                     <img src={photoone} alt="" className={classes.img} />

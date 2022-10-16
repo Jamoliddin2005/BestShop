@@ -8,7 +8,7 @@ import Footer from "./components/Footer/Footer";
 import Login from "./pages/Login/Login";
 import Admin from "./pages/Admin/Admin";
 import { useEffect, useState } from "react";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import Categories from "./pages/Categories/Categories";
 import ProductMorePage from "./pages/ProductMorePage/ProductMore";
 import axios from "axios";
@@ -111,7 +111,7 @@ function App() {
           setUser(resObject.user);
         })
         .catch((err) => {
-          console.log(err);
+          return toast.error("ERROR!!!")
         });
 
       fetch("http://localhost:5000/isAdmin", {
@@ -133,7 +133,7 @@ function App() {
           }
         })
         .catch((err) => {
-          console.log(err);
+          return toast.error("ERROR!!!")
         });
     };
     getUser();

@@ -29,6 +29,15 @@ const Administrator = ({
             <li>
               <Link to={"/admin/homePage"}>home</Link>
             </li>
+            <li>
+              <Link to={"/admin/homePage"}>About</Link>
+            </li>
+            <li>
+              <Link to={"/admin/homePage"}>Shop</Link>
+            </li>
+            <li>
+              <Link to={"/admin/homePage"}>Contact</Link>
+            </li>
           </ul>
         </div>
       </div>

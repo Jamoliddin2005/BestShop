@@ -3,7 +3,6 @@
   margin: auto;
 }
 
-
 .top {
   width: 50%;
   margin: auto;
@@ -39,6 +38,9 @@
 .h3 {
   margin: 1rem 0;
   cursor: pointer;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
 }
 
 .btn {
@@ -77,8 +79,6 @@
 .images:hover .image {
   transform: scale(1.1);
 }
-
-
 
 .bottom_Categories {
   width: 85%;

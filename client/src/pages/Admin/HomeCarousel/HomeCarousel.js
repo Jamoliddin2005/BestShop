@@ -12,6 +12,9 @@ function HomeCarousel({ user }) {
   const [photo, setPhoto] = useState("");
   const [select, setSelect] = useState([{}]);
   const [loading, setLoading] = useState(false);
+  const [categoryId, setCategoryId] = useState("");
+
+
 
   const [contacts, setContacts] = useState([
     {
@@ -34,6 +37,7 @@ function HomeCarousel({ user }) {
         dataCreate.append("desc", desc);
         dataCreate.append("select", select);
         dataCreate.append("photo", photo);
+        dataCreate.append("categoryId", categoryId);
         setTitle("");
         setDesc("");
         const { data } = await axios.post(
@@ -42,7 +46,7 @@ function HomeCarousel({ user }) {
         );
         setContacts(data.data);
       } catch (error) {
-        console.log(error);
+        return toast.error("ERROR!!!")
       }
     } else {
       toast.error("Mahsulotlarni to'liq kiriting!!!");
@@ -84,6 +88,8 @@ function HomeCarousel({ user }) {
             select={select}
             setPhoto={setPhoto}
             handleSubmit={handleSubmit}
+            loading={loading}
+            setCategoryId={setCategoryId}
           />
         </div>
         <SwiperHead

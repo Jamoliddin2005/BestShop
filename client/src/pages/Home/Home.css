@@ -110,3 +110,12 @@
 .swiper-pagination-fraction {
   bottom: 30px;
 }
+
+.carousel .row .left a {
+  background: #59ab6e;
+  border: 1px solid #212934;
+  padding: 13px 35px;
+  cursor: pointer;
+  color: #ffffff;
+  font-weight: 600;
+}

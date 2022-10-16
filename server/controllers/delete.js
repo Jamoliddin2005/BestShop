@@ -27,10 +27,10 @@ exports.deleteCategories = async (req, res) => {
 
 
 exports.deleteProducts = async (req, res) => {
-    const { id } = req.params
+    const id = await req.params.id
 
     const { photo } = await Products.findById(id)
     toDelete(photo)
     await Products.findByIdAndDelete(id)
-    res.status(201).json({ success: true, data: await Products.find() })
+    return res.status(201).json({ success: true, data: await Products.find() })
 }

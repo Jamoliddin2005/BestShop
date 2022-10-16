@@ -46,7 +46,7 @@ export default function Footer({ categories, Abouts, loading }) {
         setInput("");
       })
       .catch((err) => {
-        console.log(err);
+        return toast.error("ERROR!!!")
       })
       .finally(() => {
         return toast.success("Success!");
@@ -60,7 +60,7 @@ export default function Footer({ categories, Abouts, loading }) {
           <div className="row">
             <ul>
               <Link to="/" className="Home_Logo">
-                <img src="/uploads/greenlogo.png" alt="" />
+                <img src="/greenlogo.png" alt="" />
               </Link>
               {Abouts.map((item, index) => (
                 <li key={index}>

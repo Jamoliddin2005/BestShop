@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 
@@ -11,8 +11,26 @@ const AddCar = ({
   setSelect,
   setPhoto,
   handleSubmit,
-  select,
+  setCategoryId
 }) => {
+  const [loading, setLoading] = useState(false)
+  const [contacts, setContacts] = useState([
+    {
+      name: "",
+      photo: "",
+    },
+  ]);
+
+  useEffect(() => {
+    const getCategories = async () => {
+      setLoading(true);
+      const response = await fetch("http://localhost:5000/add/showCategory");
+      setContacts(await response.json());
+      setLoading(false);
+    };
+    getCategories();
+  }, []);
+
   const selects = [
     { value: "Spring", label: "Spring" },
     { value: "Summer", label: "Summer" },
@@ -60,8 +78,17 @@ const AddCar = ({
         placeholder="Seasons..."
         onChange={handleChange}
         value={selectedOption}
-        // onChange={(e) => console.log(e.target.value)}
       />
+      <label htmlFor="categoryId">Category</label>
+      {loading ?
+        <h3 className={"textLoading"}>Loading...</h3> :
+        <select name="categoryId" id="categoryId" onChange={(e) => setCategoryId(e.target.value)} required  >
+          <option hidden>Category</option>
+          {contacts.map((item, index) => (
+            <option key={index} value={item._id} id={item._id}>{item.name}</option>
+          ))}
+        </select>
+      }
       <label htmlFor="photo">Carousel Image</label>
       <input
         className="photoinp"

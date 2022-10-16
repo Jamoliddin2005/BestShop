@@ -8,11 +8,11 @@ const Product = new Schema({
         required: true,
     },
     price: {
-        type: String,
+        type: Number,
         required: true,
     },
     photo: {
-        type: String,
+        type: Array,
         required: true,
     },
     desc: {
@@ -22,6 +22,10 @@ const Product = new Schema({
     categoryId: {
         ref: "categories",
         type: Schema.Types.ObjectId,
+    },
+    gender: {
+        type: String,
+        default: "All"
     }
 })
 

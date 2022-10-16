@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
+import NameLength from "../NameLength/NameLength"
+import Currency from "../Currency/Currency"
 
 function Navbar({ user }) {
   const logout = () => {
@@ -128,20 +130,6 @@ function Navbar({ user }) {
       </div>
       <nav>
         <div className="container">
-          {searchDivBg ? (
-            <div
-              className="navbar_search_bg"
-              onClick={(e) => {
-                setSearch(false);
-                setSearchDivBg(false);
-                setFilteredData([]);
-                setWordEntered("");
-              }}
-            ></div>
-          ) : (
-            ""
-          )}
-
           <div className="row">
             <Link to="/" className="navbar_left">
               <img src="/uploads/logo.png" alt="" />
@@ -164,6 +152,19 @@ function Navbar({ user }) {
               className={isActive ? "d_none_div" : "disabled_bg"}
               onClick={DisabledClickHandler}
             ></div>
+            {searchDivBg ? (
+              <div
+                className="navbar_search_bg"
+                onClick={(e) => {
+                  setSearch(false);
+                  setSearchDivBg(false);
+                  setFilteredData([]);
+                  setWordEntered("");
+                }}
+              ></div>
+            ) : (
+              ""
+            )}
             {user ? (
               <ul className="navbar_right AdminRight">
                 {window.location.href.split("/")[3] !== "product" ? (
@@ -177,6 +178,7 @@ function Navbar({ user }) {
                     >
                       <i className="fa-solid fa-magnifying-glass"></i>
                     </Link>
+
                     {search ? (
                       <div className="search-input">
                         <input
@@ -207,7 +209,11 @@ function Navbar({ user }) {
                                 setWordEntered("");
                               }}
                             >
-                              <p>{value.name} </p>
+                              <div className="Search_span">
+                                <img src={`/uploads/${value.photo[0]}`} alt="" />
+                                <p>{NameLength(value.name, 15)}</p>
+                                <p className="currency">{Currency(value.price)}</p>
+                              </div>
                             </Link>
                           );
                         })}
@@ -253,6 +259,7 @@ function Navbar({ user }) {
                 </div>
               </ul>
             ) : (
+
               <ul className="navbar_right">
                 {window.location.href.split("/")[3] !== "product" ? (
                   <li>
@@ -295,7 +302,11 @@ function Navbar({ user }) {
                                 setWordEntered("");
                               }}
                             >
-                              <p>{value.name} </p>
+                               <div className="Search_span">
+                                <img src={`/uploads/${value.photo[0]}`} alt="" />
+                                <p>{NameLength(value.name, 15)}</p>
+                                <p className="currency">{Currency(value.price)}</p>
+                              </div>
                             </Link>
                           );
                         })}

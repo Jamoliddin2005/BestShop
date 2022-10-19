@@ -75,7 +75,7 @@ function App() {
   useEffect(() => {
     const getCategories = async () => {
       setLoading(true);
-      const response = await fetch("http://localhost:5000/add/showCategory");
+      const response = await fetch(`${process.env.REACT_APP_URL}/add/showCategory`);
       setCategories(await response.json());
       setLoading(false);
     };
@@ -85,7 +85,7 @@ function App() {
   useEffect(() => {
     const getCategories = async () => {
       setLoading(true);
-      const response = await fetch("http://localhost:5000/add/showCategory");
+      const response = await fetch(`${process.env.REACT_APP_URL}/add/showCategory`);
       setContacts(await response.json());
       setLoading(false);
     };
@@ -94,7 +94,7 @@ function App() {
 
   useEffect(() => {
     const getUser = () => {
-      fetch("http://localhost:5000/auth/login/success", {
+      fetch(`${process.env.REACT_APP_URL}/auth/login/success`, {
         method: "GET",
         credentials: "include",
         headers: {
@@ -114,7 +114,7 @@ function App() {
           return toast.error("ERROR!!!")
         });
 
-      fetch("http://localhost:5000/isAdmin", {
+      fetch(`${process.env.REACT_APP_URL}/isAdmin`, {
         method: "GET",
         credentials: "include",
         headers: {
@@ -144,7 +144,7 @@ function App() {
     setCategoryLoading(true);
     navigate("/category/" + id);
     const { data } = await axios.get(
-      "http://localhost:5000/add/category/" + id
+      `${process.env.REACT_APP_URL}/add/category/` + id
     );
     setCategoryBig(data.data);
     setCategoryLoading(false);
@@ -154,7 +154,7 @@ function App() {
     setMoreLoading(true);
     navigate("/product/more/" + id);
     const { data } = await axios.get(
-      "http://localhost:5000/add/product/more/" + id
+      `${process.env.REACT_APP_URL}/add/product/more/` + id
     );
     setMoreLoading(false);
     setProductMore(data.data);
@@ -214,6 +214,7 @@ function App() {
           path="/product/more/:id"
           element={
             <ProductMorePage
+              user={user}
               setProductMore={setProductMore}
               productMore={productMore}
             />

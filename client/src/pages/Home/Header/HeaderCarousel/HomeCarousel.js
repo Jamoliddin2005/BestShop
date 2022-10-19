@@ -23,7 +23,7 @@ const HomeCarousel = () => {
   useEffect(() => {
     const getProduct = async () => {
       setLoading(true);
-      const response = await fetch("http://localhost:5000/add/show");
+      const response = await fetch(`${process.env.REACT_APP_URL}/add/show`);
       setContacts(await response.json());
       setLoading(false);
     };

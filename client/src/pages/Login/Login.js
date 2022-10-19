@@ -63,7 +63,7 @@ const Login = ({ user, setUser }) => {
     if (password !== "") {
       if (password.length > 5) {
         const { data } = await axios.post(
-          "http://localhost:5000/auth/registerNumber",
+          `${process.env.REACT_APP_URL}/auth/registerNumber`,
           {
             phoneNumber: account,
             password: password,
@@ -100,18 +100,18 @@ const Login = ({ user, setUser }) => {
     }
   };
   const google = () => {
-    return window.open("http://localhost:5000/auth/google", "_self");
+    return window.open(`${process.env.REACT_APP_URL}/auth/google`, "_self");
   };
   const github = () => {
-    return window.open("http://localhost:5000/auth/github", "_self");
+    return window.open(`${process.env.REACT_APP_URL}/auth/github`, "_self");
   };
   const facebook = () => {
-    return window.open("http://localhost:5000/auth/facebook", "_self");
+    return window.open(`${process.env.REACT_APP_URL}/auth/facebook`, "_self");
   };
 
   const SubmitHandler = async (e) => {
     if (value.length > 10) {
-      const { data } = await axios.post("http://localhost:5000/auth/userFind", {
+      const { data } = await axios.post(`${process.env.REACT_APP_URL}/auth/userFind`, {
         phoneNumber: value,
       });
       if (data.data) {
@@ -167,7 +167,7 @@ const Login = ({ user, setUser }) => {
 
   const AccountPasswordSubmitHandler = async (req, res) => {
     const { data } = await axios.post(
-      "http://localhost:5000/auth/PostPasswordSubmit",
+      `${process.env.REACT_APP_URL}/auth/PostPasswordSubmit`,
       { phoneNumber: value, password: passwordNumber },
       {
         withCredentials: true,
@@ -327,7 +327,6 @@ const Login = ({ user, setUser }) => {
               )}
             </>
           )}
-
           <div id="sign-in-button"></div>
 
           {accountCode ? (

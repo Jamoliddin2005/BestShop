@@ -29,9 +29,10 @@ const Categories = ({ getCategory,
                 fileInput.value = "";
                 setName("")
                 const { data } = await axios.post(
-                    "http://localhost:5000/add/addCategory",
+                    `${process.env.REACT_APP_URL}/add/addCategory`,
                     dataCategory
                 );
+                // 
                 setContacts(data.data)
                 setPhotoOne('https://bref.sh/img/logo-null.png')
             } catch (error) {
@@ -47,7 +48,7 @@ const Categories = ({ getCategory,
         const res = window.confirm("Bu Categoriya o'chirib tashlansinmi?")
         if (res) {
             toast.success("Categoriya o'chirib tashlandi")
-            const { data } = await axios.delete('http://localhost:5000/delete/Categories/delete/' + id)
+            const { data } = await axios.delete(`${process.env.REACT_APP_URL}/delete/Categories/delete/` + id)
             setContacts(data.data);
         }
     }

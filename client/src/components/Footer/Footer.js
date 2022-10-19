@@ -25,10 +25,8 @@ const Pages = [
 
 export default function Footer({ categories, Abouts, loading }) {
   const [input, setInput] = useState("");
-
-  const TOKEN = "5597892555:AAEzeESTwhMim-4zLSZQjoGZSZ9Q4Niqles";
-  const CHAT_ID = "-1001663787427";
-  const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
+ 
+  const URI_API = `https://api.telegram.org/bot${process.env.REACT_APP_TOKEN}/sendMessage`;
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -38,7 +36,7 @@ export default function Footer({ categories, Abouts, loading }) {
 
     await axios
       .post(URI_API, {
-        chat_id: CHAT_ID,
+        chat_id: process.env.REACT_APP_CHAT_ID,
         parse_mode: "html",
         text: message,
       })

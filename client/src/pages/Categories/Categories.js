@@ -16,7 +16,7 @@ const Categories = ({
     const CategoryFind = async () => {
       const location = window.location.pathname;
       setCategoryLoading(true);
-      const { data } = await axios.get("http://localhost:5000/add/" + location);
+      const { data } = await axios.get(`${process.env.REACT_APP_URL}/add/` + location);
       setCategoryLoading(false);
       setCategoryBig(data.data);
     };

@@ -41,7 +41,7 @@ function HomeCarousel({ user }) {
         setTitle("");
         setDesc("");
         const { data } = await axios.post(
-          "http://localhost:5000/add/addCarouselHome",
+          `${process.env.REACT_APP_URL}/add/addCarouselHome`,
           dataCreate
         );
         setContacts(data.data);
@@ -56,7 +56,7 @@ function HomeCarousel({ user }) {
   useEffect(() => {
     const getProduct = async () => {
       setLoading(true);
-      const response = await fetch("http://localhost:5000/add/show");
+      const response = await fetch(`${process.env.REACT_APP_URL}/add/show`);
       setContacts(await response.json());
       setLoading(false);
     };
@@ -68,7 +68,7 @@ function HomeCarousel({ user }) {
     if (response) {
       toast.success("Product Deleted!");
       const { data } = await axios.delete(
-        "http://localhost:5000/delete/headerCarousel/delete/" + id
+        `${process.env.REACT_APP_URL}/delete/headerCarousel/delete/` + id
       );
       setContacts(data.data);
     }

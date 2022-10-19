@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const CarouselHome = require("../models/CarouselHome");
 const Categories = require("../models/Categories");
 const Products = require("../models/Product");
-
+const Profiles = require("../models/User")
 
 
 exports.addHomeCarousel = async (req, res) => {
@@ -65,6 +65,18 @@ exports.showCategory = async (req, res) => {
       return res.status(400).send("ERROR: " + err);
     });
 };
+exports.updateProfileNumber = async (req, res) => {
+  const { phoneNumber } = await req.body;
+  const UpdateProfileNumber = await Profiles.findByIdAndUpdate(req.params.id, {
+    phoneNumber
+  })
+  if (!UpdateProfileNumber) {
+    return res.status(400).send({ message: "Update profile not found", status: 404 });
+  }
+
+  return res.status(201).send({ message: "Profile updated", status: 201 })
+}
+
 
 var Images = []
 

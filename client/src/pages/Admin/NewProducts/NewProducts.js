@@ -61,7 +61,7 @@ const NewProducts = ({
         setProducts("");
         setGender("")
         const { data } = await axios.post(
-          "http://localhost:5000/add/addProduct",
+          `${process.env.REACT_APP_URL}/add/addProduct`,
           ProductForm
         );
         setProducts(data.data);
@@ -78,7 +78,7 @@ const NewProducts = ({
   useEffect(() => {
     const productBase = async () => {
       setLoading(true);
-      const response = await fetch("http://localhost:5000/add/showProducts");
+      const response = await fetch(`${process.env.REACT_APP_URL}/add/showProducts`);
       setProducts(await response.json());
       setLoading(false);
     };
@@ -90,7 +90,7 @@ const NewProducts = ({
     if (res) {
       toast.success("Mahsulot o'chirildi!");
       const { data } = await axios.delete(
-        "http://localhost:5000/delete/products/delete/" + id
+        `${process.env.REACT_APP_URL}/delete/products/delete/` + id
       );
       setProducts(data.data);
     }

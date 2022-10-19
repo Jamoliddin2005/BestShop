@@ -6,7 +6,8 @@ import Currency from "../Currency/Currency"
 
 function Navbar({ user }) {
   const logout = () => {
-    window.open("http://localhost:5000/auth/login/logout", "_self");
+    localStorage.removeItem("profileNumber")
+    window.open(`${process.env.REACT_APP_URL}/auth/login/logout`, "_self");
   };
 
   const [isActive, setActive] = useState("false");
@@ -47,7 +48,7 @@ function Navbar({ user }) {
 
   const productBase = async () => {
     setLoading(true);
-    const response = await fetch("http://localhost:5000/add/showProducts");
+    const response = await fetch(`${process.env.REACT_APP_URL}/add/showProducts`);
     setProducts(await response.json());
     setLoading(false);
   };
@@ -302,7 +303,7 @@ function Navbar({ user }) {
                                 setWordEntered("");
                               }}
                             >
-                               <div className="Search_span">
+                              <div className="Search_span">
                                 <img src={`/uploads/${value.photo[0]}`} alt="" />
                                 <p>{NameLength(value.name, 15)}</p>
                                 <p className="currency">{Currency(value.price)}</p>

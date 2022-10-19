@@ -17,7 +17,7 @@ function NewProducts({ ProductMore }) {
   useEffect(() => {
     const productBase = async () => {
       setLoading(true);
-      const response = await fetch("http://localhost:5000/add/showProducts");
+      const response = await fetch(`${process.env.REACT_APP_URL}/add/showProducts`);
       setProducts(await response.json());
       setLoading(false);
     };

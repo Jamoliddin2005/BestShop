@@ -24,7 +24,7 @@ const AddCar = ({
   useEffect(() => {
     const getCategories = async () => {
       setLoading(true);
-      const response = await fetch("http://localhost:5000/add/showCategory");
+      const response = await fetch(`${process.env.REACT_APP_URL}/add/showCategory`);
       setContacts(await response.json());
       setLoading(false);
     };

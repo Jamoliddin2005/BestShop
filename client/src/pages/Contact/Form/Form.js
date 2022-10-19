@@ -12,9 +12,7 @@ export default function Form() {
   const SubmitHandler = async (e) => {
     e.preventDefault();
     if (name && email && subject && message) {
-      const TOKEN = "5597892555:AAEzeESTwhMim-4zLSZQjoGZSZ9Q4Niqles";
-      const CHAT_ID = "-1001663787427";
-      const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
+      const URI_API = `https://api.telegram.org/bot${process.env.REACT_APP_TOKEN}/sendMessage`;
 
       let messageTelegram = `<b>#BestShop</b>\n\n`;
       messageTelegram += `<b>Contact Us </b>\n`;
@@ -26,7 +24,7 @@ export default function Form() {
 
       await axios
         .post(URI_API, {
-          chat_id: CHAT_ID,
+          chat_id: process.env.REACT_APP_CHAT_ID,
           parse_mode: "html",
           text: messageTelegram,
         })

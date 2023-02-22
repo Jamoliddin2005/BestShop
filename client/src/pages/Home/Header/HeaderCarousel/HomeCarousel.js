@@ -3,11 +3,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay } from "swiper";
 import { Pagination, Navigation } from "swiper";
 import Loading from "../../../../components/Loading/Loading";
-import NameLength from "../../../../components/NameLength/NameLength"
-import { Link } from "react-router-dom"
+import NameLength from "../../../../components/NameLength/NameLength";
+import { Link } from "react-router-dom";
 
 SwiperCore.use([Autoplay]);
-
 const HomeCarousel = () => {
   const [loading, setLoading] = useState(false);
 
@@ -31,48 +30,39 @@ const HomeCarousel = () => {
   }, []);
 
   return contacts.length ? (
-    <Swiper
-      slidesPerView={1}
-      spaceBetween={30}
-      loop={true}
-      autoplay={{
-        delay: 5000,
-        disableOnInteraction: false,
-      }}
-      effect="coverflow"
-      pagination={{
-        clickable: true,
-      }}
-      navigation={true}
-      modules={[Pagination, Navigation]}
-      className="mySwiper"
-    >
-      {loading ? (
-        <Loading />
-      ) : (
-        contacts.map((item, index) => (
-          <SwiperSlide key={index}>
-            <div className="container">
+    <div className="container">
+      <Swiper
+        slidesPerView={1.1}
+        spaceBetween={30}
+        loop={true}
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+        }}
+        effect="coverflow"
+        pagination={{
+          clickable: true,
+        }}
+        navigation={true}
+        modules={[Pagination, Navigation]}
+        className="mySwiper"
+      >
+        {loading ? (
+          <Loading />
+        ) : (
+          contacts.map((item, index) => (
+            <SwiperSlide key={index}>
               <div className="row">
-                <div className="left">
-                  <h1>{NameLength(item.title, 27)}</h1>
-                  <h3>{item.select}</h3>
-                  <p>{NameLength(item.desc, 200)}</p>
-                  {item.categoryId ? <Link to={`/category/${item.categoryId}`}>Shopping</Link> : ""}
-                </div>
-                <div className="right">
-                  <img
-                    src={"/uploads/" + item.photo}
-                    className="image"
-                    alt=""
-                  />
-                </div>
+                <img
+                  src="https://main-cdn.sbermegamarket.ru/upload/mnt/16f64129-d0bc-48a5-a556-d3d80a2eb61b.jpg"
+                  alt=""
+                />
               </div>
-            </div>
-          </SwiperSlide>
-        ))
-      )}
-    </Swiper>
+            </SwiperSlide>
+          ))
+        )}
+      </Swiper>
+    </div>
   ) : null;
 };
 

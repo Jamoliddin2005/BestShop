@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
-import NameLength from "../NameLength/NameLength"
-import Currency from "../Currency/Currency"
+import NameLength from "../NameLength/NameLength";
+import Currency from "../Currency/Currency";
 
 function Navbar({ user }) {
   const logout = () => {
-    localStorage.removeItem("profileNumber")
+    localStorage.removeItem("profileNumber");
     window.open(`${process.env.REACT_APP_URL}/auth/login/logout`, "_self");
   };
 
   const [isActive, setActive] = useState("false");
   const [toggle, setToggle] = useState("false");
   const [search, setSearch] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [setLoading] = useState(false);
   const [wordEntered, setWordEntered] = useState("");
   const [searchDivBg, setSearchDivBg] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
@@ -48,7 +48,9 @@ function Navbar({ user }) {
 
   const productBase = async () => {
     setLoading(true);
-    const response = await fetch(`${process.env.REACT_APP_URL}/add/showProducts`);
+    const response = await fetch(
+      `${process.env.REACT_APP_URL}/add/showProducts`
+    );
     setProducts(await response.json());
     setLoading(false);
   };
@@ -133,97 +135,42 @@ function Navbar({ user }) {
         <div className="container">
           <div className="row">
             <Link to="/" className="navbar_left">
-              <img src="/uploads/logo.png" alt="" />
+              <span>Mongo.uz</span>
             </Link>
-            <ul className="navbar_center">
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/about">About</Link>
-              </li>
-              <li>
-                <Link to="/shop">Shop</Link>
-              </li>
-              <li>
-                <Link to="/contact">Contact</Link>
-              </li>
+            <ul
+              className={`${
+                user ? "navbar_center navbar_user_center" : "navbar_center"
+              }`}
+            >
+              <div className="inputSearch">
+                <input
+                  type="Search"
+                  placeholder="Mahsulotlar va turkumlar izlash"
+                />
+                <button>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    id="Layer_1"
+                    x="0"
+                    y="0"
+                    version="1.1"
+                    viewBox="0 0 29 29"
+                    xmlSpace="preserve"
+                  >
+                    <path d="M11.854 21.854c-5.514 0-10-4.486-10-10s4.486-10 10-10 10 4.486 10 10-4.486 10-10 10zm0-18c-4.411 0-8 3.589-8 8s3.589 8 8 8 8-3.589 8-8-3.588-8-8-8z" />
+                    <path d="M26.146 27.146a.997.997 0 0 1-.707-.293l-7.694-7.694a.999.999 0 1 1 1.414-1.414l7.694 7.694a.999.999 0 0 1-.707 1.707z" />
+                  </svg>
+                </button>
+              </div>
             </ul>
-            <div
-              className={isActive ? "d_none_div" : "disabled_bg"}
-              onClick={DisabledClickHandler}
-            ></div>
-            {searchDivBg ? (
-              <div
-                className="navbar_search_bg"
-                onClick={(e) => {
-                  setSearch(false);
-                  setSearchDivBg(false);
-                  setFilteredData([]);
-                  setWordEntered("");
-                }}
-              ></div>
-            ) : (
-              ""
-            )}
             {user ? (
               <ul className="navbar_right AdminRight">
-                {window.location.href.split("/")[3] !== "product" ? (
-                  <li>
-                    <Link
-                      to="#"
-                      className={
-                        search ? "Search-item border_left" : "Search-item"
-                      }
-                      onClick={SearchHandler}
-                    >
-                      <i className="fa-solid fa-magnifying-glass"></i>
-                    </Link>
-
-                    {search ? (
-                      <div className="search-input">
-                        <input
-                          onChange={SearchChangeHandler}
-                          value={wordEntered}
-                          type="text"
-                          placeholder="Search..."
-                          name=""
-                          id=""
-                        />
-                      </div>
-                    ) : (
-                      ""
-                    )}
-                    {filteredData.length !== 0 && (
-                      <div className="dataResult">
-                        {filteredData.slice(0, 15).map((value, key) => {
-                          return (
-                            <Link
-                              to={`/product/more/${value._id}`}
-                              className="dataItem"
-                              href={value.link}
-                              key={key}
-                              onClick={(e) => {
-                                setSearch(false);
-                                setSearchDivBg(false);
-                                setFilteredData([]);
-                                setWordEntered("");
-                              }}
-                            >
-                              <div className="Search_span">
-                                <img src={`/uploads/${value.photo[0]}`} alt="" />
-                                <p>{NameLength(value.name, 15)}</p>
-                                <p className="currency">{Currency(value.price)}</p>
-                              </div>
-                            </Link>
-                          );
-                        })}
-                      </div>
-                    )}
-                  </li>
-                ) : (
-                  ""
-                )}
+                <li>
+                  <Link to={"/"}>
+                    <i className="fa-regular fa-heart"></i>
+                    <span>0</span>
+                  </Link>
+                </li>
 
                 <li>
                   <Link to="/">
@@ -260,91 +207,41 @@ function Navbar({ user }) {
                 </div>
               </ul>
             ) : (
-
               <ul className="navbar_right">
-                {window.location.href.split("/")[3] !== "product" ? (
-                  <li>
-                    <Link
-                      to="#"
-                      className={
-                        search ? "Search-item border_left" : "Search-item"
-                      }
-                      onClick={SearchHandler}
-                    >
-                      <i className="fa-solid fa-magnifying-glass"></i>
-                    </Link>
-                    {search ? (
-                      <div className="search-input">
-                        <input
-                          onChange={SearchChangeHandler}
-                          value={wordEntered}
-                          type="text"
-                          placeholder="Search..."
-                          name=""
-                          id=""
-                        />
-                      </div>
-                    ) : (
-                      ""
-                    )}
-                    {filteredData.length !== 0 && (
-                      <div className="dataResult">
-                        {filteredData.slice(0, 15).map((value, key) => {
-                          return (
-                            <Link
-                              to={`/product/more/${value._id}`}
-                              className="dataItem"
-                              href={value.link}
-                              key={key}
-                              onClick={(e) => {
-                                setSearch(false);
-                                setSearchDivBg(false);
-                                setFilteredData([]);
-                                setWordEntered("");
-                              }}
-                            >
-                              <div className="Search_span">
-                                <img src={`/uploads/${value.photo[0]}`} alt="" />
-                                <p>{NameLength(value.name, 15)}</p>
-                                <p className="currency">{Currency(value.price)}</p>
-                              </div>
-                            </Link>
-                          );
-                        })}
-                      </div>
-                    )}
-                  </li>
-                ) : (
-                  ""
-                )}
                 <li>
-                  <Link to="/">
-                    <i className="fa-solid fa-cart-arrow-down"></i>
+                  <Link to={"/"}>
+                    <i className="fa-regular fa-heart"></i>
                     <span>0</span>
+                    <p>Sevimlilar</p>
                   </Link>
                 </li>
-                <li className="registerClick" onClick={RegisterClickHandler}>
-                  <div className="userIcon" onClick={RegisterClickHandler}>
-                    <div className="userIcon">
-                      <i className="fa-solid fa-user"></i>
-                    </div>
-                    <div className="downIcon">
-                      <i className="fa-solid fa-sort-down"></i>
-                    </div>
-                  </div>
-                  <div className={isActive ? "register" : "register_clicked"}>
-                    <Link to="/login">Login</Link>
-                    <a
-                      onClick={() => {
-                        window.open("https://t.me/BestShopWeb");
-                      }}
-                      href="https://t.me/BestShopWeb"
-                      target={"_blank"}
-                      rel="noopener noreferrer"
+
+                <li>
+                  <Link to="/">
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="slightly transparent"
                     >
-                      Telegram
-                    </a>
-                  </div>
+                      <path
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        d="M9 6.5C9 4.88779 10.2402 3.5 12 3.5C13.7598 3.5 15 4.88779 15 6.5V7.5H9V6.5ZM7.5 9V11.5H9V9H15V11.5H16.5V9H18.5V19.75C18.5 20.1642 18.1642 20.5 17.75 20.5H6.25C5.83579 20.5 5.5 20.1642 5.5 19.75V9H7.5ZM7.5 7.5V6.5C7.5 4.11221 9.35984 2 12 2C14.6402 2 16.5 4.11221 16.5 6.5V7.5H19.25H20V8.25V19.75C20 20.9926 18.9926 22 17.75 22H6.25C5.00736 22 4 20.9926 4 19.75V8.25V7.5H4.75H7.5Z"
+                        fill="#141415"
+                      ></path>
+                    </svg>
+                    <span>0</span>
+                    <p>Savat</p>
+                  </Link>
+                </li>
+                <li className="registerClick">
+                  <Link to={"/login"}>
+                    <i className="fa-regular fa-user"></i>
+                    <p>Kirish</p>
+                  </Link>
                 </li>
               </ul>
             )}

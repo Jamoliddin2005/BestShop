@@ -3,12 +3,9 @@ import Google from "../img/google.png";
 import Facebook from "../img/facebook.png";
 import Github from "../img/github.png";
 import { toast } from "react-toastify";
-
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
-
 import firebase from "../../firebase";
-
 import "./Login.css";
 import axios from "axios";
 
@@ -19,8 +16,6 @@ const Login = ({ user, setUser }) => {
   const [accountCode, SetAccountCode] = useState(false);
   const [switcher, SetSwitcher] = useState(false);
   const [password, SetPassword] = useState("");
-  const [repeatpassword, SetRepeatPassword] = useState("");
-  const [inputActive, setInputActive] = useState("input notactive");
   const [account, setAccount] = useState("");
   const [passwordNumber, setPasswordNumber] = useState("");
   const [accountPassword, setAccountPassword] = useState(false);
@@ -72,7 +67,7 @@ const Login = ({ user, setUser }) => {
             withCredentials: true,
           }
         );
-        if (data.data.phoneNumber === "+998942245606") {
+        if (data.data.phoneNumber === process.env.REACT_APP_ADMIN_PHONE_NUMBER) {
           const user = {
             googleId: data.data.googleId,
             password: data.data.password,
@@ -137,33 +132,6 @@ const Login = ({ user, setUser }) => {
     }
   };
 
-  const RepeatPass = (e) => {
-    if (e.target.placeholder === "Repeat Password") {
-      SetRepeatPassword(e.target.value);
-      const btn = document.querySelector(".codeAccountBtn");
-
-      if (password === e.target.value) {
-        setInputActive("input active");
-        return (btn.className = "submit codeAccountBtn activeBTN");
-      } else {
-        setInputActive("input notactive");
-        return (btn.className = "submit codeAccountBtn NotactiveBTN");
-      }
-    } else {
-      SetPassword(e.target.value);
-      const btn = document.querySelector(".codeAccountBtn");
-      setInputActive("input active");
-
-      if (repeatpassword === e.target.value) {
-        setInputActive("input active");
-        return (btn.className = "submit codeAccountBtn activeBTN");
-      } else {
-        const btn = document.querySelector(".codeAccountBtn");
-        setInputActive("input notactive");
-        return (btn.className = "submit codeAccountBtn NotactiveBTN");
-      }
-    }
-  };
 
   const AccountPasswordSubmitHandler = async (req, res) => {
     const { data } = await axios.post(
@@ -271,7 +239,7 @@ const Login = ({ user, setUser }) => {
                           value={password}
                           minLength={6}
                           type={switcher ? "text" : "password"}
-                          onChange={(e) => RepeatPass(e)}
+                          onChange={(e) => SetPassword(e.target.value)}
                         />
                         <div className="switcher">
                           {switcher ? (
@@ -295,16 +263,6 @@ const Login = ({ user, setUser }) => {
                           )}
                         </div>
                       </div>
-                      <input
-                        type={"password"}
-                        className={inputActive}
-                        placeholder="Repeat Password"
-                        value={repeatpassword}
-                        minLength={6}
-                        onChange={(e) => {
-                          RepeatPass(e);
-                        }}
-                      />
                     </>
                   ) : (
                     <>

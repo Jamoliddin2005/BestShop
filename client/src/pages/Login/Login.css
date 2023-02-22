@@ -97,6 +97,7 @@
   margin-bottom: 20px;
   margin-top: 10px;
 }
+
 .login input.active {
   border: 2px solid #11c73f;
   outline: none;
@@ -114,6 +115,7 @@
   border-radius: 5px;
   cursor: pointer;
   margin: auto;
+  margin-top: 20px;
 }
 
 .login .submit.NotactiveBTN {
@@ -159,6 +161,7 @@
   width: 60px;
   height: 60px;
 }
+
 .PhoneInput {
   margin-bottom: 20px;
   width: 300px;
@@ -198,7 +201,7 @@
 }
 
 .codeSubmit {
-  margin-bottom: 20px !important ;
+  margin-bottom: 20px !important;
 }
 
 .min6 {

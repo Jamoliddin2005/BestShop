@@ -49,16 +49,70 @@ nav .container .row ul {
 }
 
 nav .navbar_left {
-  height: 75px;
+  padding: 15px 0;
+}
+
+nav .navbar_left span {
+  font-family: 'Bitter', serif;
+  color: #862ac1;
+  font-size: 30px;
+  font-weight: 500;
 }
 
 nav .navbar_left img {
   width: 75px;
   height: 75px;
 }
+
 nav .navbar_center {
-  width: auto;
+  width: 60%;
 }
+
+nav .navbar_center.navbar_user_center {
+  width: 60%;
+}
+
+.navbar_user_center .inputSearch {
+  width: 100%;
+}
+
+.inputSearch {
+  width: 100%;
+  display: flex;
+  position: relative;
+  justify-content: flex-end;
+}
+
+.inputSearch input {
+  width: 85%;
+  height: 50px;
+  border-radius: 24px;
+  font-size: 16px;
+  border: 2px solid #9b38dc;
+  outline: #fff;
+  padding-left: 20px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+}
+
+
+
+.inputSearch button {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  position: absolute;
+  right: 6px;
+  top: 5px;
+  padding: 10px;
+  fill: white;
+  background-color: #862ac1;
+  border: none;
+  border-radius: 50%;
+}
+
+
+/* 
 
 nav .navbar_center li {
   margin: 0 30px;
@@ -74,7 +128,7 @@ nav .navbar_center li a {
 
 nav .navbar_center li a:hover {
   color: #69bb7e;
-}
+} */
 
 nav .navbar_right li {
   margin-left: 40px;
@@ -112,18 +166,23 @@ nav .navbar_right li a {
 
 nav .navbar_right li span {
   position: absolute;
-  top: -12px;
-  right: -14px;
-  width: 25px;
-  height: 20px;
-  background-color: #e9eef5;
-  color: #212529;
+  top: -7px;
+  right: -12px;
+  color: #862ac1;
   font-size: 0.75em;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 700;
-  border-radius: 40%;
+  font-weight: 300;
+  border-radius: 9px;
+}
+
+nav .navbar_right li p {
+  margin-left: 10px;
+  color: #494f54;
+  font-size: 17px;
+  font-weight: 400;
+  font-family: "Roboto", sans-serif;
 }
 
 nav .navbar_right li .register {
@@ -211,6 +270,7 @@ nav .AdminIcon_logout {
   flex-direction: column;
   box-shadow: 0 0 20px 2px #d8d8d8;
 }
+
 nav .AdminIcon_logout a {
   border-bottom: 1px solid #59ab6e;
   padding: 6px 10px;
@@ -239,9 +299,11 @@ nav .AdminIcon_logout span {
   padding: 6px 10px;
   cursor: pointer;
 }
+
 nav ul.AdminRight {
   position: relative;
 }
+
 nav ul.AdminRight .User {
   margin-left: 40px;
 }

@@ -19,6 +19,17 @@ import Shop from "./pages/Shop/Shop";
 function App() {
   const [user, setUser] = useState(null);
   const [categoryLoading, setCategoryLoading] = useState(false);
+
+  const GetTranslate = () => {
+    if (window.localStorage.getItem("language") === null || window.localStorage.getItem("language") !== "uz" && window.localStorage.getItem("language") !== "ru") {
+      window.localStorage.setItem("language", "uz")
+    }
+  }
+
+  useEffect(() => {
+    GetTranslate()
+  }, [])
+
   const [categoryBig, setCategoryBig] = useState([
     {
       _id: "",
@@ -29,7 +40,9 @@ function App() {
       categoryId: "",
     },
   ]);
+
   const [moreLoading, setMoreLoading] = useState(false);
+
   const [productMore, setProductMore] = useState({
     _id: "",
     name: "",
@@ -38,6 +51,7 @@ function App() {
     desc: "",
     categoryId: "",
   });
+
   const [categories, setCategories] = useState([
     {
       name: "",
@@ -82,14 +96,15 @@ function App() {
     getCategories();
   }, []);
 
+  const getCategories = async () => {
+    setLoading(true);
+    const response = await fetch(`${process.env.REACT_APP_URL}/add/showCategory`);
+    setContacts(await response.json());
+    setLoading(false);
+  };
   useEffect(() => {
-    const getCategories = async () => {
-      setLoading(true);
-      const response = await fetch(`${process.env.REACT_APP_URL}/add/showCategory`);
-      setContacts(await response.json());
-      setLoading(false);
-    };
     getCategories();
+
   }, []);
 
   useEffect(() => {
@@ -160,16 +175,7 @@ function App() {
     setProductMore(data.data);
   };
 
-  document.addEventListener("keydown", (e) => {
-    if (e.keyCode === 123) {
-      e.preventDefault();
-    }
-  });
 
-  window.oncontextmenu = function (e) {
-    e.preventDefault();
-    return false;
-  };
 
   return (
     <div className="App" onCopy={(e) => e.preventDefault()}>

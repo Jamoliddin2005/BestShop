@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
-import NameLength from "../NameLength/NameLength";
-import Currency from "../Currency/Currency";
+import translate from "../translate/translate";
 
 function Navbar({ user }) {
   const logout = () => {
@@ -10,71 +9,12 @@ function Navbar({ user }) {
     window.open(`${process.env.REACT_APP_URL}/auth/login/logout`, "_self");
   };
 
-  const [isActive, setActive] = useState("false");
-  const [toggle, setToggle] = useState("false");
-  const [search, setSearch] = useState(false);
-  const [setLoading] = useState(false);
-  const [wordEntered, setWordEntered] = useState("");
-  const [searchDivBg, setSearchDivBg] = useState(false);
-  const [filteredData, setFilteredData] = useState([]);
-  const [products, setProducts] = useState([
-    {
-      name: "",
-      price: "",
-      desc: "",
-      photo: "",
-    },
-  ]);
-
-  const RegisterClickHandler = (e) => {
-    e.preventDefault();
-    setActive(!isActive);
-  };
-
-  const DisabledClickHandler = (e) => {
-    e.preventDefault();
-    setActive(!isActive);
-  };
-
-  const DropdownAdmin = (e) => {
-    e.preventDefault();
-    setToggle(!toggle);
-  };
-
-  const SearchHandler = (e) => {
-    setSearch(true);
-    productBase();
-  };
-
-  const productBase = async () => {
-    setLoading(true);
-    const response = await fetch(
-      `${process.env.REACT_APP_URL}/add/showProducts`
-    );
-    setProducts(await response.json());
-    setLoading(false);
-  };
-
-  const SearchChangeHandler = (e) => {
-    setSearchDivBg(true);
-    productBase();
-    const searchWord = e.target.value;
-    setWordEntered(searchWord);
-    const newFilter = products.filter((value) => {
-      return value.name.toLowerCase().includes(searchWord.toLowerCase());
-    });
-
-    if (searchWord === "") {
-      setFilteredData([]);
-      setSearchDivBg(false);
-    } else {
-      setFilteredData(newFilter);
-    }
-  };
+  const [languages, setLanguages] = useState(false);
+  const [uzLanguage, setUzLanguage] = useState(true);
 
   return (
-    <>
-      <div className="navbar_top">
+    <div className={"Navbar_big"}>
+      <div className={"navbar_top"}>
         <div className="container">
           <div className="row">
             <ul>
@@ -93,15 +33,6 @@ function Navbar({ user }) {
             <ul>
               <li>
                 <a
-                  href="https://www.facebook.com/profile.php?id=100078919103944"
-                  target={"_blank"}
-                  rel="noopener noreferrer"
-                >
-                  <i className="fa-brands fa-facebook-f"></i>
-                </a>
-              </li>
-              <li>
-                <a
                   target={"_blank"}
                   href="https://www.instagram.com/jamoliddin__05/"
                   rel="noopener noreferrer"
@@ -118,14 +49,30 @@ function Navbar({ user }) {
                   <i className="fa-brands fa-telegram"></i>
                 </a>
               </li>
-              <li>
-                <a
-                  target={"_blank"}
-                  href="https://www.linkedin.com/in/jamoliddin-ko-charov-8a6193234/"
-                  rel="noopener noreferrer"
+              <li
+                className="language"
+                onClick={(e) => {
+                  setLanguages(true);
+                }}
+              >
+                <span
+                  className={uzLanguage || languages ? "active" : ""}
+                  onClick={(e) => {
+                    setUzLanguage(true);
+                  }}
                 >
-                  <i className="fa-brands fa-linkedin"></i>
-                </a>
+                  <img src="/flags/uzb.png" alt="" />
+                  O'zbekcha
+                </span>
+                <span
+                  className={uzLanguage && languages ? "" : "active"}
+                  onClick={(e) => {
+                    setUzLanguage(false);
+                  }}
+                >
+                  <img src="/flags/russian.png" alt="" />
+                  Русский
+                </span>
               </li>
             </ul>
           </div>
@@ -145,7 +92,10 @@ function Navbar({ user }) {
               <div className="inputSearch">
                 <input
                   type="Search"
-                  placeholder="Mahsulotlar va turkumlar izlash"
+                  placeholder={translate(
+                    "Поиск продуктов и категорий",
+                    "Mahsulotlar va turkumlar izlash"
+                  )}
                 />
                 <button>
                   <svg
@@ -187,24 +137,6 @@ function Navbar({ user }) {
 
                   {user.firstName ? user.firstName : user.phoneNumber}
                 </Link>
-                <div className="dropdownAdmin" onClick={DropdownAdmin}>
-                  <div className="userIcon">
-                    <i className="fa-solid fa-user"></i>
-                  </div>
-                  <div className="downIcon">
-                    <i className="fa-solid fa-sort-down"></i>
-                  </div>
-                </div>
-                <div className={toggle ? "d_none_div" : "AdminIcon_logout"}>
-                  <Link to={"/"}>
-                    <i className="fa-solid fa-gear"></i>
-                    Settings
-                  </Link>
-                  <span onClick={logout}>
-                    <i className="fa-solid fa-arrow-right-from-bracket"></i>
-                    Logout
-                  </span>
-                </div>
               </ul>
             ) : (
               <ul className="navbar_right">
@@ -248,7 +180,7 @@ function Navbar({ user }) {
           </div>
         </div>
       </nav>
-    </>
+    </div>
   );
 }
 

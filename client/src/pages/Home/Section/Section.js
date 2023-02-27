@@ -1,6 +1,7 @@
 import React from "react";
 import Loading from "../../../components/Loading/Loading";
 import classes from "./section.module.css";
+import translate from "../../../components/translate/translate"
 
 function Section({
   setCategoryBig,
@@ -14,7 +15,7 @@ function Section({
   return (
     <div className={classes.container}>
       <div className={classes.top}>
-        <h1 className={classes.h1}>Categories of The Month</h1>
+        <h1 className={classes.h1}>{translate("Рус", "UZB")}</h1>
         <p className={classes.p}>
           Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
           officia deserunt mollit anim id est laborum.

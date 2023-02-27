@@ -36,11 +36,12 @@ function NewProducts({ ProductMore }) {
             pariatur. Excepteur sint occaecat cupidatat non proident.
           </p>
         </div>
-        {products.length ? (
+        {products.length > 1 ? (
           <div className={classes.newProds}>
             {loading ? (
               <Loading />
             ) : (
+              products &&
               products.map((item, index) => (
                 <div
                   className={classes.product}

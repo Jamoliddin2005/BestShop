@@ -53,10 +53,12 @@ const HomeCarousel = () => {
           contacts.map((item, index) => (
             <SwiperSlide key={index}>
               <div className="row">
-                <img
-                  src="https://main-cdn.sbermegamarket.ru/upload/mnt/16f64129-d0bc-48a5-a556-d3d80a2eb61b.jpg"
-                  alt=""
-                />
+                <a href="https://google.com" target={"_blank"} rel="noreferrer">
+                  <img
+                    src="https://main-cdn.sbermegamarket.ru/upload/mnt/16f64129-d0bc-48a5-a556-d3d80a2eb61b.jpg"
+                    alt=""
+                  />
+                </a>
               </div>
             </SwiperSlide>
           ))

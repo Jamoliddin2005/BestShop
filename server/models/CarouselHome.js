@@ -1,26 +1,13 @@
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema({
-  title: {
+  post: {
     type: String,
-    required: true,
+    required: true
   },
-  desc: {
+  link: {
     type: String,
-    required: true,
-  },
-  select: {
-    type: String,
-    required: true,
-    default: "Spring"
-  },
-  photo: {
-    type: String,
-    // required: true,
-  },
-  categoryId: {
-    type: String,
-    // required: true,
+    required: true
   }
 });
 

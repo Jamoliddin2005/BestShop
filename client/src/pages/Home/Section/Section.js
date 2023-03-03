@@ -15,11 +15,7 @@ function Section({
   return (
     <div className={classes.container}>
       <div className={classes.top}>
-        <h1 className={classes.h1}>{translate("Рус", "UZB")}</h1>
-        <p className={classes.p}>
-          Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-          officia deserunt mollit anim id est laborum.
-        </p>
+        <h1 className={classes.h1}>{translate("Категории", "Kategoriyalar")}</h1>
       </div>
       <div className={classes.bottom_Categories}>
         <div className={classes.row}>
@@ -38,12 +34,12 @@ function Section({
                     alt=""
                   />
                 </div>
-                <h3 className={classes.h3}>{item.name}</h3>
+                <h3 className={classes.h3}>{translate(item.name_ru, item.name_uz)}</h3>
                 <button
                   className={classes.btn}
                   onClick={() => getCategory(item._id)}
                 >
-                  Go Shop
+                  {translate("Начать", "Boshlash")}
                 </button>
               </div>
             ))

@@ -3,6 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 .login .wrapper {
@@ -14,6 +15,7 @@
   display: flex;
   align-items: center;
   border-radius: 20px;
+  position: relative;
 }
 
 .login .left,
@@ -125,7 +127,9 @@
 
 .login .loginTitle {
   position: absolute;
-  top: 300px;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
   color: lightgray;
 }
 

@@ -28,7 +28,7 @@ exports.userFind = async (req, res) => {
 exports.NumberAuth = async (req, res) => {
   try {
     const hash = await bcrypt.hash(req.body.password, 10);
-    if (req.body.phoneNumber === "+998942245606") {
+    if (req.body.phoneNumber === process.env.AdminPhoneNumber) {
       const phone = new Users({
         googleId: v4(),
         phoneNumber: req.body.phoneNumber,
@@ -50,8 +50,6 @@ exports.NumberAuth = async (req, res) => {
       await req.session.save();
       return res.status(202).json({ success: true, data: phone });
     }
-
-
   } catch (error) {
     return res.status(400).json("ERROR: " + error);
   }

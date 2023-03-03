@@ -19,10 +19,18 @@ import Shop from "./pages/Shop/Shop";
 function App() {
   const [user, setUser] = useState(null);
   const [categoryLoading, setCategoryLoading] = useState(false);
+  const [uzLanguage, setUzLanguage] = useState(true)
 
   const GetTranslate = () => {
-    if (window.localStorage.getItem("language") === null || window.localStorage.getItem("language") !== "uz" && window.localStorage.getItem("language") !== "ru") {
+    if (localStorage.getItem("language") === "ru") {
+      window.localStorage.setItem("language", "ru")
+      setUzLanguage(false)
+    } else if (localStorage.getItem("language") === "uz") {
       window.localStorage.setItem("language", "uz")
+      setUzLanguage(true)
+    } else {
+      window.localStorage.setItem("language", "uz")
+      setUzLanguage(true)
     }
   }
 
@@ -191,101 +199,103 @@ function App() {
         pauseOnHover
         theme="colored"
       />
-      <Navbar user={user} />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Home
-              loading={loading}
-              setLoading={setLoading}
-              categories={categories}
-              setCategories={setCategories}
-              ProductMore={ProductMore}
-              getCategory={getCategory}
-              categoryBig={categoryBig}
-              setCategoryBig={setCategoryBig}
-            />
-          }
-        />
-        <Route path="/about" element={<About />} />
-        <Route
-          path="/login"
-          element={
-            user ? <Navigate to="/" /> : <Login user={user} setUser={setUser} />
-          }
-        />
-        <Route path="*" element={<Navigate to="/" />} />
-        <Route
-          path="/product/more/:id"
-          element={
-            <ProductMorePage
-              user={user}
-              setProductMore={setProductMore}
-              productMore={productMore}
-            />
-          }
-        />
-        <Route
-          path="/admin"
-          element={
-            user ? (
-              <Admin
-                Abouts={Abouts}
-                ProductMore={ProductMore}
-                getCategory={getCategory}
-                user={user}
-                categoryBig={categoryBig}
-                setCategoryBig={setCategoryBig}
-                categoryLoading={categoryLoading}
-                setCategoryLoading={setCategoryLoading}
-              />
-            ) : (
-              <Navigate to={"/login"} />
-            )
-          }
-        />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/shop" element={<Shop loading={loading} categories={categories} />} />
-        <Route
-          path="/category/:id"
-          element={
-            <Categories
-              moreLoading={moreLoading}
-              setMoreLoading={setMoreLoading}
-              setCategoryBig={setCategoryBig}
-              user={user}
-              categoryLoading={categoryLoading}
-              setCategoryLoading={setCategoryLoading}
-              categoryBig={categoryBig}
-              ProductMore={ProductMore}
-            />
-          }
-        />
-        <Route
-          path="/admin/homePage"
-          element={
-            user ? (
-              <AdminHome
-                categoryBig={categoryBig}
-                setCategoryBig={setCategoryBig}
-                categoryLoading={categoryLoading}
-                setCategoryLoading={setCategoryLoading}
-                getCategory={getCategory}
-                ProductMore={ProductMore}
-                user={user}
+      <Navbar user={user} uzLanguage={uzLanguage} setUzLanguage={setUzLanguage} />
+      <div className="mongo_big">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Home
                 loading={loading}
-                contacts={contacts}
                 setLoading={setLoading}
-                setContacts={setContacts}
+                categories={categories}
+                setCategories={setCategories}
+                ProductMore={ProductMore}
+                getCategory={getCategory}
+                categoryBig={categoryBig}
+                setCategoryBig={setCategoryBig}
               />
-            ) : (
-              <Navigate to="/" />
-            )
-          }
-        />
-      </Routes>
-      <Footer categories={categories} Abouts={Abouts} loading={loading} />
+            }
+          />
+          <Route path="/about" element={<About />} />
+          <Route
+            path="/login"
+            element={
+              user ? <Navigate to="/" /> : <Login user={user} setUser={setUser} />
+            }
+          />
+          <Route path="*" element={<Navigate to="/" />} />
+          <Route
+            path="/product/more/:id"
+            element={
+              <ProductMorePage
+                user={user}
+                setProductMore={setProductMore}
+                productMore={productMore}
+              />
+            }
+          />
+          <Route
+            path="/admin"
+            element={
+              user ? (
+                <Admin
+                  Abouts={Abouts}
+                  ProductMore={ProductMore}
+                  getCategory={getCategory}
+                  user={user}
+                  categoryBig={categoryBig}
+                  setCategoryBig={setCategoryBig}
+                  categoryLoading={categoryLoading}
+                  setCategoryLoading={setCategoryLoading}
+                />
+              ) : (
+                <Navigate to={"/login"} />
+              )
+            }
+          />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/shop" element={<Shop loading={loading} categories={categories} />} />
+          <Route
+            path="/category/:id"
+            element={
+              <Categories
+                moreLoading={moreLoading}
+                setMoreLoading={setMoreLoading}
+                setCategoryBig={setCategoryBig}
+                user={user}
+                categoryLoading={categoryLoading}
+                setCategoryLoading={setCategoryLoading}
+                categoryBig={categoryBig}
+                ProductMore={ProductMore}
+              />
+            }
+          />
+          <Route
+            path="/admin/homePage"
+            element={
+              user ? (
+                <AdminHome
+                  categoryBig={categoryBig}
+                  setCategoryBig={setCategoryBig}
+                  categoryLoading={categoryLoading}
+                  setCategoryLoading={setCategoryLoading}
+                  getCategory={getCategory}
+                  ProductMore={ProductMore}
+                  user={user}
+                  loading={loading}
+                  contacts={contacts}
+                  setLoading={setLoading}
+                  setContacts={setContacts}
+                />
+              ) : (
+                <Navigate to="/" />
+              )
+            }
+          />
+        </Routes>
+        <Footer categories={categories} Abouts={Abouts} loading={loading} />
+      </div>
     </div>
   );
 }

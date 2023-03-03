@@ -7,7 +7,6 @@ import classes from "./Shop.module.css"
 
 
 function Shop({ categories, loading }) {
-
     const [seasons, setSeasons] = useState([
         {
             name: "Spring",
@@ -78,7 +77,7 @@ function Shop({ categories, loading }) {
                             {seasons.map((item, index) => (
                                 <li key={index} className={item.isActive ? classes.SeasonsActive : classes.noActive}>
                                     <Link to={"#"} onClick={(e) => {
-                                        e.preventDefault() 
+                                        e.preventDefault()
                                     }}>{item.name}</Link>
                                 </li>
                             ))}

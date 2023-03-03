@@ -35,24 +35,39 @@
   color: white;
 }
 
-.navbar_top ul .language {
-  margin-left: 20px;
-  display: flex;
-  flex-direction: column;
+.navbar_top ul:last-child {
+  position: relative;
+}
+
+.lan {
   position: relative;
   width: 120px;
   height: 30px;
+  margin-left: 20px;
+}
+
+.navbar_top ul .language {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 120px;
+  height: 30px;
   margin-right: 0;
+  overflow: hidden;
+  transition: .3s;
+  right: 0;
+  z-index: 11;
+}
+
+.navbar_top ul .language_active {
+  height: 63px;
 }
 
 .navbar_top ul .language span.active {
-  opacity: 1;
   top: 0;
 }
 
 .navbar_top ul .language span {
-  opacity: 0;
-
   width: 100%;
   cursor: pointer;
   font-family: "Roboto", sans-serif;

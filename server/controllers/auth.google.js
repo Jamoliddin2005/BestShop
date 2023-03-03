@@ -1,6 +1,4 @@
 const passport = require("passport");
-const bcrypt = require("bcrypt");
-const Users = require("../models/User");
 
 exports.loginSuccess = async (req, res) => {
   if (req.user) {

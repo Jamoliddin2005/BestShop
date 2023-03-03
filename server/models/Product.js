@@ -1,9 +1,11 @@
-const mongoose = require("mongoose");
-
-const Schema = mongoose.Schema;
+const { Schema, model } = require("mongoose");
 
 const Product = new Schema({
-    name: {
+    name_uz: {
+        type: String,
+        required: true,
+    },
+    name_ru: {
         type: String,
         required: true,
     },
@@ -15,18 +17,18 @@ const Product = new Schema({
         type: Array,
         required: true,
     },
-    desc: {
+    desc_uz: {
+        type: String,
+        required: true,
+    },
+    desc_ru: {
         type: String,
         required: true,
     },
     categoryId: {
         ref: "categories",
         type: Schema.Types.ObjectId,
-    },
-    gender: {
-        type: String,
-        default: "All"
     }
 })
 
-module.exports = mongoose.model("Product", Product)
+module.exports = model("Product", Product)

@@ -160,8 +160,8 @@ const Login = ({ user, setUser }) => {
 
   return (
     <div className="login">
-      <h1 className="loginTitle">Login Page</h1>
       <div className="wrapper">
+        <h1 className="loginTitle">Login Page</h1>
         <div className="left">
           <div className="loginButton google" onClick={google}>
             <img src={Google} alt="" className="icon" />

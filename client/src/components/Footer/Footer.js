@@ -4,6 +4,7 @@ import axios from "axios";
 import "./Footer.css";
 import { toast } from "react-toastify";
 import Loading from "../Loading/Loading";
+import translate from "../translate/translate"
 
 const Pages = [
   {
@@ -23,9 +24,10 @@ const Pages = [
   },
 ];
 
+
 export default function Footer({ categories, Abouts, loading }) {
   const [input, setInput] = useState("");
- 
+
   const URI_API = `https://api.telegram.org/bot${process.env.REACT_APP_TOKEN}/sendMessage`;
 
   const submitHandler = async (e) => {
@@ -74,19 +76,19 @@ export default function Footer({ categories, Abouts, loading }) {
               ))}
             </ul>
             <ul className="footer_center">
-              <h3>Products</h3>
+              <h3>{translate("Категории", "Kategoriyalar")}</h3>
               {loading ? (
                 <Loading />
               ) : (
                 categories.map((item, index) => (
                   <li key={index}>
-                    <Link to={`/category/${item._id}`}>{item.name}</Link>
+                    <Link to={`/category/${item._id}`}>{translate(item.name_ru, item.name_uz)}</Link>
                   </li>
                 ))
               )}
             </ul>
             <ul>
-              <h3>Further Info</h3>
+              <h3>{translate("Страницы", "Sahifalar")}</h3>
               {Pages.map((item, index) => (
                 <li key={index}>
                   <Link to={index}>{item.name}</Link>
@@ -137,14 +139,13 @@ export default function Footer({ categories, Abouts, loading }) {
               <form action="/auth" onSubmit={submitHandler}>
                 <input
                   type="email"
-                  placeholder="Email address"
+                  placeholder={translate("Введите Email", "Emailingizni kiriting")}
                   onChange={(e) => setInput(e.target.value)}
                   value={input}
                   autoComplete="off"
                   required={true}
                 />
-
-                <button type="submit">Send</button>
+                <button type="submit">{translate("Отправить", "Yuborish")}</button>
               </form>
             </div>
           </div>

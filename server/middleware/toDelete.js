@@ -3,7 +3,7 @@ const path = require('path')
 
 
 
-module.exports = (photo, res) => {
+module.exports = (photo, res) => { 
     if (photo) {
         if (typeof photo === 'object') {
             for (var i = 0; i < photo.length; i++) {

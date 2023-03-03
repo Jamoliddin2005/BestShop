@@ -7,39 +7,29 @@ import { toast } from "react-toastify";
 import AddCar from "./addCarousel/AddCar";
 
 function HomeCarousel({ user }) {
-  const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
   const [photo, setPhoto] = useState("");
-  const [select, setSelect] = useState([{}]);
-  const [loading, setLoading] = useState(false);
-  const [categoryId, setCategoryId] = useState("");
-
-
+  const [link, setLink] = useState("");
+  const [loading, setLoading] = useState("");
 
   const [contacts, setContacts] = useState([
     {
-      title: "",
-      desc: "",
-      select: "",
       photo: "",
+      link: "",
     },
   ]);
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (title && desc && photo && contacts && select.length > 2) {
+    if (photo && contacts) {
       try {
         toast.success("Product Added!");
         e.preventDefault();
         const dataCreate = new FormData();
         const fileInput = document.querySelector(".photoinp");
         fileInput.value = "";
-        dataCreate.append("title", title);
-        dataCreate.append("desc", desc);
-        dataCreate.append("select", select);
         dataCreate.append("photo", photo);
-        dataCreate.append("categoryId", categoryId);
-        setTitle("");
-        setDesc("");
+        dataCreate.append("link", link);
         const { data } = await axios.post(
           `${process.env.REACT_APP_URL}/add/addCarouselHome`,
           dataCreate
@@ -80,16 +70,11 @@ function HomeCarousel({ user }) {
         <div className="headerCarousel">
           <h3>Home Header Carousel</h3>
           <AddCar
-            title={title}
-            setTitle={setTitle}
-            desc={desc}
-            setDesc={setDesc}
-            setSelect={setSelect}
-            select={select}
+            link={link}
+            setLink={setLink}z
             setPhoto={setPhoto}
             handleSubmit={handleSubmit}
             loading={loading}
-            setCategoryId={setCategoryId}
           />
         </div>
         <SwiperHead

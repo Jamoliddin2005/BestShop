@@ -3,14 +3,13 @@ import { Link } from "react-router-dom";
 import "./Navbar.css";
 import translate from "../translate/translate";
 
-function Navbar({ user }) {
+function Navbar({ user, uzLanguage, setUzLanguage }) {
   const logout = () => {
     localStorage.removeItem("profileNumber");
     window.open(`${process.env.REACT_APP_URL}/auth/login/logout`, "_self");
   };
 
   const [languages, setLanguages] = useState(false);
-  const [uzLanguage, setUzLanguage] = useState(true);
 
   return (
     <div className={"Navbar_big"}>
@@ -25,8 +24,9 @@ function Navbar({ user }) {
                 </a>
               </li>
               <li>
-                <a href="tel:+998946239777">
-                  <i className="fa-solid fa-phone"></i> +998942245606
+                <a href="tel:+998942245606">
+                  <i className="fa-solid fa-phone"></i>
+                  +998942245606
                 </a>
               </li>
             </ul>
@@ -49,31 +49,37 @@ function Navbar({ user }) {
                   <i className="fa-brands fa-telegram"></i>
                 </a>
               </li>
-              <li
-                className="language"
-                onClick={(e) => {
-                  setLanguages(true);
-                }}
-              >
-                <span
-                  className={uzLanguage || languages ? "active" : ""}
-                  onClick={(e) => {
-                    setUzLanguage(true);
-                  }}
+              <div className="lan">
+                <li
+                  className={
+                    languages ? "language language_active" : "language"
+                  }
                 >
-                  <img src="/flags/uzb.png" alt="" />
-                  O'zbekcha
-                </span>
-                <span
-                  className={uzLanguage && languages ? "" : "active"}
-                  onClick={(e) => {
-                    setUzLanguage(false);
-                  }}
-                >
-                  <img src="/flags/russian.png" alt="" />
-                  Русский
-                </span>
-              </li>
+                  <span
+                    className={uzLanguage ? "active" : ""}
+                    onClick={(e) => {
+                      languages ? setLanguages(false) : setLanguages(true);
+                      setUzLanguage(true);
+
+                      window.localStorage.setItem("language", "uz");
+                    }}
+                  >
+                    <img src="/flags/uzb.png" alt="" />
+                    O'zbekcha
+                  </span>
+                  <span
+                    className={uzLanguage ? "" : "active"}
+                    onClick={(e) => {
+                      setUzLanguage(false);
+                      languages ? setLanguages(false) : setLanguages(true);
+                      window.localStorage.setItem("language", "ru");
+                    }}
+                  >
+                    <img src="/flags/russian.png" alt="" />
+                    Русский
+                  </span>
+                </li>
+              </div>
             </ul>
           </div>
         </div>
@@ -144,7 +150,7 @@ function Navbar({ user }) {
                   <Link to={"/"}>
                     <i className="fa-regular fa-heart"></i>
                     <span>0</span>
-                    <p>Sevimlilar</p>
+                    <p>{translate("Избранное", "Sevimlilar")}</p>
                   </Link>
                 </li>
 
@@ -166,13 +172,13 @@ function Navbar({ user }) {
                       ></path>
                     </svg>
                     <span>0</span>
-                    <p>Savat</p>
+                    <p>{translate("Корзина", "Savat")}</p>
                   </Link>
                 </li>
                 <li className="registerClick">
                   <Link to={"/login"}>
                     <i className="fa-regular fa-user"></i>
-                    <p>Kirish</p>
+                    <p>{translate("Войти", "Kirish")}</p>
                   </Link>
                 </li>
               </ul>

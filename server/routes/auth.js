@@ -36,11 +36,11 @@ router.get("/facebook/callback", passport.authenticate("facebook", {
 
 
 // Phone Number Authenticated
-const { NumberAuth, usersGet, userFind, PostPasswordSubmit } = require('../controllers/auth.phone')
+const { NumberAuth, usersGet, userFind, PostPasswordSubmit } = require('../controllers/auth.phone');
+const auth = require("../middleware/auth");
 
-router.route("/users").get(usersGet)
-router.route("/userFind").post(userFind)
-router.route("/PostPasswordSubmit").post(PostPasswordSubmit)
-router.route("/registerNumber").post(NumberAuth)
-
+router.get("/users", auth, usersGet)
+router.post("/userFind", userFind)
+router.post("/PostPasswordSubmit", PostPasswordSubmit)
+router.post("/registerNumber", NumberAuth)
 module.exports = router;

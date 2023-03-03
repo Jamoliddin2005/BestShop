@@ -9,26 +9,15 @@ exports.addHomeCarousel = async (req, res) => {
   try {
     if (req.file) {
       const carouselAdd = new CarouselHome({
-        title: req.body.title,
-        desc: req.body.desc,
-        select: req.body.select,
-        photo: req.file.filename,
-        categoryId: req.body.categoryId
+        post: req.file.filename,
+        link: req.body.link
       });
       await carouselAdd.save();
       const swipers = await CarouselHome.find();
       return res.status(201).json({ success: true, data: swipers });
-    } else {
-      const carouselAdd = new CarouselHome({
-        title: req.body.title,
-        desc: req.body.desc,
-        select: req.body.select,
-        photo: "noimage.jpg",
-        categoryId: req.body.categoryId
-      });
-      await carouselAdd.save();
-      const swipers = await CarouselHome.find();
-      return res.status(201).json({ success: true, data: swipers });
+    }
+    else {
+      return res.status(300).json({ success: false });
     }
   } catch (error) {
     return res.status(400).send("ERROR ADDING: " + error);
@@ -48,7 +37,8 @@ exports.show = async (req, res) => {
 exports.addCategory = async (req, res) => {
   try {
     const categories = new Categories({
-      name: req.body.name,
+      name_uz: req.body.name_uz,
+      name_ru: req.body.name_ru,
       photo: req.file.filename,
     });
     await categories.save();
@@ -84,23 +74,25 @@ exports.addProduct = async (req, res) => {
   imageToArray(req.files)
   if (req.files) {
     const product = new Products({
-      name: req.body.name,
+      name_uz: req.body.name_uz,
+      name_ru: req.body.name_ru,
       price: req.body.price,
-      desc: req.body.desc,
+      desc_uz: req.body.desc_uz,
+      desc_ru: req.body.desc_ru,
       categoryId: req.body.categoryId,
       photo: Images,
-      gender: req.body.gender
     });
     await product.save();
     Images = []
   } else {
     const product = new Products({
-      name: req.body.name,
+      name_uz: req.body.name_uz,
+      name_ru: req.body.name_ru,
+      desc_uz: req.body.desc_uz,
+      desc_ru: req.body.desc_ru,
       price: req.body.price,
-      desc: req.body.desc,
       categoryId: req.body.categoryId,
-      photo: "noimg.jpg",
-      gender: req.body.gender
+      photo: "noimg.jpg"
     });
     await product.save();
     Images = []

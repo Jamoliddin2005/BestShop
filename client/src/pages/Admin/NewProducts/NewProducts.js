@@ -13,30 +13,34 @@ const NewProducts = ({
   setContacts,
   ProductMore,
 }) => {
-  const [name, setName] = useState("");
+  const [name_uz, setName_uz] = useState("");
+  const [name_ru, setName_ru] = useState("");
   const [price, setPrice] = useState("");
-  const [desc, setDesc] = useState("");
+  const [desc_uz, setDesc_uz] = useState("");
+  const [desc_ru, setDesc_ru] = useState("");
   const [categoryId, setCategoryId] = useState("");
-  const [gender, setGender] = useState("");
   const [photo, setPhoto] = useState(null);
   const [photoone, setPhotoOne] = useState("https://bref.sh/img/logo-null.png");
 
   const [products, setProducts] = useState([
     {
-      name: "",
+      name_uz: "",
+      name_ru: "",
       price: "",
       photo: "",
-      desc: "",
+      desc_uz: "",
+      desc_ru: "",
       categoryId: "",
       gender: ""
     },
   ]);
 
   const ProductForm = new FormData();
-  ProductForm.append("name", name);
+  ProductForm.append("name_uz", name_uz);
+  ProductForm.append("name_ru", name_ru);
   ProductForm.append("price", price.replace("e"));
-  ProductForm.append("desc", desc);
-  ProductForm.append("gender", gender);
+  ProductForm.append("desc_uz", desc_uz);
+  ProductForm.append("desc_ru", desc_ru);
   ProductForm.append("categoryId", categoryId);
   if (photo) {
     for (let i = 0; i < photo.length; i++) {
@@ -50,16 +54,16 @@ const NewProducts = ({
     ProductPhoto.value = "";
     try {
       e.preventDefault();
-      if (name && price && desc && photo && categoryId) {
+      if (name_uz && name_ru && price && desc_uz && desc_ru && photo && categoryId) {
         e.preventDefault();
-
         setPhoto("");
-        setName("");
+        setName_uz("");
+        setName_ru("");
         setPrice("");
-        setDesc("");
+        setDesc_uz("");
+        setDesc_ru("");
         setLoading("");
         setProducts("");
-        setGender("")
         const { data } = await axios.post(
           `${process.env.REACT_APP_URL}/add/addProduct`,
           ProductForm
@@ -99,15 +103,19 @@ const NewProducts = ({
   return (
     <div className={classes.NewProducts}>
       <ProductsAdd
-        setName={setName}
+        setName_uz={setName_uz}
+        setName_ru={setName_ru}
         setPrice={setPrice}
-        setDesc={setDesc}
+        setDesc_uz={setDesc_uz}
+        setDesc_ru={setDesc_ru}
         setCategoryId={setCategoryId}
         setPhoto={setPhoto}
         CreateProductHandler={CreateProductHandler}
-        name={name}
+        name_uz={name_uz}
+        name_ru={name_ru}
         price={price}
-        desc={desc}
+        desc_uz={desc_uz}
+        desc_ru={desc_ru}
         categoryId={categoryId}
         photo={photo}
         photoone={photoone}
@@ -116,8 +124,6 @@ const NewProducts = ({
         setLoading={setLoading}
         contacts={contacts}
         setContacts={setContacts}
-        gender={gender}
-        setGender={setGender}
       />
 
       <div className={classes.ProductsDiv}>
@@ -127,14 +133,14 @@ const NewProducts = ({
           ) : (
             products.map((item, index) => (
               <Products
-                gender={gender}
-                setGender={setGender}
                 key={index}
                 id={item._id}
-                name={item.name}
+                name_uz={item.name_uz}
+                name_ru={item.name_ru}
                 price={item.price}
                 photo={item.photo}
-                desc={item.desc}
+                desc_uz={item.desc_uz}
+                desc_ru={item.desc_ru}
                 categoryId={item.categoryId}
                 ProductDelete={ProductDelete}
                 ProductMore={ProductMore}

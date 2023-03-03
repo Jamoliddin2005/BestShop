@@ -32,10 +32,11 @@ app.use(
 const Auth = require("./routes/auth");
 const AddRoutes = require("./routes/Add");
 const HeaderCarouselDelete = require("./routes/Delete");
+const auth = require("./middleware/auth");
 
 app.use("/auth", Auth);
 app.use("/add", AddRoutes);
-app.use("/delete", HeaderCarouselDelete);
+app.use("/delete", auth, HeaderCarouselDelete);
 
 app.get("/isAdmin", async (req, res) => {
   return res.status(200).json({ data: req.session });

@@ -11,23 +11,26 @@ const Categories = ({ getCategory,
     contacts,
     setContacts }) => {
 
-    const [name, setName] = useState('')
+    const [name_uz, setName_uz] = useState('')
+    const [name_ru, setName_ru] = useState('')
     const [photo, setPhoto] = useState('https://bref.sh/img/logo-null.png')
     const [photoone, setPhotoOne] = useState('https://bref.sh/img/logo-null.png')
 
     const onSubmitHandler = async (e) => {
         e.preventDefault()
-        if (name && photo && contacts) {
+        if (name_uz && name_ru && photo && contacts) {
             e.preventDefault()
             try {
                 e.preventDefault()
                 toast.success("Categoriya qo'shildi");
                 const dataCategory = new FormData()
-                dataCategory.append('name', name)
+                dataCategory.append('name_uz', name_uz)
+                dataCategory.append('name_ru', name_ru)
                 dataCategory.append('photo', photo)
                 const fileInput = document.querySelector("#photoInputAdd");
                 fileInput.value = "";
-                setName("")
+                setName_uz("")
+                setName_ru("")
                 const { data } = await axios.post(
                     `${process.env.REACT_APP_URL}/add/addCategory`,
                     dataCategory
@@ -59,13 +62,13 @@ const Categories = ({ getCategory,
             <div className={classes.row}>
                 <div className={classes.addCategory}>
                     <CategoryAdd photoone={photoone}
-                        setPhotoOne={setPhotoOne} name={name} photo={photo} setName={setName} setPhoto={setPhoto} onSubmitHandler={onSubmitHandler} />
+                        setPhotoOne={setPhotoOne} name_ru={name_ru} name_uz={name_uz} photo={photo} setName_uz={setName_uz} setName_ru={setName_ru} setPhoto={setPhoto} onSubmitHandler={onSubmitHandler} />
                 </div>
                 <div className={classes.categories}>
                     {contacts.length
                         ? loading ? <Loading />
                             : contacts.map((item, index) => (
-                                <Category getCategory={getCategory} deleteCategory={deleteCategory} id={item._id} key={index} name={item.name} photo={item.photo} />
+                                <Category getCategory={getCategory} deleteCategory={deleteCategory} id={item._id} key={index} name_uz={item.name_uz} name_ru={item.name_ru} photo={item.photo} />
                             ))
                         : <h2>Categoriyalar yo'q</h2>}
 

@@ -42,65 +42,36 @@
   margin: auto;
 }
 
-.adminPage
-  .adminTitle
-  .CarouselHomeHeaderBigDiv
-  .carouselHome
-  .carousel
-  .swiper {
-  height: 300px;
+.adminPage .adminTitle .CarouselHomeHeaderBigDiv .carouselHome .carousel .swiper {
+  height: auto;
 }
 
-.adminPage
-  .adminTitle
-  .CarouselHomeHeaderBigDiv
-  .swiper-horizontal
-  > .adminPage
-  .adminTitle
-  .CarouselHomeHeaderBigDiv
-  .swiper-pagination-bullets,
-.adminPage
-  .adminTitle
-  .CarouselHomeHeaderBigDiv
-  .swiper-pagination-bullets.swiper-pagination-horizontal,
+.adminPage .adminTitle .CarouselHomeHeaderBigDiv .swiper-horizontal>.adminPage .adminTitle .CarouselHomeHeaderBigDiv .swiper-pagination-bullets,
+.adminPage .adminTitle .CarouselHomeHeaderBigDiv .swiper-pagination-bullets.swiper-pagination-horizontal,
 .adminPage .adminTitle .CarouselHomeHeaderBigDiv .swiper-pagination-custom,
 .adminPage .adminTitle .CarouselHomeHeaderBigDiv .swiper-pagination-fraction {
   bottom: 10px;
 }
 
-.adminPage
-  .adminTitle
-  .CarouselHomeHeaderBigDiv
-  .carouselHome
-  .carousel
-  .swiper
-  .buttons {
+.adminPage .adminTitle .CarouselHomeHeaderBigDiv .carouselHome .carousel .swiper .buttons {
   display: flex;
   align-items: center;
 }
 
-.adminPage
-  .adminTitle
-  .CarouselHomeHeaderBigDiv
-  .carouselHome
-  .carousel
-  .swiper
-  .buttons
-  button {
+.swiper-button-prev,
+.swiper-button-next {
+  width: 45px !important;
+  height: 45px !important;
+}
+
+.adminPage .adminTitle .CarouselHomeHeaderBigDiv .carouselHome .carousel .swiper .buttons button {
   border: none;
   margin-right: 10px;
   transition: 0.3s;
   border: 1px solid transparent;
 }
 
-.adminPage
-  .adminTitle
-  .CarouselHomeHeaderBigDiv
-  .carouselHome
-  .carousel
-  .swiper
-  .buttons
-  button:hover {
+.adminPage .adminTitle .CarouselHomeHeaderBigDiv .carouselHome .carousel .swiper .buttons button:hover {
   border: 1px solid #212934;
   color: #212934;
 }
@@ -129,7 +100,7 @@
 }
 
 .adminPage .container .row {
-  height: 300px;
+  height: auto;
 }
 
 .css-1s2u09g-control {
@@ -146,7 +117,22 @@
   border-color: #2d343f !important;
   box-shadow: none !important;
 }
+
 .css-1pahdxg-control:hover {
   border-color: #2d343f !important;
   box-shadow: none !important;
+}
+
+.delete_btn {
+  position: absolute;
+  bottom: 30px;
+  left: 25px;
+  z-index: 5;
+  padding: 10px 25px;
+  cursor: pointer;
+  background-color: #59ab6e !important;
+  border-color: #56ae6c !important;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  color: white;
 }

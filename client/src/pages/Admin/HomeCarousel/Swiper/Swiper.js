@@ -2,7 +2,6 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Loading from "../../../../components/Loading/Loading";
 import { Pagination, Navigation } from "swiper";
-import NameLength from "../../../../components/NameLength/NameLength";
 
 function SwiperHead({ contacts, deleteCarousel, loading }) {
   return (
@@ -10,7 +9,7 @@ function SwiperHead({ contacts, deleteCarousel, loading }) {
       <div className="carousel">
         {contacts.length ? (
           <Swiper
-            slidesPerView={1}
+            slidesPerView={1.1}
             spaceBetween={30}
             loop={true}
             autoplay={{
@@ -30,26 +29,13 @@ function SwiperHead({ contacts, deleteCarousel, loading }) {
             ) : (
               contacts.map((item, index) => (
                 <SwiperSlide key={index}>
-                  <div className="container">
-                    <div className="row">
-                      <div className="left">
-                        <h1>{NameLength(item.title, 25)}</h1>
-                        <h3>{item.select}</h3>
-                        <p>{NameLength(item.desc, 200)}</p>
-                        <div className="buttons admin">
-                          <button onClick={(e) => deleteCarousel(item._id)}>
-                            Delete
-                          </button>
-                        </div>
-                      </div>
-                      <div className="right">
-                        <img
-                          src={`/uploads/${item.photo}`}
-                          className="image"
-                          alt=""
-                        />
-                      </div>
-                    </div>
+                  <div className="row">
+                    <a href={item.link} target={"_blank"} rel="noreferrer">
+                      <img src={`/uploads/${item.post}`} alt="" />
+                    </a>
+                    <button onClick={(e) => deleteCarousel(item._id)} className={"delete_btn"}>
+                      Delete
+                    </button>
                   </div>
                 </SwiperSlide>
               ))

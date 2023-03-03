@@ -13,6 +13,6 @@ module.exports = () => {
     console.log(`MongoDb running`);
   });
   db.on("error", (err) => {
-    console.log(`MongoDb not Error:`, err);
+    console.log(`MongoDb Error:`, err);
   });
 };

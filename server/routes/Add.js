@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-// const multer = require("multer")
+const auth = require("../middleware/auth")
+
 const {
   addHomeCarousel,
   show,
@@ -14,10 +15,10 @@ const {
 } = require("../controllers/Add");
 const fileUpload = require("../middleware/pictureUpload");
 
-router.post("/addCarouselHome", fileUpload.single("photo"), addHomeCarousel);
-router.post("/addCategory", fileUpload.single("photo"), addCategory);
-router.post("/addProduct", fileUpload.array("photo", 20), addProduct);
-router.put('/profile/updateNumber/:id', updateProfileNumber)
+router.post("/addCarouselHome", auth, fileUpload.single("photo"), addHomeCarousel);
+router.post("/addCategory", auth, fileUpload.single("photo"), addCategory);
+router.post("/addProduct", auth, fileUpload.array("photo", 20), addProduct);
+router.put('/profile/updateNumber/:id', auth, updateProfileNumber)
 router.get("/show", show);
 router.get("/showCategory", showCategory);
 router.get("/showProducts", showProducts);

@@ -1,25 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 const AddCar = ({ setPhoto, handleSubmit, setCategoryId, link, setLink }) => {
-  const [loading, setLoading] = useState(false);
-  const [contacts, setContacts] = useState([
-    {
-      link: "",
-      photo: "",
-    },
-  ]);
+  // const [contacts, setContacts] = useState([
+  //   {
+  //     link: "",
+  //     photo: "",
+  //   },
+  // ]);
 
-  useEffect(() => {
-    const getCategories = async () => {
-      setLoading(true);
-      const response = await fetch(
-        `${process.env.REACT_APP_URL}/add/showCategory`
-      );
-      setContacts(await response.json());
-      setLoading(false);
-    };
-    getCategories();
-  }, []);
+  // useEffect(() => {
+  //   const getCategories = async () => {
+  //     const response = await fetch(
+  //       `${process.env.REACT_APP_URL}/add/showCategory`
+  //     );
+  //     setContacts(await response.json());
+  //   };
+  //   getCategories();
+  // }, []);
 
   return (
     <form encType="multipart/form-data">

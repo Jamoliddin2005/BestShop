@@ -4,10 +4,6 @@ import "./Navbar.css";
 import translate from "../translate/translate";
 
 function Navbar({ user, uzLanguage, setUzLanguage }) {
-  const logout = () => {
-    localStorage.removeItem("profileNumber");
-    window.open(`${process.env.REACT_APP_URL}/auth/login/logout`, "_self");
-  };
 
   const [languages, setLanguages] = useState(false);
 
@@ -91,9 +87,8 @@ function Navbar({ user, uzLanguage, setUzLanguage }) {
               <span>Mongo.uz</span>
             </Link>
             <ul
-              className={`${
-                user ? "navbar_center navbar_user_center" : "navbar_center"
-              }`}
+              className={`${user ? "navbar_center navbar_user_center" : "navbar_center"
+                }`}
             >
               <div className="inputSearch">
                 <input

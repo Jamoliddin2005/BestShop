@@ -5,4 +5,4 @@ module.exports = async (req, res, next) => {
     } else {
         return res.json('Token not defined')
     }
-} 
+}  

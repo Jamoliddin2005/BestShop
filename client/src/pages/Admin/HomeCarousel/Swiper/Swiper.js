@@ -4,6 +4,7 @@ import Loading from "../../../../components/Loading/Loading";
 import { Pagination, Navigation } from "swiper";
 
 function SwiperHead({ contacts, deleteCarousel, loading }) {
+
   return (
     <div className="carouselHome">
       <div className="carousel">

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Autoplay } from "swiper";
-import { Pagination, Navigation } from "swiper";
+import SwiperCore, { Autoplay, Pagination, Navigation } from "swiper";
 import Loading from "../../../../components/Loading/Loading";
-import NameLength from "../../../../components/NameLength/NameLength";
-import { Link } from "react-router-dom";
+import 'swiper/swiper.min.css'
+import 'swiper/modules/pagination/pagination.min.css'
+import "swiper/modules/navigation/navigation.min.css";
 
 SwiperCore.use([Autoplay]);
-const HomeCarousel = () => {
+const HomeCarousel = ({ setErrorServer }) => {
   const [loading, setLoading] = useState(false);
 
   const [contacts, setContacts] = useState([
@@ -21,10 +21,20 @@ const HomeCarousel = () => {
 
   useEffect(() => {
     const getProduct = async () => {
-      setLoading(true);
-      const response = await fetch(`${process.env.REACT_APP_URL}/add/show`);
-      setContacts(await response.json());
-      setLoading(false);
+      try {
+        setLoading(true);
+        await fetch(`${process.env.REACT_APP_URL}/add/show`)
+          .then(res => res.json())
+          .then(response => setContacts(response))
+          .catch(err => {
+            setErrorServer(true)
+          })
+        setLoading(false);
+      } catch (error) {
+        if (error) {
+          setErrorServer(true)
+        }
+      }
     };
     getProduct();
   }, []);

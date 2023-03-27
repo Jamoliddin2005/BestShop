@@ -4,10 +4,8 @@ import Loading2 from '../../components/Loading2/Loading2'
 import Brands from '../About/Brands/Brands'
 import classes from "./Shop.module.css"
 
-
-
 function Shop({ categories, loading }) {
-    const [seasons, setSeasons] = useState([
+    const [seasons] = useState([
         {
             name: "Spring",
             isActive: false,

@@ -1,8 +1,8 @@
 import React from 'react'
 import Currency from '../../../../components/Currency/Currency'
-import NameLength from '../../../../components/NameLength/NameLength'
 import translate from '../../../../components/translate/translate'
 import classes from "./Products.module.css"
+
 const Products = ({
     name_uz,
     name_ru,

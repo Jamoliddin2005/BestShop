@@ -22,6 +22,7 @@ app.use(
 require("./middleware/passport")(passport);
 app.use(passport.initialize());
 app.use(passport.session());
+
 app.use(
   cors({
     origin: "http://localhost:3000",

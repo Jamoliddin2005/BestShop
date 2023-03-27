@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Loading from "../../components/Loading/Loading";
 import classes from "./ProductMore.module.css";
-import { toast } from "react-toastify"
 import Truth from "./Truth"
 
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";

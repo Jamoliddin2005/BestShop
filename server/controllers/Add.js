@@ -70,7 +70,7 @@ exports.updateProfileNumber = async (req, res) => {
 
 var Images = []
 
-exports.addProduct = async (req, res) => {
+exports.addProduct = async (req, res) => { 
   imageToArray(req.files)
   if (req.files) {
     const product = new Products({
@@ -124,10 +124,6 @@ exports.productMore = async (req, res) => {
   const product = await Products.findById(id);
   return res.status(201).json({ success: true, data: product });
 };
-
-
-
-
 function imageToArray(images) {
   for (var i = 0; i < images.length; i++) {
     Images.push(images[i].filename)

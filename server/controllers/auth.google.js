@@ -1,6 +1,6 @@
 const passport = require("passport");
 
-exports.loginSuccess = async (req, res) => {
+exports.loginSuccess = async (req, res) => { 
   if (req.user) {
     return res.status(200).json({
       success: true,
@@ -15,12 +15,6 @@ exports.loginFailed = async (req, res) => {
     success: false,
     message: "failure",
   });
-};
-
-exports.logout = async (req, res) => {
-  req.logout();
-  res.redirect(process.env.CLIENT_URL);
-  return req.session.destroy();
 };
 
 exports.Google =

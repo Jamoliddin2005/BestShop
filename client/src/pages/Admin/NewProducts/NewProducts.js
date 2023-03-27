@@ -65,7 +65,14 @@ const NewProducts = ({
         setLoading("");
         setProducts("");
         const { data } = await axios.post(
-          `${process.env.REACT_APP_URL}/add/addProduct`,
+          `${process.env.REACT_APP_URL}/add/addProduct`, {
+          credentials: "include",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Credentials": true,
+          },
+        },
           ProductForm
         );
         setProducts(data.data);
@@ -127,7 +134,7 @@ const NewProducts = ({
       />
 
       <div className={classes.ProductsDiv}>
-        {products.length ? (
+        {products ? products.length ? (
           loading ? (
             <Loading />
           ) : (
@@ -149,7 +156,8 @@ const NewProducts = ({
           )
         ) : (
           <h2 className={classes.productNull}>Mahsulotlar yo'q</h2>
-        )}
+        ) : <Loading />}
+
       </div>
     </div>
   );

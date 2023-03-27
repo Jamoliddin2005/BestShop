@@ -1,25 +1,32 @@
-import Navbar from "./components/Navbar/Navbar";
+import React, { useEffect, useState } from "react";
+import { ToastContainer } from "react-toastify";
+import axios from "axios";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 
+// Import css
 import "./App.css";
+
+// Import Pages
 import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
-import Footer from "./components/Footer/Footer";
 import Login from "./pages/Login/Login";
 import Admin from "./pages/Admin/Admin";
-import { useEffect, useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
 import Categories from "./pages/Categories/Categories";
 import ProductMorePage from "./pages/ProductMorePage/ProductMore";
-import axios from "axios";
 import Contact from "./pages/Contact/Contact";
 import AdminHome from "./pages/Admin/Administrator/Home/Home";
 import Shop from "./pages/Shop/Shop";
+
+// Import Components
+import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
+import ServerError from "./pages/500/ServerError";
 
 function App() {
   const [user, setUser] = useState(null);
   const [categoryLoading, setCategoryLoading] = useState(false);
   const [uzLanguage, setUzLanguage] = useState(true)
+  const [ErrorServer, setErrorServer] = useState(false)
 
   const GetTranslate = () => {
     if (localStorage.getItem("language") === "ru") {
@@ -34,7 +41,32 @@ function App() {
     }
   }
 
+  const GetToken = async () => {
+    if (sessionStorage.getItem('token')) {
+      try {
+        await fetch(`${process.env.REACT_APP_URL}/auth/find`, {
+          method: "GET",
+          headers: {
+            'Authorization': sessionStorage.getItem('token')
+          }
+        }).then((res) => res.json())
+          .then((res) => {
+            if (res.user) {
+              setUser(res.user)
+            }
+          })
+          .catch(err => console.log(err))
+      } catch (error) {
+        setErrorServer(true)
+      }
+    } else {
+      setUser(null)
+    }
+  }
+
+
   useEffect(() => {
+    GetToken()
     GetTranslate()
   }, [])
 
@@ -96,19 +128,31 @@ function App() {
 
   useEffect(() => {
     const getCategories = async () => {
-      setLoading(true);
-      const response = await fetch(`${process.env.REACT_APP_URL}/add/showCategory`);
-      setCategories(await response.json());
-      setLoading(false);
+      try {
+        setLoading(true);
+        fetch(`${process.env.REACT_APP_URL}/add/showCategory`).then(res => res.json()).then(res => {
+          setCategories(res);
+        }).catch(err => {
+          setErrorServer(true)
+        })
+        setLoading(false);
+      } catch (error) {
+        setErrorServer(true)
+      }
     };
     getCategories();
   }, []);
 
   const getCategories = async () => {
-    setLoading(true);
-    const response = await fetch(`${process.env.REACT_APP_URL}/add/showCategory`);
-    setContacts(await response.json());
-    setLoading(false);
+    try {
+      setLoading(true);
+      await fetch(`${process.env.REACT_APP_URL}/add/showCategory`).then(res => res.json()).then(res => {
+        setContacts(res);
+      }).catch(err => setErrorServer(true))
+      setLoading(false);
+    } catch (error) {
+      setErrorServer(true)
+    }
   };
   useEffect(() => {
     getCategories();
@@ -117,73 +161,61 @@ function App() {
 
   useEffect(() => {
     const getUser = () => {
-      fetch(`${process.env.REACT_APP_URL}/auth/login/success`, {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Credentials": true,
-        },
-      })
-        .then((response) => {
-          if (response.status === 200) return response.json();
-          throw new Error("authentication has been failed!");
+      try {
+        fetch(`${process.env.REACT_APP_URL}/auth/login/success`, {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Credentials": true,
+          },
         })
-        .then((resObject) => {
-          setUser(resObject.user);
-        })
-        .catch((err) => {
-          return toast.error("ERROR!!!")
-        });
-
-      fetch(`${process.env.REACT_APP_URL}/isAdmin`, {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Credentials": true,
-        },
-      })
-        .then((response) => {
-          if (response.status === 200) return response.json();
-          throw new Error("authentication has been failed!");
-        })
-        .then((resObject) => {
-          if (resObject.data.user) {
-            setUser(resObject.data.user);
-          }
-        })
-        .catch((err) => {
-          return toast.error("ERROR!!!")
-        });
+          .then((response) => {
+            if (response.status === 200) return response.json();
+            throw new Error("authentication has been failed!");
+          })
+          .then((resObject) => {
+            setUser(resObject.user);
+          })
+          .catch((err) => {
+            setErrorServer(true)
+          });
+      } catch (error) {
+        setErrorServer(true)
+      }
     };
     getUser();
   }, []);
 
   let navigate = useNavigate();
   const getCategory = async (id) => {
-    setCategoryLoading(true);
-    navigate("/category/" + id);
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_URL}/add/category/` + id
-    );
-    setCategoryBig(data.data);
-    setCategoryLoading(false);
+    try {
+      setCategoryLoading(true);
+      navigate("/category/" + id);
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_URL}/add/category/` + id
+      );
+      setCategoryBig(data.data);
+      setCategoryLoading(false);
+    } catch (error) {
+      setErrorServer(true)
+    }
   };
 
   const ProductMore = async (id) => {
-    setMoreLoading(true);
-    navigate("/product/more/" + id);
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_URL}/add/product/more/` + id
-    );
-    setMoreLoading(false);
-    setProductMore(data.data);
+    try {
+      setMoreLoading(true);
+      navigate("/product/more/" + id);
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_URL}/add/product/more/` + id
+      );
+      setMoreLoading(false);
+      setProductMore(data.data);
+    } catch (error) {
+      setErrorServer(true)
+    }
   };
-
-
 
   return (
     <div className="App" onCopy={(e) => e.preventDefault()}>
@@ -199,82 +231,88 @@ function App() {
         pauseOnHover
         theme="colored"
       />
-      <Navbar user={user} uzLanguage={uzLanguage} setUzLanguage={setUzLanguage} />
+      {ErrorServer || <Navbar user={user} uzLanguage={uzLanguage} setUzLanguage={setUzLanguage} />}
       <div className="mongo_big">
         <Routes>
           <Route
             path="/"
             element={
-              <Home
-                loading={loading}
-                setLoading={setLoading}
-                categories={categories}
-                setCategories={setCategories}
-                ProductMore={ProductMore}
-                getCategory={getCategory}
-                categoryBig={categoryBig}
-                setCategoryBig={setCategoryBig}
-              />
+              ErrorServer ? <Navigate to="/server-error" /> :
+                <Home
+                  setErrorServer={setErrorServer}
+                  loading={loading}
+                  setLoading={setLoading}
+                  categories={categories}
+                  setCategories={setCategories}
+                  ProductMore={ProductMore}
+                  getCategory={getCategory}
+                  categoryBig={categoryBig}
+                  setCategoryBig={setCategoryBig}
+                />
             }
           />
-          <Route path="/about" element={<About />} />
+          <Route path="/about" element={ErrorServer ? <Navigate to="/server-error" /> : <About />} />
           <Route
             path="/login"
             element={
-              user ? <Navigate to="/" /> : <Login user={user} setUser={setUser} />
+              ErrorServer ? <Navigate to="/server-error" /> : user ? <Navigate to="/" /> : <Login user={user} setUser={setUser} GetToken={GetToken} />
             }
           />
-          <Route path="*" element={<Navigate to="/" />} />
+          <Route path="*" element={ErrorServer ? <Navigate to="/server-error" /> : <Navigate to="/" />} />
           <Route
             path="/product/more/:id"
             element={
-              <ProductMorePage
-                user={user}
-                setProductMore={setProductMore}
-                productMore={productMore}
-              />
+              ErrorServer ? <Navigate to="/server-error" /> :
+                <ProductMorePage
+                  user={user}
+                  setProductMore={setProductMore}
+                  productMore={productMore}
+                />
             }
           />
           <Route
             path="/admin"
             element={
-              user ? (
-                <Admin
-                  Abouts={Abouts}
-                  ProductMore={ProductMore}
-                  getCategory={getCategory}
-                  user={user}
-                  categoryBig={categoryBig}
-                  setCategoryBig={setCategoryBig}
-                  categoryLoading={categoryLoading}
-                  setCategoryLoading={setCategoryLoading}
-                />
-              ) : (
-                <Navigate to={"/login"} />
-              )
+              ErrorServer ? <Navigate to="/server-error" /> :
+                user ? (
+                  <Admin
+                    GetToken={GetToken}
+                    Abouts={Abouts}
+                    ProductMore={ProductMore}
+                    getCategory={getCategory}
+                    user={user}
+                    categoryBig={categoryBig}
+                    setCategoryBig={setCategoryBig}
+                    categoryLoading={categoryLoading}
+                    setCategoryLoading={setCategoryLoading}
+                  />
+                ) : (
+                  <Navigate to={"/login"} />
+                )
             }
           />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/shop" element={<Shop loading={loading} categories={categories} />} />
+          <Route path="/contact" element={ErrorServer ? <Navigate to="/server-error" /> : <Contact />} />
+          <Route path="/shop" element={ErrorServer ? <Navigate to="/server-error" /> : <Shop loading={loading} categories={categories} />} />
           <Route
             path="/category/:id"
             element={
-              <Categories
-                moreLoading={moreLoading}
-                setMoreLoading={setMoreLoading}
-                setCategoryBig={setCategoryBig}
-                user={user}
-                categoryLoading={categoryLoading}
-                setCategoryLoading={setCategoryLoading}
-                categoryBig={categoryBig}
-                ProductMore={ProductMore}
-              />
+              ErrorServer ? <Navigate to="/server-error" /> :
+                <Categories
+                  moreLoading={moreLoading}
+                  setMoreLoading={setMoreLoading}
+                  setCategoryBig={setCategoryBig}
+                  user={user}
+                  categoryLoading={categoryLoading}
+                  setCategoryLoading={setCategoryLoading}
+                  categoryBig={categoryBig}
+                  ProductMore={ProductMore}
+                />
             }
           />
           <Route
             path="/admin/homePage"
             element={
-              user ? (
+              ErrorServer ? <Navigate to="/server-error" /> : user ? (
                 <AdminHome
                   categoryBig={categoryBig}
                   setCategoryBig={setCategoryBig}
@@ -291,10 +329,12 @@ function App() {
               ) : (
                 <Navigate to="/" />
               )
+
             }
           />
+          <Route path="/server-error" element={ErrorServer ? <ServerError /> : <Navigate to="/" />} />
         </Routes>
-        <Footer categories={categories} Abouts={Abouts} loading={loading} />
+        {ErrorServer || <Footer categories={categories} Abouts={Abouts} loading={loading} />}
       </div>
     </div>
   );

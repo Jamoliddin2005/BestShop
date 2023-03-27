@@ -13,10 +13,11 @@ function Home({
   setCategories,
   loading,
   setLoading,
+  setErrorServer,
 }) {
   return (
     <div className="about">
-      <Header />
+      <Header setErrorServer={setErrorServer} />
       <Section
         loading={loading}
         setLoading={setLoading}
@@ -26,7 +27,7 @@ function Home({
         categoryBig={categoryBig}
         setCategoryBig={setCategoryBig}
       />
-      <NewProducts ProductMore={ProductMore} />
+      <NewProducts ProductMore={ProductMore} setErrorServer={setErrorServer} />
     </div>
   );
 }

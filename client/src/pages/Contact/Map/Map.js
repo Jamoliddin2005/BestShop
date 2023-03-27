@@ -8,6 +8,7 @@ export default function Map() {
         width={"100%"}
         height={"500px"}
         frameBorder="0"
+        title={"Map"}
         style={{ border: 0 }}
         allowFullScreen=""
         aria-hidden="false"

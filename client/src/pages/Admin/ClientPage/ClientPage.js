@@ -1,7 +1,13 @@
 import React from "react";
 import classes from "./ClientPage.module.css";
 
-const ClientPage = ({ user }) => {
+const ClientPage = ({ user, GetToken }) => {
+
+  const Logout = () => {
+    window.sessionStorage.removeItem("token")
+    GetToken()
+  }
+
   return (
     <div className="container ">
       <div className={classes.adminPageRow}>
@@ -42,6 +48,7 @@ const ClientPage = ({ user }) => {
         <div className={classes.adminPagePanel}>
           <div className={classes.itemPanele}>
             <h4>Update account</h4>
+            <span className={classes.logout} onClick={() => Logout()}>Logout</span>
           </div>
         </div>
       </div>

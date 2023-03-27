@@ -9,7 +9,7 @@ import firebase from "../../firebase";
 import "./Login.css";
 import axios from "axios";
 
-const Login = ({ user, setUser }) => {
+const Login = ({ setUser, GetToken }) => {
   const [value, setValue] = useState("");
   const [code, setCode] = useState("");
   const [trueFalse, SetTrueFalse] = useState(false);
@@ -67,23 +67,10 @@ const Login = ({ user, setUser }) => {
             withCredentials: true,
           }
         );
-        if (data.data.phoneNumber === process.env.REACT_APP_ADMIN_PHONE_NUMBER) {
-          const user = {
-            googleId: data.data.googleId,
-            password: data.data.password,
-            phoneNumber: data.data.phoneNumber,
-            isAdmin: true,
-            avatar: "/uploads/user.png",
-          };
-          setUser(user);
-        } else {
-          const user = {
-            googleId: data.data.googleId,
-            password: data.data.password,
-            phoneNumber: data.data.phoneNumber,
-            avatar: "/uploads/user.png",
-          };
-          setUser(user);
+        if (data.data) {
+          window.sessionStorage.setItem("token", data.data);
+          GetToken();
+          return
         }
 
         return toast.success("Success");
@@ -106,9 +93,12 @@ const Login = ({ user, setUser }) => {
 
   const SubmitHandler = async (e) => {
     if (value.length > 10) {
-      const { data } = await axios.post(`${process.env.REACT_APP_URL}/auth/userFind`, {
-        phoneNumber: value,
-      });
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_URL}/auth/userFind`,
+        {
+          phoneNumber: value,
+        }
+      );
       if (data.data) {
         const phoneNumber = value;
         configureCaptcha();
@@ -132,7 +122,6 @@ const Login = ({ user, setUser }) => {
     }
   };
 
-
   const AccountPasswordSubmitHandler = async (req, res) => {
     const { data } = await axios.post(
       `${process.env.REACT_APP_URL}/auth/PostPasswordSubmit`,
@@ -142,17 +131,9 @@ const Login = ({ user, setUser }) => {
       }
     );
     if (data.success) {
-      if (!data.data.user.avatar) {
-        const userInfo = {
-          googleId: data.data.user.googleId,
-          password: data.data.user.password,
-          phoneNumber: data.data.user.phoneNumber,
-          firstName: data.data.user.phoneNumber,
-          avatar: "/uploads/user.png",
-        };
-        setUser(userInfo);
-        return toast.success("SUCCESS");
-      }
+      window.sessionStorage.setItem("token", data.data);
+      GetToken();
+      return
     } else {
       return toast.error("Password is Incorrect");
     }
@@ -208,7 +189,7 @@ const Login = ({ user, setUser }) => {
                         SetSwitcher(false);
                       }}
                     >
-                      🙈
+                      <span role="img" aria-label="monkey">🙈</span>
                     </div>
                   ) : (
                     <div
@@ -217,7 +198,7 @@ const Login = ({ user, setUser }) => {
                         SetSwitcher(true);
                       }}
                     >
-                      🐵
+                      <span role="img" aria-label="monkey">🐵</span>
                     </div>
                   )}
                 </div>
@@ -249,7 +230,7 @@ const Login = ({ user, setUser }) => {
                                 SetSwitcher(false);
                               }}
                             >
-                              🙈
+                              <span role="img" aria-label="monkey">🙈</span>
                             </div>
                           ) : (
                             <div
@@ -258,7 +239,7 @@ const Login = ({ user, setUser }) => {
                                 SetSwitcher(true);
                               }}
                             >
-                              🐵
+                              <span role="img" aria-label="monkey">🐵</span>
                             </div>
                           )}
                         </div>

@@ -11,7 +11,7 @@ function Section({
   setCategories,
   loading,
   setLoading,
-}) {
+}) { 
   return (
     <div className={classes.container}>
       <div className={classes.top}>

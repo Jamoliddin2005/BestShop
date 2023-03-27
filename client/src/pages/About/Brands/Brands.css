@@ -1,6 +1,7 @@
 .image {
   width: 70%;
 }
+
 .Brands {
   background-color: #e9eef5;
   padding: 130px 0 120px;
@@ -11,6 +12,7 @@
   margin: auto;
   text-align: center;
 }
+
 .Brands .text h2 {
   font-family: "Roboto", sans-serif;
   font-size: 48px;
@@ -33,6 +35,7 @@
   display: flex;
   align-items: center;
 }
+
 .Brands .swiper {
   height: 230px;
 }

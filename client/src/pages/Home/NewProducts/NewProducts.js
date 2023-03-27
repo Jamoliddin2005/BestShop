@@ -3,7 +3,7 @@ import Currency from "../../../components/Currency/Currency";
 import Loading from "../../../components/Loading/Loading";
 import NameLength from "../../../components/NameLength/NameLength";
 import classes from "./NewProducts.module.css";
-function NewProducts({ ProductMore }) {
+function NewProducts({ ProductMore, setErrorServer }) {
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([
     {
@@ -17,8 +17,12 @@ function NewProducts({ ProductMore }) {
   useEffect(() => {
     const productBase = async () => {
       setLoading(true);
-      const response = await fetch(`${process.env.REACT_APP_URL}/add/showProducts`);
-      setProducts(await response.json());
+      await fetch(`${process.env.REACT_APP_URL}/add/showProducts`).then(response => {
+        setProducts(response.json());
+        setErrorServer(false)
+      }).catch(err => {
+        setErrorServer(true)
+      });
       setLoading(false);
     };
 

@@ -80,7 +80,6 @@ function Truth({ truth,
                     .confirm(code1)
                     .then((result) => {
                         const user1 = result.user.phoneNumber;
-                        console.log(user1)
                         ProfileNumberUpdate(user1)
                     })
                     .catch((error) => {

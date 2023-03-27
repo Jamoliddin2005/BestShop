@@ -3,7 +3,7 @@ import "./Admin.css";
 import Administrator from "./Administrator/Administrator";
 import ClientPage from "./ClientPage/ClientPage";
 
-function Admin({ user, getCategory, ProductMore, Abouts }) {
+function Admin({ user, getCategory, ProductMore, Abouts, GetToken }) {
   const [loading, setLoading] = useState(false);
   const [contacts, setContacts] = useState([
     {
@@ -35,7 +35,7 @@ function Admin({ user, getCategory, ProductMore, Abouts }) {
           setContacts={setContacts}
         />
       ) : (
-        <ClientPage user={user} />
+        <ClientPage user={user} GetToken={GetToken} />
       )}
     </>
   );

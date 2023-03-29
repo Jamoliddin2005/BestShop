@@ -60,7 +60,6 @@ module.exports = async (passport) => {
           }
         } catch (error) {
           console.log(error);
-          req.session.authorization = false;
         }
       }
     )

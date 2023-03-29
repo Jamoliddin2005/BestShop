@@ -24,8 +24,8 @@
 .adminPage .adminTitle h1 {
   text-align: center;
   font-size: 40px;
-  color: #212934;
-  font-family: "Roboto", sans-serif;
+  color: var( --color-dark) ;
+  font-family: var(--font-family-roboto);
   font-weight: 300;
   transition: 0.3s;
 }
@@ -36,14 +36,14 @@
 
 .adminPage .adminTitle .headerCarousel h3 {
   font-size: 30px;
-  color: #212934;
-  font-family: "Roboto", sans-serif;
+  color: var( --color-dark) ;
+  font-family: var(--font-family-roboto);
   font-weight: 200;
   transition: 0.3s;
 }
 
 .adminPage .adminTitle .headerCarousel form label {
-  color: #212934;
+  color: var( --color-dark) ;
   display: block;
   margin: 5px 0;
 }
@@ -55,7 +55,7 @@
   border-radius: 5px;
   padding: 7px;
   display: block;
-  color: #212934;
+  color: var( --color-dark) ;
   outline: none;
 }
 
@@ -70,6 +70,6 @@
   border-radius: 5px;
   padding: 7px;
   display: block;
-  color: #212934;
+  color: var( --color-dark) ;
   outline: none;
 }

@@ -10,7 +10,7 @@
 }
 
 .h1 {
-  font-family: "Roboto", sans-serif;
+  font-family: var(--font-family-roboto);
   font-size: 48px;
   font-weight: 200;
   text-align: center;
@@ -33,21 +33,21 @@
 .h3 {
   margin: 1rem 0;
   cursor: pointer;
-  font-family: "Roboto", sans-serif;
+  font-family: var(--font-family-roboto);
   font-size: 18px;
   font-weight: 400;
 }
 
 .btn {
-  background-color: #59ab6e;
-  border-color: #56ae6c;
+  background-color: var(--color-green) ;
+  border-color: var(--color-green-border);
   line-height: 1.5;
   border-radius: 0.25rem;
   cursor: pointer;
   padding: 0.7rem 2rem;
   border: 1px solid transparent;
   text-transform: uppercase;
-  color: #fff;
+  color: var(--color-snow);
 }
 
 .images {

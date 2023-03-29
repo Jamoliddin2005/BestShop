@@ -5,8 +5,8 @@
 .title {
     text-align: left !important;
     font-size: 30px;
-    color: #212934;
-    font-family: "Roboto", sans-serif;
+    color: var( --color-dark) ;
+    font-family: var(--font-family-roboto);
     font-weight: 200;
     transition: 0.3s;
 }

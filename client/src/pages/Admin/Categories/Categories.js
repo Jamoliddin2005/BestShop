@@ -33,7 +33,12 @@ const Categories = ({ getCategory,
                 setName_ru("")
                 const { data } = await axios.post(
                     `${process.env.REACT_APP_URL}/add/addCategory`,
-                    dataCategory
+                    dataCategory,
+                    {
+                        headers: {
+                            "Authorization": sessionStorage.getItem("token")
+                        }
+                    }
                 );
                 // 
                 setContacts(data.data)
@@ -51,7 +56,11 @@ const Categories = ({ getCategory,
         const res = window.confirm("Bu Categoriya o'chirib tashlansinmi?")
         if (res) {
             toast.success("Categoriya o'chirib tashlandi")
-            const { data } = await axios.delete(`${process.env.REACT_APP_URL}/delete/Categories/delete/` + id)
+            const { data } = await axios.delete(`${process.env.REACT_APP_URL}/delete/Categories/delete/` + id, {
+                headers: {
+                    "Authorization": sessionStorage.getItem("token")
+                }
+            })
             setContacts(data.data);
         }
     }
@@ -68,7 +77,7 @@ const Categories = ({ getCategory,
                     {contacts.length
                         ? loading ? <Loading />
                             : contacts.map((item, index) => (
-                                <Category getCategory={getCategory} deleteCategory={deleteCategory} id={item._id} key={index} name_uz={item.name_uz} name_ru={item.name_ru} photo={item.photo} />
+                                item.photo && <Category getCategory={getCategory} deleteCategory={deleteCategory} id={item._id} key={index} name_uz={item.name_uz} name_ru={item.name_ru} photo={item.photo} />
                             ))
                         : <h2>Categoriyalar yo'q</h2>}
 

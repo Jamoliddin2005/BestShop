@@ -23,7 +23,6 @@ function HomeCarousel({ user }) {
     e.preventDefault();
     if (photo && contacts) {
       try {
-        toast.success("Product Added!");
         e.preventDefault();
         const dataCreate = new FormData();
         const fileInput = document.querySelector(".photoinp");
@@ -32,9 +31,14 @@ function HomeCarousel({ user }) {
         dataCreate.append("link", link);
         const { data } = await axios.post(
           `${process.env.REACT_APP_URL}/add/addCarouselHome`,
-          dataCreate
+          dataCreate, {
+          headers: {
+            "Authorization": sessionStorage.getItem("token")
+          }
+        }
         );
         setContacts(data.data);
+        return toast.success("Banner added!")
       } catch (error) {
         return toast.error("ERROR!!!")
       }
@@ -58,7 +62,11 @@ function HomeCarousel({ user }) {
     if (response) {
       toast.success("Product Deleted!");
       const { data } = await axios.delete(
-        `${process.env.REACT_APP_URL}/delete/headerCarousel/delete/` + id
+        `${process.env.REACT_APP_URL}/delete/headerCarousel/delete/` + id, {
+        headers: {
+          "Authorization": sessionStorage.getItem("token")
+        }
+      }
       );
       setContacts(data.data);
     }
@@ -71,7 +79,7 @@ function HomeCarousel({ user }) {
           <h3>Home Header Carousel</h3>
           <AddCar
             link={link}
-            setLink={setLink}z
+            setLink={setLink} z
             setPhoto={setPhoto}
             handleSubmit={handleSubmit}
             loading={loading}

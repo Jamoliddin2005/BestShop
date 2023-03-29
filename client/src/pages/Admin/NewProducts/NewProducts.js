@@ -52,6 +52,7 @@ const NewProducts = ({
     e.preventDefault();
     const ProductPhoto = document.getElementById("ProductPhoto");
     ProductPhoto.value = "";
+
     try {
       e.preventDefault();
       if (name_uz && name_ru && price && desc_uz && desc_ru && photo && categoryId) {
@@ -65,15 +66,11 @@ const NewProducts = ({
         setLoading("");
         setProducts("");
         const { data } = await axios.post(
-          `${process.env.REACT_APP_URL}/add/addProduct`, {
-          credentials: "include",
+          `${process.env.REACT_APP_URL}/add/addProduct`, ProductForm, {
           headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Credentials": true,
-          },
-        },
-          ProductForm
+            "Authorization": sessionStorage.getItem("token")
+          }
+        }
         );
         setProducts(data.data);
         toast.success("Product qo'shildi");
@@ -101,7 +98,11 @@ const NewProducts = ({
     if (res) {
       toast.success("Mahsulot o'chirildi!");
       const { data } = await axios.delete(
-        `${process.env.REACT_APP_URL}/delete/products/delete/` + id
+        `${process.env.REACT_APP_URL}/delete/products/delete/` + id, {
+        headers: {
+          "Authorization": sessionStorage.getItem("token")
+        }
+      }
       );
       setProducts(data.data);
     }
@@ -139,7 +140,7 @@ const NewProducts = ({
             <Loading />
           ) : (
             products.map((item, index) => (
-              <Products
+              item.photo && <Products
                 key={index}
                 id={item._id}
                 name_uz={item.name_uz}

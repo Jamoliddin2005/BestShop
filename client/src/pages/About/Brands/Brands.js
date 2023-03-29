@@ -50,6 +50,7 @@ function Brands() {
           className="mySwiper"
         >
           {brands.map((item, index) => (
+            item.img &&
             <SwiperSlide key={index}>
               <img src={item.img} className={"image"} alt="" />
             </SwiperSlide>

@@ -4,7 +4,7 @@ import axios from "axios";
 import "./Footer.css";
 import { toast } from "react-toastify";
 import Loading from "../Loading/Loading";
-import translate from "../translate/translate"
+import translate from "../translate/translate";
 
 const Pages = [
   {
@@ -24,7 +24,6 @@ const Pages = [
   },
 ];
 
-
 export default function Footer({ categories, Abouts, loading }) {
   const [input, setInput] = useState("");
 
@@ -32,7 +31,7 @@ export default function Footer({ categories, Abouts, loading }) {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    let message = `<b>#BestShop</b>\n\n`;
+    let message = `<b>#Mongo.uz</b>\n\n`;
     message += `<b>Email: </b> ${input}\n`;
     message += `<b>Time: </b> ${new Date().toLocaleString()}`;
 
@@ -46,7 +45,7 @@ export default function Footer({ categories, Abouts, loading }) {
         setInput("");
       })
       .catch((err) => {
-        return toast.error("ERROR!!!")
+        return toast.error("ERROR!!!");
       })
       .finally(() => {
         return toast.success("Success!");
@@ -60,9 +59,10 @@ export default function Footer({ categories, Abouts, loading }) {
           <div className="row">
             <ul>
               <Link to="/" className="Home_Logo">
-                <img src="/greenlogo.png" alt="" />
+                <span>Mongo.uz</span>
               </Link>
               {Abouts.map((item, index) => (
+                item.icon &&
                 <li key={index}>
                   <a
                     href={item.hrefs}
@@ -81,8 +81,11 @@ export default function Footer({ categories, Abouts, loading }) {
                 <Loading />
               ) : (
                 categories.map((item, index) => (
+                  item.photo &&
                   <li key={index}>
-                    <Link to={`/category/${item._id}`}>{translate(item.name_ru, item.name_uz)}</Link>
+                    <Link to={`/category/${item._id}`}>
+                      {translate(item.name_ru, item.name_uz)}
+                    </Link>
                   </li>
                 ))
               )}
@@ -90,7 +93,7 @@ export default function Footer({ categories, Abouts, loading }) {
             <ul>
               <h3>{translate("Страницы", "Sahifalar")}</h3>
               {Pages.map((item, index) => (
-                <li key={index}>
+                item.name && <li key={index}>
                   <Link to={index}>{item.name}</Link>
                 </li>
               ))}
@@ -139,13 +142,18 @@ export default function Footer({ categories, Abouts, loading }) {
               <form action="/auth" onSubmit={submitHandler}>
                 <input
                   type="email"
-                  placeholder={translate("Введите Email", "Emailingizni kiriting")}
+                  placeholder={translate(
+                    "Введите Email",
+                    "Emailingizni kiriting"
+                  )}
                   onChange={(e) => setInput(e.target.value)}
                   value={input}
                   autoComplete="off"
                   required={true}
                 />
-                <button type="submit">{translate("Отправить", "Yuborish")}</button>
+                <button type="submit">
+                  {translate("Отправить", "Yuborish")}
+                </button>
               </form>
             </div>
           </div>

@@ -20,9 +20,9 @@
 .product {
   width: 320px;
   cursor: pointer;
-  height: 450px;
+  height: 377px;
   background-color: white;
-  border: 1px solid #e9eef5;
+  border: 1px solid var(--color-violet);
   border-radius: 5px;
 }
 
@@ -34,7 +34,7 @@
   justify-content: center;
   overflow: hidden;
   padding: 20px;
-  border: 1px solid #e9eef5;
+  border: 1px solid var(--color-blue);
   border-radius: 5px;
   height: 270px;
 }
@@ -43,7 +43,6 @@
   width: 90%;
   height: 100%;
   object-fit: contain;
-  filter: drop-shadow(5px 8px 7px grey);
 }
 
 .texts {
@@ -51,28 +50,27 @@
 }
 
 .price_name {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   margin-bottom: 15px;
 }
 
 .name {
-  font-family: "Roboto", sans-serif;
-  font-size: 30px;
+  font-family: var(--font-family-roboto);
+  font-size: 17px;
   font-weight: 300;
   color: #212529;
+  margin-bottom: 13px;
 }
 
 .price {
-  color: #bcbcbc;
-  font-family: "Roboto", sans-serif;
+  color: var(--color-violet);
+  font-family: var(--font-family-roboto);
   font-size: 18px;
   font-weight: 300;
+  margin-bottom: 15px;
 }
 
 .desc {
-  font-family: "Roboto", sans-serif;
+  font-family: var(--font-family-roboto);
   font-size: 18px;
   font-weight: 300;
   max-height: 85px;

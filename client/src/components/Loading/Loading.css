@@ -17,7 +17,7 @@
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: #59ab6e;
+  background: var(--color-green);
   animation: ldio-0n453coy2pyp 1s linear infinite;
 }
 

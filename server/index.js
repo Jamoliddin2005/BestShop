@@ -33,11 +33,11 @@ app.use(
 const Auth = require("./routes/auth");
 const AddRoutes = require("./routes/Add");
 const HeaderCarouselDelete = require("./routes/Delete");
-const auth = require("./middleware/auth");
+const isAdmin = require("./middleware/isAdmin");
 
 app.use("/auth", Auth);
 app.use("/add", AddRoutes);
-app.use("/delete", auth, HeaderCarouselDelete);
+app.use("/delete", isAdmin, HeaderCarouselDelete);
 
 app.get("/isAdmin", async (req, res) => {
   return res.status(200).json({ data: req.session });

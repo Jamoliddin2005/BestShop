@@ -1,3 +1,19 @@
+.adminPage {
+  position: relative;
+}
+
+.admin_LogOut {
+  position: absolute;
+  top: 100px;
+  right: 100px;
+  cursor: pointer;
+  color: red;
+}
+
+.admin_LogOut h4 {
+  font-weight: 900;
+}
+
 .p_admin_pages {
   display: flex;
   align-items: center;
@@ -5,12 +21,12 @@
 
 .p_admin_pages a {
   font-size: 15px;
-  color: #212934;
-  font-family: "Roboto", sans-serif;
+  color: var( --color-dark) ;
+  font-family: var(--font-family-roboto);
   font-weight: 300;
   transition: .300s;
 }
 
 .p_admin_pages a:hover {
-  color: #59ab6e;
+  color: var(--color-green) ;
 }

@@ -6,10 +6,12 @@ const {
   loginSuccess,
   loginFailed,
   Google,
+  logout,
   GoogleCallBack,
 } = require("../controllers/auth.google");
 router.route("/login/success").get(loginSuccess);
 router.route("/login/failed").get(loginFailed);
+router.route("/login/logout").get(logout);
 router.route("/google").get(Google);
 router.route("/google/callback").get(GoogleCallBack);
 
@@ -27,9 +29,9 @@ router.get(
 
 // Phone Number Authenticated
 const { NumberAuth, usersGet, userFind, PostPasswordSubmit } = require('../controllers/auth.phone');
-const auth = require("../middleware/auth");
+const isAdmin = require("../middleware/isAdmin");
 
-router.get("/users", auth, usersGet)
+router.get("/users", isAdmin, usersGet)
 router.get('/find', require('../controllers/authToken'))
 router.post("/userFind", userFind)
 router.post("/PostPasswordSubmit", PostPasswordSubmit)

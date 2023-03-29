@@ -1,5 +1,5 @@
-.section{
-    padding: 80px 0 100px;
+.section {
+  padding: 80px 0 100px;
 }
 
 .services {
@@ -10,7 +10,7 @@
 }
 
 .services h2 {
-  font-family: "Roboto", sans-serif;
+  font-family: var(--font-family-roboto);
   font-size: 48px;
   font-weight: 200;
   color: #212529;
@@ -18,7 +18,7 @@
 }
 
 .services p {
-  font-family: "Roboto", sans-serif;
+  font-family: var(--font-family-roboto);
   font-size: 18px;
   font-weight: 300;
   margin-bottom: 1rem;
@@ -45,25 +45,25 @@
 
 .carts .cart:hover {
   background: #69bb7e;
-  color: #fff;
+  color: var(--color-snow);
 }
 
 .carts .cart i {
   font-size: 3.33333em;
   line-height: 0.75em;
   vertical-align: -0.0667em;
-  color: #59ab6e;
+  color: var(--color-green);
   margin-bottom: 20px;
   transition: 0.3s;
 }
 
 .carts .cart:hover i,
 .carts .cart:hover h3 {
-  color: #fff;
+  color: var(--color-snow);
 }
 
 .carts .cart h3 {
-  font-family: "Roboto", sans-serif;
+  font-family: var(--font-family-roboto);
   margin-bottom: 0;
   font-weight: 500;
   line-height: 1.2;

@@ -35,14 +35,14 @@
 
 
 .button {
-    background-color: #59ab6e;
-    border-color: #56ae6c;
+    background-color: var(--color-green) ;
+    border-color: var(--color-green-border);
     line-height: 1.5;
     border-radius: 0.25rem;
     cursor: pointer;
     padding: 0.7rem 2rem;
     border: 1px solid transparent;
     text-transform: uppercase;
-    color: #fff;
+    color: var(--color-snow);
     margin: 0 5px;
 }

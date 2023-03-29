@@ -59,7 +59,7 @@ const ProductMore = ({ productMore, setProductMore, user }) => {
               <div className={classes.left}>
                 <div className={classes.Left_left}>
                   {productMore.photo ? productMore.photo.map((item, index) => (
-                    <div className={classes.images_nth} key={index} onClick={(e) => {
+                    item && <div className={classes.images_nth} key={index} onClick={(e) => {
                       setImageActive(item)
                       window.scroll(0, 0);
                     }}>
@@ -71,11 +71,11 @@ const ProductMore = ({ productMore, setProductMore, user }) => {
                 <div className={classes.Left_Right}>
                   <TransformWrapper>
                     <TransformComponent>
-                      {activeImage !== null ? <img
+                      {activeImage !== null ? activeImage && <img
                         src={"/uploads/" + activeImage}
                         alt=""
                         className={classes.img}
-                      /> : <img
+                      /> : productMore.photo[0] && <img
                         src={"/uploads/" + productMore.photo[0]}
                         alt=""
                         className={classes.img}

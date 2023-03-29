@@ -1,13 +1,13 @@
 .Navbar_big {
   position: fixed;
   top: 9;
-  background: #fff;
+  background: var(--color-snow);
   z-index: 100;
   width: 100%;
 }
 
 .navbar_top {
-  background: #212934;
+  background: var(--color-dark);
   padding: 10px 0;
 }
 
@@ -26,7 +26,7 @@
 }
 
 .navbar_top ul li a {
-  color: #cfd6e1;
+  color: var(--color-white);
   font-size: 0.9em;
   transition: 0.3s;
 }
@@ -70,9 +70,9 @@
 .navbar_top ul .language span {
   width: 100%;
   cursor: pointer;
-  font-family: "Roboto", sans-serif;
+  font-family: var(--font-family-roboto);
   font-size: 17px;
-  color: #fff;
+  color: var(--color-snow);
   font-weight: 300;
   background-color: #494f54;
   text-align: center;
@@ -118,7 +118,7 @@ nav .navbar_left {
 
 nav .navbar_left span {
   font-family: 'Bitter', serif;
-  color: #862ac1;
+  color: var(--color-violet);
   font-size: 30px;
   font-weight: 500;
 }
@@ -153,9 +153,9 @@ nav .navbar_center.navbar_user_center {
   border-radius: 24px;
   font-size: 16px;
   border: 2px solid #9b38dc;
-  outline: #fff;
+  outline: var(--color-snow);
   padding-left: 20px;
-  font-family: "Roboto", sans-serif;
+  font-family: var(--font-family-roboto);
   font-weight: 400;
 }
 
@@ -170,7 +170,7 @@ nav .navbar_center.navbar_user_center {
   top: 5px;
   padding: 10px;
   fill: white;
-  background-color: #862ac1;
+  background-color: var(--color-violet);
   border: none;
   border-radius: 50%;
 }
@@ -183,8 +183,8 @@ nav .navbar_center li {
 }
 
 nav .navbar_center li a {
-  color: #212934;
-  font-family: "Roboto", sans-serif;
+  color: var( --color-dark) ;
+  font-family: var(--font-family-roboto);
   font-size: 18px;
   font-weight: 300;
   transition: 0.3s;
@@ -206,7 +206,7 @@ nav .navbar_right li {
 nav .navbar_right li .userIcon {
   display: flex;
   align-items: center;
-  color: #212934;
+  color: var(--color-dark);
   font-size: 18px;
   cursor: pointer;
 }
@@ -224,7 +224,7 @@ nav .navbar_right li .userIcon .downIcon i {
 }
 
 nav .navbar_right li a {
-  color: #212934;
+  color: var(--color-dark);
   font-size: 18px;
 }
 
@@ -232,7 +232,7 @@ nav .navbar_right li span {
   position: absolute;
   top: -7px;
   right: -12px;
-  color: #862ac1;
+  color: var(--color-violet);
   font-size: 0.75em;
   display: flex;
   align-items: center;
@@ -246,7 +246,7 @@ nav .navbar_right li p {
   color: #494f54;
   font-size: 17px;
   font-weight: 400;
-  font-family: "Roboto", sans-serif;
+  font-family: var(--font-family-roboto);
 }
 
 nav .navbar_right li .register {
@@ -268,14 +268,14 @@ nav .navbar_right li .register_clicked {
 nav .navbar_right li .register_clicked a {
   padding: 10px 20px;
   transition: 0.2s;
-  color: #212934;
-  font-family: "Roboto", sans-serif;
+  color: var(--color-dark);
+  font-family: var(--font-family-roboto);
   font-size: 18px;
   font-weight: 300;
 }
 
 nav .navbar_right li .register_clicked a:hover {
-  background-color: #59ab6e;
+  background-color: var(--color-green);
   color: white;
 }
 
@@ -286,8 +286,8 @@ nav .navbar_right .registerClick {
 nav .navbar_right a {
   display: flex;
   align-items: center;
-  color: #212934;
-  font-family: "Roboto", sans-serif;
+  color: var(--color-dark);
+  font-family: var(--font-family-roboto);
   font-size: 18px;
   font-weight: 300;
   transition: 0.3s;
@@ -295,7 +295,7 @@ nav .navbar_right a {
 
 nav .navbar_right a:hover,
 nav .AdminIcon_logout span:hover {
-  color: #59ab6e;
+  color: var(--color-green);
 }
 
 nav .navbar_right img {
@@ -319,11 +319,11 @@ nav .dropdownAdmin {
   cursor: pointer;
   display: flex;
   margin-left: 10px;
-  color: #212934;
+  color: var(--color-dark);
 }
 
 nav .AdminIcon_logout {
-  font-family: "Roboto", sans-serif;
+  font-family: var(--font-family-roboto);
   position: absolute;
   top: 30px;
   right: -60px;
@@ -336,7 +336,7 @@ nav .AdminIcon_logout {
 }
 
 nav .AdminIcon_logout a {
-  border-bottom: 1px solid #59ab6e;
+  border-bottom: 1px solid var(--color-green);
   padding: 6px 10px;
   cursor: pointer;
   display: flex;
@@ -355,7 +355,7 @@ nav .AdminIcon_logout span i {
 }
 
 nav .AdminIcon_logout span {
-  color: #212934;
+  color: var(--color-dark);
   font-size: 18px;
   font-weight: 300;
   transition: 0.3s;
@@ -380,7 +380,7 @@ nav ul.AdminRight .User {
 }
 
 .border_left {
-  border-left: 1px solid #212934;
+  border-left: 1px solid var(--color-dark);
   border-radius: 5px;
 }
 
@@ -395,9 +395,9 @@ nav ul.AdminRight .User {
   outline: none;
   padding: 9px 5px 9px 12px;
   width: 300px;
-  border: 1px solid #212934;
+  border: 1px solid var(--color-dark);
   border-radius: 5px;
-  color: #59ab6e;
+  color: var(--color-green);
   font-weight: 700;
   position: relative;
   z-index: 500;
@@ -437,8 +437,8 @@ nav ul.AdminRight .User {
 }
 
 .navbar_right .dataResult .Search_span .currency {
-  color: #212934;
-  font-family: "Roboto", sans-serif;
+  color: var(--color-dark);
+  font-family: var(--font-family-roboto);
   font-size: 15px;
 }
 

@@ -27,7 +27,7 @@
 
 .swiper-button-prev::after,
 .swiper-button-next::after {
-  color: #59ab6e;
+  color: var(--color-green) ;
   font-weight: 900;
 }
 
@@ -73,30 +73,30 @@
 }
 
 .carousel .row .left h1 {
-  color: #59ab6e;
-  font-family: "Roboto", sans-serif;
+  color: var(--color-green) ;
+  font-family: var(--font-family-roboto);
   font-size: 48px;
   font-weight: 200 !important;
   margin-bottom: 0.5rem;
 }
 
 .carousel .row .left h3 {
-  font-family: "Roboto", sans-serif;
+  font-family: var(--font-family-roboto);
   font-size: 30px;
   font-weight: 300;
   margin-bottom: 0.5rem;
 }
 
 .carousel .row .left p {
-  font-family: "Roboto", sans-serif;
+  font-family: var(--font-family-roboto);
   font-size: 18px;
   font-weight: 300;
   margin-bottom: 20px;
 }
 
 .carousel .row .left button {
-  background: #59ab6e;
-  border: 1px solid #212934;
+  background: var(--color-green) ;
+  border: 1px solid var( --color-dark) ;
   padding: 13px 35px;
   cursor: pointer;
   color: #efefef;
@@ -110,10 +110,10 @@
 }
 
 .carousel .row .left a {
-  background: #59ab6e;
-  border: 1px solid #212934;
+  background: var(--color-green) ;
+  border: 1px solid var( --color-dark) ;
   padding: 13px 35px;
   cursor: pointer;
-  color: #ffffff;
+  color: var(--color-snow);
   font-weight: 600;
 }

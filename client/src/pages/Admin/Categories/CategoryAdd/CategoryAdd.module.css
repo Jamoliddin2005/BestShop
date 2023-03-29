@@ -16,7 +16,7 @@
     padding: 7px 0;
     cursor: pointer;
     font-weight: 300;
-    color: #212934;
+    color: var( --color-dark) ;
 }
 
 .input {
@@ -25,7 +25,7 @@
     border-radius: 5px;
     padding: 7px;
     display: block;
-    color: #212934;
+    color: var( --color-dark) ;
     outline: none;
 }
 

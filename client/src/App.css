@@ -21,17 +21,30 @@
 }
 
 
+:root {
+  --color-violet: #862ac1;
+  --color-green: #59ab6e;
+  --color-dark: #212934;
+  --color-white: #cfd6e1;
+  --color-blue: #e9eef5;
+  --color-snow: #fff;
+  --color-green-footer: #68bb7d;
+  --color-grey: #2d343f;
+  --color-green-border: #56ae6c;
+  --font-family-roboto: "Roboto", sans-serif;
+}
+
 .mongo_big {
   padding-top: 120px;
 }
 
 ::-webkit-scrollbar {
   width: 5px;
-  background-color: #59ab6e;
+  background-color: var(--color-green);
   border-radius: 20px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #212934;
+  background-color: var(--color-dark);
   border-radius: 10px;
 }

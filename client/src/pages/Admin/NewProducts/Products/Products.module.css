@@ -1,9 +1,9 @@
 .Products {
   width: 30%;
-  height: 480px;
+  height: 430px;
   border-radius: 5px;
-  border: 1px solid #e9eef5;
-  background-color: #ffffff;
+  border: 1px solid var(--color-blue);
+  background-color: var(--color-snow);
   cursor: pointer;
   position: relative;
 }
@@ -26,28 +26,26 @@
 }
 
 .name_price {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   margin-bottom: 15px;
 }
 
 .h3 {
-  font-family: "Roboto", sans-serif;
-  font-size: 30px;
+  font-family: var(--font-family-roboto);
+  font-size: 17px;
   font-weight: 300;
   color: #212529;
+  margin-bottom: 15px;
 }
 
 .price {
-  color: #bcbcbc;
-  font-family: "Roboto", sans-serif;
+  color: var(--color-violet);
+  font-family: var(--font-family-roboto);
   font-size: 18px;
   font-weight: 300;
 }
 
 .desc {
-  font-family: "Roboto", sans-serif;
+  font-family: var(--font-family-roboto);
   font-size: 18px;
   font-weight: 300;
   overflow: auto;
@@ -55,15 +53,15 @@
 }
 
 .btn {
-  background-color: #59ab6e;
-  border-color: #56ae6c;
+  background-color: var(--color-green);
+  border-color: var(--color-green-border);
   line-height: 0.8;
   border-radius: 0.25rem;
   cursor: pointer;
   padding: 0.7rem 1.2rem;
   border: 1px solid transparent;
   text-transform: uppercase;
-  color: #fff;
+  color: var(--color-snow);
   position: absolute;
   top: 0;
   left: 0;

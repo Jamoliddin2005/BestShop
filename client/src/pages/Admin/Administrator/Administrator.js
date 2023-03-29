@@ -3,17 +3,7 @@ import { Link } from "react-router-dom";
 // import classes from "./Administrator.module.css";
 
 const Administrator = ({
-  categoryBig,
-  setCategoryBig,
-  categoryLoading,
-  setCategoryLoading,
-  getCategory,
-  ProductMore,
   user,
-  loading,
-  contacts,
-  setLoading,
-  setContacts,
 }) => {
   return (
     <div>
@@ -39,6 +29,18 @@ const Administrator = ({
               <Link to={"/admin/homePage"}>Contact</Link>
             </li>
           </ul>
+        </div>
+        <div
+          className="admin_LogOut"
+          onClick={() => {
+            window.sessionStorage.removeItem("token");
+            window.open(
+              `${process.env.REACT_APP_URL}/auth/login/logout`,
+              "_self"
+            );
+          }}
+        >
+          <h4>LogOut</h4>
         </div>
       </div>
     </div>

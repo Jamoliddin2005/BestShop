@@ -6,7 +6,7 @@ const Category = ({ name_uz,
     return (
         <div className={classes.category}>
             <div className={classes.imageDiv} onClick={() => getCategory(id)}>
-                <img className={classes.image} src={`/uploads/${photo}`} alt="" />
+                {photo && <img className={classes.image} src={`/uploads/${photo}`} alt="" />}
             </div>
             <h4 className={classes.name} onClick={() => getCategory(id)}>{translate(name_ru, name_uz)}</h4>
             <button className={classes.button} onClick={() => getCategory(id)}>GO SHOP</button>

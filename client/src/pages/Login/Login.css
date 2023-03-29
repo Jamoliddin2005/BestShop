@@ -139,8 +139,8 @@
 }
 
 .createAccount {
-  color: #212934;
-  font-family: "Roboto", sans-serif;
+  color: var( --color-dark) ;
+  font-family: var(--font-family-roboto);
   font-size: 15px;
   font-weight: 300;
   transition: 0.3s;

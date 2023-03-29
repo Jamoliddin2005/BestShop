@@ -11,7 +11,7 @@ function Section({
   setCategories,
   loading,
   setLoading,
-}) { 
+}) {
   return (
     <div className={classes.container}>
       <div className={classes.top}>
@@ -23,7 +23,7 @@ function Section({
             <Loading />
           ) : (
             categories.map((item, index) => (
-              <div className={classes.item} key={index}>
+              item.photo && <div className={classes.item} key={index}>
                 <div
                   className={classes.images}
                   onClick={() => getCategory(item._id)}

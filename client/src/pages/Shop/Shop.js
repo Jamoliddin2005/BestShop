@@ -62,7 +62,7 @@ function Shop({ categories, loading }) {
                                 <>
                                     <h4>Categories</h4>
                                     {categories.map((item, index) => (
-                                        <li key={index}>
+                                        item._id && <li key={index}>
                                             <Link to={`/category/${item._id}`}>{item.name}</Link>
                                         </li>
                                     ))}
@@ -73,7 +73,7 @@ function Shop({ categories, loading }) {
                         <ul>
                             <h4>Seasons</h4>
                             {seasons.map((item, index) => (
-                                <li key={index} className={item.isActive ? classes.SeasonsActive : classes.noActive}>
+                                item.name && <li key={index} className={item.isActive ? classes.SeasonsActive : classes.noActive}>
                                     <Link to={"#"} onClick={(e) => {
                                         e.preventDefault()
                                     }}>{item.name}</Link>

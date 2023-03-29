@@ -1,5 +1,5 @@
 .Contact_Top {
-  background-color: #e9eef5;
+  background-color: var(--color-blue);
   padding-top: 60px;
 }
 
@@ -10,7 +10,7 @@
 }
 
 .Contact_Top .texts h2 {
-  font-family: "Roboto", sans-serif;
+  font-family: var(--font-family-roboto);
   font-size: 48px;
   font-weight: 200;
   margin-bottom: 0.5rem;
@@ -18,7 +18,7 @@
   color: #212529;
 }
 .Contact_Top .texts p {
-  font-family: "Roboto", sans-serif;
+  font-family: var(--font-family-roboto);
   font-size: 18px;
   font-weight: 300;
   margin-bottom: 70px;

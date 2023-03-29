@@ -29,6 +29,7 @@ function SwiperHead({ contacts, deleteCarousel, loading }) {
               <Loading />
             ) : (
               contacts.map((item, index) => (
+                item.post &&
                 <SwiperSlide key={index}>
                   <div className="row">
                     <a href={item.link} target={"_blank"} rel="noreferrer">

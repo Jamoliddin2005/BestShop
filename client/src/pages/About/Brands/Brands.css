@@ -3,7 +3,7 @@
 }
 
 .Brands {
-  background-color: #e9eef5;
+  background-color: var(--color-blue);
   padding: 130px 0 120px;
 }
 
@@ -14,7 +14,7 @@
 }
 
 .Brands .text h2 {
-  font-family: "Roboto", sans-serif;
+  font-family: var(--font-family-roboto);
   font-size: 48px;
   font-weight: 200;
   margin-bottom: 0.5rem;
@@ -23,7 +23,7 @@
 }
 
 .Brands .text p {
-  font-family: "Roboto", sans-serif;
+  font-family: var(--font-family-roboto);
   font-size: 18px;
   font-weight: 300;
   margin-bottom: 1rem;

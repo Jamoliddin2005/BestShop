@@ -5,17 +5,17 @@
 
 .title {
     font-size: 40px;
-    color: #212934;
-    font-family: "Roboto", sans-serif;
+    color: var(--color-dark);
+    font-family: var(--font-family-roboto);
     font-weight: 300;
     transition: 0.3s;
     text-align: left !important;
 }
 
 .textLoading {
-    color: #212934;
+    color: var(--color-dark);
     font-weight: 300;
-    font-family: "Roboto", sans-serif;
+    font-family: var(--font-family-roboto);
     margin-top: 5px;
 }
 
@@ -31,21 +31,21 @@
     border-radius: 5px;
     padding: 7px;
     display: block;
-    color: #212934;
+    color: var(--color-dark);
     outline: none;
     border: 1px solid #adadad;
 }
 
 .btn {
-    background-color: #59ab6e;
-    border-color: #56ae6c;
+    background-color: var(--color-green);
+    border-color: var(--color-green-border);
     line-height: 1.5;
     border-radius: 0.25rem;
     cursor: pointer;
     padding: 0.7rem 2rem;
     border: 1px solid transparent;
     text-transform: uppercase;
-    color: #fff !important;
+    color: var(--color-snow) !important;
     margin: 15px 0;
 }
 

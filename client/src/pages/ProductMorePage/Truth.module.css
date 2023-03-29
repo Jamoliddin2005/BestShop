@@ -8,7 +8,7 @@
   border: 1px solid rgb(212, 212, 212);
   border-radius: 10px;
   padding: 20px 30px;
-  background-color: #fff;
+  background-color: var(--color-snow);
   z-index: 7;
   width: 450px;
 }
@@ -20,19 +20,21 @@
   font-weight: 500;
   color: rgb(0, 0, 0);
 }
+
 .Truth .AboutProduct h3,
 .Truth .AboutProduct h4,
 .Truth .AboutProduct p {
   font-family: "Lora", serif;
   font-size: 16px;
   font-weight: 400;
-  color: #212934;
+  color: var(--color-dark);
 }
 
 .Truth .buttons {
   padding-top: 20px;
   text-align: center;
 }
+
 .Truth .buttons span {
   display: block;
   font-size: 22px;
@@ -59,9 +61,11 @@
   margin-right: 10px;
   background-color: rgb(66, 201, 8);
 }
+
 .Truth .buttons button.yes:hover {
   background-color: rgb(132, 255, 79);
 }
+
 .Truth .buttons button:hover {
   color: black;
   background-color: rgb(255, 98, 58);
@@ -87,7 +91,7 @@
   border-radius: 5px;
   padding: 7px;
   display: block;
-  color: #212934;
+  color: var(--color-dark);
   outline: none;
   border: 1px solid black;
 }

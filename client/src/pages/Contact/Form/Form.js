@@ -14,7 +14,7 @@ export default function Form() {
     if (name && email && subject && message) {
       const URI_API = `https://api.telegram.org/bot${process.env.REACT_APP_TOKEN}/sendMessage`;
 
-      let messageTelegram = `<b>#BestShop</b>\n\n`;
+      let messageTelegram = `<b>#Mongo.uz</b>\n\n`;
       messageTelegram += `<b>Contact Us </b>\n`;
       messageTelegram += `<b>Name: </b> ${name}\n`;
       messageTelegram += `<b>Email: </b> ${email}\n`;

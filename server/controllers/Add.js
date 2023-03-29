@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 const CarouselHome = require("../models/CarouselHome");
 const Categories = require("../models/Categories");
 const Products = require("../models/Product");
-const Profiles = require("../models/User")
+const Profiles = require("../models/User");
+const { verifyToken } = require("./token");
 
 
 exports.addHomeCarousel = async (req, res) => {
@@ -70,9 +71,9 @@ exports.updateProfileNumber = async (req, res) => {
 
 var Images = []
 
-exports.addProduct = async (req, res) => { 
-  imageToArray(req.files)
+exports.addProduct = async (req, res) => {
   if (req.files) {
+    imageToArray(req.files)
     const product = new Products({
       name_uz: req.body.name_uz,
       name_ru: req.body.name_ru,
@@ -103,7 +104,6 @@ exports.addProduct = async (req, res) => {
 exports.showProducts = async (req, res) => {
   await Products.find()
     .sort({ photo: -1 })
-    .limit(8)
     .then((result) => res.json(result))
     .catch((err) => {
       return res.status(400).send("ERROR: " + err);

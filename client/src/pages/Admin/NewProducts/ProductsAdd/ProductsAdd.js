@@ -60,7 +60,7 @@ const ProductsAdd = ({
                         <select className={classes.input} name="categoryId" id="categoryId" onChange={(e) => setCategoryId(e.target.value)} required>
                             <option hidden>Category</option>
                             {contacts.map((item, index) => (
-                                <option key={index} value={item._id} id={item._id}>{translate(item.name_ru, item.name_uz)}</option>
+                                item._id && <option key={index} value={item._id} id={item._id}>{translate(item.name_ru, item.name_uz)}</option>
                             ))}
                         </select>
                     }

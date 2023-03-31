@@ -5,6 +5,7 @@ import Products from "./Products/Products";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Loading from "../../../components/Loading/Loading";
+import translate from "../../../components/translate/translate";
 
 const NewProducts = ({
   loading,
@@ -22,6 +23,9 @@ const NewProducts = ({
   const [photo, setPhoto] = useState(null);
   const [photoone, setPhotoOne] = useState("https://bref.sh/img/logo-null.png");
 
+  const [pages, setPages] = useState(0);
+  const [moreBtn, setMoreBtn] = useState(true);
+
   const [products, setProducts] = useState([
     {
       name_uz: "",
@@ -31,7 +35,7 @@ const NewProducts = ({
       desc_uz: "",
       desc_ru: "",
       categoryId: "",
-      gender: ""
+      gender: "",
     },
   ]);
 
@@ -55,7 +59,15 @@ const NewProducts = ({
 
     try {
       e.preventDefault();
-      if (name_uz && name_ru && price && desc_uz && desc_ru && photo && categoryId) {
+      if (
+        name_uz &&
+        name_ru &&
+        price &&
+        desc_uz &&
+        desc_ru &&
+        photo &&
+        categoryId
+      ) {
         e.preventDefault();
         setPhoto("");
         setName_uz("");
@@ -66,11 +78,13 @@ const NewProducts = ({
         setLoading("");
         setProducts("");
         const { data } = await axios.post(
-          `${process.env.REACT_APP_URL}/add/addProduct`, ProductForm, {
-          headers: {
-            "Authorization": sessionStorage.getItem("token")
+          `${process.env.REACT_APP_URL}/add/addProduct`,
+          ProductForm,
+          {
+            headers: {
+              Authorization: sessionStorage.getItem("token"),
+            },
           }
-        }
         );
         setProducts(data.data);
         toast.success("Product qo'shildi");
@@ -79,17 +93,29 @@ const NewProducts = ({
         toast.error("Productni to'liq kiriting");
       }
     } catch (error) {
-      return toast.error("ERROR!!!")
+      return toast.error("ERROR!!!");
     }
   };
 
+  const MoreProducts = () => {
+    productBase();
+  };
+  const productBase = async () => {
+    setLoading(true);
+    const response = await fetch(
+      `${process.env.REACT_APP_URL}/products/showProducts/${pages + 3}`
+    );
+
+    const res = await response.json();
+    setPages(pages + 3);
+    setProducts(res);
+    if (res.length < pages + 3) {
+      setMoreBtn(false);
+    }
+    setLoading(false);
+  };
+
   useEffect(() => {
-    const productBase = async () => {
-      setLoading(true);
-      const response = await fetch(`${process.env.REACT_APP_URL}/add/showProducts`);
-      setProducts(await response.json());
-      setLoading(false);
-    };
     productBase();
   }, []);
 
@@ -98,11 +124,12 @@ const NewProducts = ({
     if (res) {
       toast.success("Mahsulot o'chirildi!");
       const { data } = await axios.delete(
-        `${process.env.REACT_APP_URL}/delete/products/delete/` + id, {
-        headers: {
-          "Authorization": sessionStorage.getItem("token")
+        `${process.env.REACT_APP_URL}/delete/products/delete/` + id,
+        {
+          headers: {
+            Authorization: sessionStorage.getItem("token"),
+          },
         }
-      }
       );
       setProducts(data.data);
     }
@@ -135,30 +162,48 @@ const NewProducts = ({
       />
 
       <div className={classes.ProductsDiv}>
-        {products ? products.length ? (
-          loading ? (
-            <Loading />
+        {products ? (
+          products.length ? (
+            loading ? (
+              <Loading />
+            ) : (
+              <>
+                <div className={classes.getProductAll}>
+                  {products.map(
+                    (item, index) =>
+                      item.photo && (
+                        <Products
+                          key={index}
+                          id={item._id}
+                          name_uz={item.name_uz}
+                          name_ru={item.name_ru}
+                          price={item.price}
+                          photo={item.photo}
+                          desc_uz={item.desc_uz}
+                          desc_ru={item.desc_ru}
+                          categoryId={item.categoryId}
+                          ProductDelete={ProductDelete}
+                          ProductMore={ProductMore}
+                        />
+                      )
+                  )}
+                </div>
+                {moreBtn && (
+                  <button
+                    onClick={() => MoreProducts()}
+                    className={classes.more_btn}
+                  >
+                    {translate("ЕЩЕ", "Yana")}
+                  </button>
+                )}
+              </>
+            )
           ) : (
-            products.map((item, index) => (
-              item.photo && <Products
-                key={index}
-                id={item._id}
-                name_uz={item.name_uz}
-                name_ru={item.name_ru}
-                price={item.price}
-                photo={item.photo}
-                desc_uz={item.desc_uz}
-                desc_ru={item.desc_ru}
-                categoryId={item.categoryId}
-                ProductDelete={ProductDelete}
-                ProductMore={ProductMore}
-              />
-            ))
+            <h2 className={classes.productNull}>Mahsulotlar yo'q</h2>
           )
         ) : (
-          <h2 className={classes.productNull}>Mahsulotlar yo'q</h2>
-        ) : <Loading />}
-
+          <Loading />
+        )}
       </div>
     </div>
   );

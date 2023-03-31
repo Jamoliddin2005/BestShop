@@ -21,7 +21,7 @@ const Products = ({
             </div>
             <div className={classes.center}>
                 <div className={classes.name_price}>
-                    <h4 className={classes.h3} onClick={() => ProductMore(id)}>{translate(NameLength(name_ru, 30), NameLength(name_uz, 30))}</h4>
+                    <h4 className={classes.h3} onClick={() => ProductMore(id)}>{translate(NameLength(name_ru, 25), NameLength(name_uz, 30))}</h4>
                     <button className={classes.btn} onClick={() => ProductDelete(id)}>Delete</button>
                     <h5 className={classes.price} onClick={() => ProductMore(id)}>{Currency(price)}</h5>
                 </div>

@@ -3,8 +3,6 @@ const CarouselHome = require("../models/CarouselHome");
 const Categories = require("../models/Categories");
 const Products = require("../models/Product");
 const Profiles = require("../models/User");
-const { verifyToken } = require("./token");
-
 
 exports.addHomeCarousel = async (req, res) => {
   try {
@@ -24,6 +22,7 @@ exports.addHomeCarousel = async (req, res) => {
     return res.status(400).send("ERROR ADDING: " + error);
   }
 };
+
 exports.show = async (req, res) => {
   try {
     await CarouselHome.find()
@@ -49,6 +48,7 @@ exports.addCategory = async (req, res) => {
     return res.status(400).send("ERROR: " + error);
   }
 };
+
 exports.showCategory = async (req, res) => {
   await Categories.find()
     .then((result) => res.json(result))
@@ -67,7 +67,6 @@ exports.updateProfileNumber = async (req, res) => {
 
   return res.status(201).send({ message: "Profile updated", status: 201 })
 }
-
 
 var Images = []
 
@@ -101,14 +100,7 @@ exports.addProduct = async (req, res) => {
   const ProductFind = await Products.find();
   return res.status(202).json({ success: true, data: ProductFind });
 };
-exports.showProducts = async (req, res) => {
-  await Products.find()
-    .sort({ photo: -1 })
-    .then((result) => res.json(result))
-    .catch((err) => {
-      return res.status(400).send("ERROR: " + err);
-    });
-};
+
 exports.categoryFind = async (req, res) => {
   const categoryFind = await Products.aggregate([
     {
@@ -119,11 +111,13 @@ exports.categoryFind = async (req, res) => {
   ]);
   return res.status(201).json({ success: true, data: categoryFind });
 };
+
 exports.productMore = async (req, res) => {
   const id = req.params.id;
   const product = await Products.findById(id);
   return res.status(201).json({ success: true, data: product });
 };
+
 function imageToArray(images) {
   for (var i = 0; i < images.length; i++) {
     Images.push(images[i].filename)

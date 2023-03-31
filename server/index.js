@@ -32,11 +32,13 @@ app.use(
 );
 const Auth = require("./routes/auth");
 const AddRoutes = require("./routes/Add");
+const Products = require("./routes/Products");
 const HeaderCarouselDelete = require("./routes/Delete");
 const isAdmin = require("./middleware/isAdmin");
 
 app.use("/auth", Auth);
 app.use("/add", AddRoutes);
+app.use("/products", Products)
 app.use("/delete", isAdmin, HeaderCarouselDelete);
 
 app.get("/isAdmin", async (req, res) => {

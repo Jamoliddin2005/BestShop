@@ -116,8 +116,8 @@ form input {
 }
 
 form button {
-  background-color: var(--color-green) !important;
-  border-color: var(--color-green) !important;
+  background-color: var(--color-violet) !important;
+  border-color: var(--color-violet) !important;
   color: var(--color-snow) !important;
   padding: 8px 20px;
   line-height: 1.5;

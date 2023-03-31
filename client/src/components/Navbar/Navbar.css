@@ -275,7 +275,7 @@ nav .navbar_right li .register_clicked a {
 }
 
 nav .navbar_right li .register_clicked a:hover {
-  background-color: var(--color-green);
+  background-color: var(--color-violet);
   color: white;
 }
 
@@ -295,7 +295,7 @@ nav .navbar_right a {
 
 nav .navbar_right a:hover,
 nav .AdminIcon_logout span:hover {
-  color: var(--color-green);
+  color: var(--color-violet);
 }
 
 nav .navbar_right img {
@@ -336,7 +336,7 @@ nav .AdminIcon_logout {
 }
 
 nav .AdminIcon_logout a {
-  border-bottom: 1px solid var(--color-green);
+  border-bottom: 1px solid var(--color-violet);
   padding: 6px 10px;
   cursor: pointer;
   display: flex;
@@ -397,7 +397,7 @@ nav ul.AdminRight .User {
   width: 300px;
   border: 1px solid var(--color-dark);
   border-radius: 5px;
-  color: var(--color-green);
+  color: var(--color-violet);
   font-weight: 700;
   position: relative;
   z-index: 500;

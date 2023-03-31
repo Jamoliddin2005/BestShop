@@ -53,7 +53,7 @@
 }
 
 .btn {
-  background-color: var(--color-green);
+  background-color: var(--color-violet);
   border-color: var(--color-green-border);
   line-height: 0.8;
   border-radius: 0.25rem;

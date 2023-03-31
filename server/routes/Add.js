@@ -6,8 +6,7 @@ const {
   show,
   addCategory,
   showCategory,
-  addProduct,
-  showProducts,
+  addProduct, 
   categoryFind,
   productMore,
   updateProfileNumber
@@ -21,7 +20,6 @@ router.post("/addProduct", isAdmin, fileUpload.array("photo", 20), addProduct);
 router.put('/profile/updateNumber/:id', updateProfileNumber)
 router.get("/show", show);
 router.get("/showCategory", showCategory);
-router.get("/showProducts", showProducts);
 router.get("/category/:id", categoryFind);
 router.get("/product/more/:id", productMore);
 

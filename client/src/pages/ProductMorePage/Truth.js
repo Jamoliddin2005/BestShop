@@ -2,6 +2,7 @@ import React from 'react'
 import Currency from '../../components/Currency/Currency'
 import classes from "./Truth.module.css"
 import NameLength from "../../components/NameLength/NameLength"
+import translate from "../../components/translate/translate"
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
@@ -94,7 +95,6 @@ function Truth({ truth,
     }
     const SubmitTelegram = async (e) => {
         const URI_API = `https://api.telegram.org/bot${process.env.REACT_APP_TOKEN}/sendMessage`;
-
         let message = `<b>#BestShop #Shopping_Time</b>\n\n`;
         message += `<b>User:</b>\n`;
         message += ` <b> User Profile Number: </b> <strong>${localStorage.getItem("profileNumber") ? localStorage.getItem("profileNumber") : user.phoneNumber}</strong>\n`;
@@ -119,9 +119,9 @@ function Truth({ truth,
 
         message += `\n<b>Product:</b>\n`;
         message += ` <b> Product ID: </b> <strong>${productMore._id}</strong>\n`;
-        message += ` <b> Product Name: </b> ${productMore.name} \n`;
+        message += ` <b> Product Name: </b> ${productMore.name_uz} \n`;
         message += ` <b> Product Price: </b> ${Currency(productMore.price)} \n`;
-        message += ` <b> Product Desc: </b> ${NameLength(productMore.desc, 150)}\n\n`;
+        message += ` <b> Product Desc: </b> ${NameLength(productMore.desc_uz, 150)}\n\n`;
 
         message += `<b> Time: </b> ${new Date().toLocaleString()} `;
 
@@ -187,9 +187,9 @@ function Truth({ truth,
                 </div> : (
                     <>
                         <div className={classes.AboutProduct}>
-                            <h3><span>Nomi: </span>{productMore.name}</h3>
+                            <h3><span>Nomi: </span>{translate(productMore.name_ru, productMore.name_uz)}</h3>
                             <h4><span>Narxi: </span>{Currency(productMore.price)}</h4>
-                            <p><span>Product haqida: </span>{NameLength(productMore.desc, 150)}</p>
+                            <p><span>Product haqida: </span>{translate(NameLength(productMore.desc_ru, 150), NameLength(productMore.desc_uz, 150))}</p>
                         </div>
 
                         <div className={classes.buttons}>

@@ -10,13 +10,31 @@
 
 .ProductsDiv {
     width: 65%;
+    position: relative !important;
+}
+
+.more_btn {
+    background-color: var(--color-violet);
+    border-color: var(--color-green-border);
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    padding: 0.7rem 2rem;
+    border: 1px solid transparent;
+    text-transform: uppercase;
+    color: var(--color-snow);
+    margin: auto;
+    margin-top: 30px;
+    display: block;
+}
+
+.getProductAll {
+    width: 100%;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     gap: 15px;
-    position: relative !important;
 }
-
 
 .productNull {
     font-size: 30px;

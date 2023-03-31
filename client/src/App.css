@@ -22,8 +22,7 @@
 
 
 :root {
-  --color-violet: #862ac1;
-  --color-green: #59ab6e;
+  --color-violet: #862ac1; 
   --color-dark: #212934;
   --color-white: #cfd6e1;
   --color-blue: #e9eef5;
@@ -40,11 +39,10 @@
 
 ::-webkit-scrollbar {
   width: 5px;
-  background-color: var(--color-green);
   border-radius: 20px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--color-dark);
+  background-color: var(--color-violet);
   border-radius: 10px;
 }

@@ -98,7 +98,7 @@
   font-family: var(--font-family-roboto);
   font-size: 18px;
   font-weight: 300;
-  max-height: 330px;
+  max-height: 280px;
   overflow-y: auto;
 }
 
@@ -106,7 +106,7 @@
 .buttonBuyCart,
 .buttonBuyCartAdd {
   cursor: pointer;
-  background-color: var(--color-green);
+  background-color: var(--color-violet);
   border-color: var(--color-green-border);
   padding: 0.5rem 4rem;
   font-size: 1.25rem;

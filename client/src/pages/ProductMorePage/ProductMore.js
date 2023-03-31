@@ -7,6 +7,7 @@ import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 import axios from "axios";
 import Currency from "../../components/Currency/Currency";
+import translate from "../../components/translate/translate";
 
 const ProductMore = ({ productMore, setProductMore, user }) => {
   const [loading, setLoading] = useState(false);
@@ -86,11 +87,11 @@ const ProductMore = ({ productMore, setProductMore, user }) => {
               </div>
 
               <div className={classes.right}>
-                <h2 className={classes.name}>{productMore.name}</h2>
+                <h2 className={classes.name}>{translate(productMore.name_ru, productMore.name_uz)}</h2>
                 <h4 className={classes.price}>{Currency(productMore.price)}</h4>
                 <div className={classes.description}>
-                  <h3 className={classes.desc_title}>Description:</h3>
-                  <p className={classes.desc}>{productMore.desc}</p>
+                  <h3 className={classes.desc_title}>{translate("О продукте:", "Mahsulot haqida:")}</h3>
+                  <p className={classes.desc}>{translate(productMore.desc_ru, productMore.desc_uz)}</p>
                 </div>
                 <div className={classes.buttons}>
                   <button className={classes.buttonBuy} onClick={() => {

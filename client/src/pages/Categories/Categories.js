@@ -49,7 +49,7 @@ const Categories = ({
                   </div>
                   <div className={classes.texts}>
                     <div className={classes.price_name}>
-                      <h2 className={classes.name}>{translate(NameLength(item.name_ru, 30), NameLength(item.name_uz, 30))}</h2>
+                      <h2 className={classes.name}>{translate(NameLength(item.name_ru, 25), NameLength(item.name_uz, 30))}</h2>
                       <h3 className={classes.price}>{Currency(item.price)}</h3>
                     </div>
                     <div className={classes.desc}>

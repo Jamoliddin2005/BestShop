@@ -2,10 +2,26 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import translate from "../translate/translate";
+import axios from "axios"
 
 function Navbar({ user, uzLanguage, setUzLanguage }) {
 
   const [languages, setLanguages] = useState(false);
+
+  const onScrollTop = () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }
+
+  const onSearchFunction = async (e) => {
+    const test = await axios.get(`${process.env.REACT_APP_URL}/products/search/${e}`)
+    console.log(test.data.search);
+  }
+
+
 
   return (
     <div className={"Navbar_big"}>
@@ -83,7 +99,7 @@ function Navbar({ user, uzLanguage, setUzLanguage }) {
       <nav>
         <div className="container">
           <div className="row">
-            <Link to="/" className="navbar_left">
+            <Link to="/" className="navbar_left" onClick={() => onScrollTop()}>
               <span>Mongo.uz</span>
             </Link>
             <ul
@@ -97,6 +113,7 @@ function Navbar({ user, uzLanguage, setUzLanguage }) {
                     "Поиск продуктов и категорий",
                     "Mahsulotlar va turkumlar izlash"
                   )}
+                  onChange={(e) => onSearchFunction(e.target.value)}
                 />
                 <button>
                   <svg
@@ -116,20 +133,20 @@ function Navbar({ user, uzLanguage, setUzLanguage }) {
             </ul>
             {user ? (
               <ul className="navbar_right AdminRight">
-                <li>
-                  <Link to={"/"}>
+                <li >
+                  <Link to={"/"} onClick={() => onScrollTop()}>
                     <i className="fa-regular fa-heart"></i>
                     <span>0</span>
                   </Link>
                 </li>
 
                 <li>
-                  <Link to="/">
+                  <Link to="/" onClick={() => onScrollTop()}>
                     <i className="fa-solid fa-cart-arrow-down"></i>
                     <span>0</span>
                   </Link>
                 </li>
-                <Link to="/admin" className="User">
+                <Link to="/admin" className="User" onClick={() => onScrollTop()}>
                   {user.avatar ? (
                     <img src={user.avatar} alt="" />
                   ) : (
@@ -142,7 +159,7 @@ function Navbar({ user, uzLanguage, setUzLanguage }) {
             ) : (
               <ul className="navbar_right">
                 <li>
-                  <Link to={"/"}>
+                  <Link to={"/"} onClick={() => onScrollTop()}>
                     <i className="fa-regular fa-heart"></i>
                     <span>0</span>
                     <p>{translate("Избранное", "Sevimlilar")}</p>
@@ -150,7 +167,7 @@ function Navbar({ user, uzLanguage, setUzLanguage }) {
                 </li>
 
                 <li>
-                  <Link to="/">
+                  <Link to="/" onClick={() => onScrollTop()}>
                     <svg
                       width="24"
                       height="24"
@@ -171,7 +188,7 @@ function Navbar({ user, uzLanguage, setUzLanguage }) {
                   </Link>
                 </li>
                 <li className="registerClick">
-                  <Link to={"/login"}>
+                  <Link to={"/login"} onClick={() => onScrollTop()}>
                     <i className="fa-regular fa-user"></i>
                     <p>{translate("Войти", "Kirish")}</p>
                   </Link>

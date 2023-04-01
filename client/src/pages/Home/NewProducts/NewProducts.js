@@ -31,6 +31,7 @@ function NewProducts({ ProductMore, setErrorServer }) {
     }
     setLoading(false);
   };
+
   useEffect(() => {
     productBase();
   }, []);

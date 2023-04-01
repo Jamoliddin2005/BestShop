@@ -9,7 +9,7 @@ import axios from "axios";
 import Currency from "../../components/Currency/Currency";
 import translate from "../../components/translate/translate";
 
-const ProductMore = ({ productMore, setProductMore, user }) => {
+const ProductMore = ({ productMore, setProductMore, user, cartNumbers, minusNumber }) => {
   const [loading, setLoading] = useState(false);
   const [savetoCart, setSavetoCart] = useState(0);
   const [activeImage, setImageActive] = useState(null)
@@ -27,18 +27,19 @@ const ProductMore = ({ productMore, setProductMore, user }) => {
       categoryId: "",
     },
   ]);
+  const Winlocation = window.location.pathname;
+  const CategoryFind = async () => {
+    setLoading(true);
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_URL}/add/` + Winlocation
+    );
+    setProductMore(data.data);
+    setLoading(false);
+  };
+
+
 
   useEffect(() => {
-    const Winlocation = window.location.pathname;
-    const CategoryFind = async () => {
-      setLoading(true);
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_URL}/add/` + Winlocation
-      );
-      setProductMore(data.data);
-      setLoading(false);
-    };
-
     CategoryFind();
   }, []);
 
@@ -96,12 +97,15 @@ const ProductMore = ({ productMore, setProductMore, user }) => {
                 <div className={classes.buttons}>
                   <button className={classes.buttonBuy} onClick={() => {
                     setTruth(true)
-                  }}>Buy</button>
+                  }}>{translate("Купить в один клик", "Bir bosishda sotib olish")}</button>
                   {savetoCart > 0 ? (
                     <button className={classes.buttonBuyCartAdd}>
                       <div
                         className={classes.minus}
-                        onClick={(e) => setSavetoCart(savetoCart - 1)}
+                        onClick={(e) => {
+                          setSavetoCart(savetoCart - 1)
+                          minusNumber(productMore)
+                        }}
                       >
                         <i className="fa-solid fa-minus"></i>
                       </div>
@@ -116,9 +120,12 @@ const ProductMore = ({ productMore, setProductMore, user }) => {
                   ) : (
                     <button
                       className={classes.buttonBuyCart}
-                      onClick={clickHandler}
+                      onClick={() => {
+                        clickHandler()
+                        cartNumbers(productMore)
+                      }}
                     >
-                      Save To Cart
+                      {translate("Добавить в корзину", "Savatga qoʻshish")}
                     </button>
                   )}
                 </div>
@@ -128,11 +135,13 @@ const ProductMore = ({ productMore, setProductMore, user }) => {
           </>
         )}
       </div>
-      {truth ? <div className={classes.Bg_Truth} onClick={() => {
-        setTruth(false)
-      }}></div> : ""}
+      {
+        truth ? <div className={classes.Bg_Truth} onClick={() => {
+          setTruth(false)
+        }}></div> : ""
+      }
       {truth ? <Truth user={user} truth={truth} setTruth={setTruth} productMore={productMore} /> : ""}
-    </div>
+    </div >
   );
 };
 

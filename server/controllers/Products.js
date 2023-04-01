@@ -1,21 +1,14 @@
 const Products = require('../models/Product')
 
 module.exports.Search = async (req, res) => {
-  const searchQuery = req.params.key
-  console.log(searchQuery);
-  // let search = await Products.find({
-  //     $text: {
-  //         $search: searchQuery,
-  //         $caseSensitive: false,
-  //         $diacriticSensitive: false
-  //     },
-  // })
-  // return res.status(200).send({ message: "Success", search })
+  const { key } = req.params
+  const cursor = await Products.find({ $text: { $search: key } })
+  return res.status(200).send({ message: "Success", cursor })
 }
 
 exports.showProducts = async (req, res) => {
   const { page } = req.params
- 
+
   await Products.find()
     .sort({ photo: -1 })
     .limit(Number(page))

@@ -10,7 +10,7 @@ import PhoneInput from 'react-phone-number-input'
 import firebase from "../../firebase";
 import axios from 'axios'
 
-function Truth({ truth,
+function Truth({
     setTruth,
     productMore, user }) {
     const navigate = useNavigate()
@@ -54,7 +54,7 @@ function Truth({ truth,
                     return SetTrueFalse(false);
                 });
         } else {
-            return toast.error("Nomerni tog'ri kiriting");
+            return toast.error(translate("Введите номер правильно", "Nomerni tog'ri kiriting"));
         }
     };
 
@@ -65,10 +65,10 @@ function Truth({ truth,
             .then(res => {
                 localStorage.setItem('profileNumber', user1);
                 BtnYes()
-                return toast.success("Success!")
+                return toast.success("✔!")
             })
             .catch(err => {
-                return toast.error("Xato!")
+                return toast.error(translate("Неправильно!", "xato!"));
             })
     }
 
@@ -84,13 +84,13 @@ function Truth({ truth,
                         ProfileNumberUpdate(user1)
                     })
                     .catch((error) => {
-                        return toast.error("Kod xato!!!");
+                        return toast.error(translate("Неправильный код!", "Kod xato!"));
                     });
             } else {
-                return toast.error("Kodni to'gri kiriting");
+                return toast.error(translate("Введите правильный код", "Kodni to'gri kiriting"));
             }
         } else {
-            return toast.error("Kodni to'gri kiriting");
+            return toast.error(translate("Введите правильный код", "Kodni to'gri kiriting"));
         }
     }
     const SubmitTelegram = async (e) => {
@@ -161,45 +161,44 @@ function Truth({ truth,
             {phoneNumberAdd
                 ?
                 <div>
-                    <label htmlFor='phoneNumber'>Telefon raqamingizni yozing </label>
+                    <label htmlFor='phoneNumber'>{translate("Введите свой номер телефона", "Telefon raqamingizni kiriting")}</label>
                     <div>
                         <PhoneInput
                             international
                             defaultCountry="UZ"
                             className="input"
-                            placeholder="Enter phone number"
+                            placeholder={translate("Введите свой номер телефона", "Telefon raqamingizni kiriting")}
                             value={value}
                             onChange={setValue}
                         />
                         {trueFalse ? (
                             <>
-                                <label htmlFor="smsCode" style={{ fontSize: "13px" }}>Kodni kiriting!</label>
-                                <input type="text" name="" id="smsCode" placeholder='Kodni kiriting!' value={code} onChange={(e) => setCode(e.target.value)} style={{ marginBottom: "15px", width: "200px" }} />
+                                <label htmlFor="smsCode" style={{ fontSize: "13px" }}>{translate("Введите код!", "Kodni kiriting!")}</label>
+                                <input type="text" name="" id="smsCode" placeholder={translate("Введите код!", "Kodni kiriting!")} value={code} onChange={(e) => setCode(e.target.value)} style={{ marginBottom: "15px", width: "200px" }} />
                             </>
                         ) : ""}
                         <button className={classes.SubmitCode}
-
                             onClick={codeButton ? SubmitHandler : CodeSubmit}
                         >
-                            {loadingGif ? <img src="/uploads/loading_gif.gif" alt="" /> : <>Submit </>}
+                            {loadingGif ? <img src="/uploads/loading_gif.gif" alt="" /> : <>{translate("Отправить", "Yuborish")} </>}
                         </button>
                     </div>
                 </div> : (
                     <>
                         <div className={classes.AboutProduct}>
-                            <h3><span>Nomi: </span>{translate(productMore.name_ru, productMore.name_uz)}</h3>
-                            <h4><span>Narxi: </span>{Currency(productMore.price)}</h4>
-                            <p><span>Product haqida: </span>{translate(NameLength(productMore.desc_ru, 150), NameLength(productMore.desc_uz, 150))}</p>
+                            <h3><span>{translate("Имя:", "Nomi:")} </span>{translate(productMore.name_ru, productMore.name_uz)}</h3>
+                            <h4><span>{translate("Цена:", "Narxi:")} </span>{Currency(productMore.price)}</h4>
+                            <p><span> {translate("О продукте:", "Product haqida:")} </span>{translate(NameLength(productMore.desc_ru, 150), NameLength(productMore.desc_uz, 150))}</p>
                         </div>
 
                         <div className={classes.buttons}>
-                            <span>Sotib olishni xohlaysizmi?</span>
+                            <span>{translate("Хотеть купить?", "Sotib olmoqchimisiz?")}</span>
                             <button className={classes.yes} onClick={(e) => {
                                 BtnYes()
-                            }}>Yes</button>
+                            }}>{translate("ДА", "HA")}</button>
                             <button onClick={(e) => {
                                 setTruth(false)
-                            }}>No</button>
+                            }}>{translate("Нет", "YO'Q")}</button>
                         </div>
                     </>
                 )

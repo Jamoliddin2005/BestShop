@@ -28,6 +28,11 @@ function App() {
   const [uzLanguage, setUzLanguage] = useState(true)
   const [ErrorServer, setErrorServer] = useState(false)
 
+  // Add To Card
+  const [productNumbers, setProductNumbers] = useState("");
+  const [productsInCart, setProductsInCart] = useState("");
+  const [totalCoastGet, setTotalCoastGet] = useState("");
+
   const GetTranslate = () => {
     if (localStorage.getItem("language") === "ru") {
       window.localStorage.setItem("language", "ru")
@@ -63,7 +68,6 @@ function App() {
       setUser(null)
     }
   }
-
 
   useEffect(() => {
     GetToken()
@@ -188,6 +192,7 @@ function App() {
   }, []);
 
   let navigate = useNavigate();
+
   const getCategory = async (id) => {
     try {
       setCategoryLoading(true);
@@ -201,7 +206,6 @@ function App() {
       setErrorServer(true)
     }
   };
-
   const ProductMore = async (id) => {
     try {
       setMoreLoading(true);
@@ -215,6 +219,113 @@ function App() {
       setErrorServer(true)
     }
   };
+
+
+
+  // Add To Card 
+
+  useEffect(() => {
+    function getLocals() {
+      setProductNumbers(localStorage.getItem("cartNumbers"));
+      setProductsInCart(localStorage.getItem("productsInCart"));
+      setTotalCoastGet(localStorage.getItem("totalCoast"));
+
+    }
+    getLocals();
+  }, [])
+
+  function cartNumbers(item) {
+    setProductNumbers(localStorage.getItem("cartNumbers"));
+    if (productNumbers) {
+      localStorage.setItem("cartNumbers", +productNumbers + 1);
+    } else {
+      localStorage.setItem("cartNumbers", 1);
+    }
+    setItems(item);
+    totalCoast(item);
+    setProductNumbers(localStorage.getItem("cartNumbers"));
+  }
+
+  function setItems(product) {
+    let cartItems = localStorage.getItem("productsInCart");
+    cartItems = JSON.parse(cartItems);
+    if (cartItems != null) {
+      if (cartItems[product._id] === undefined) {
+        product.inCart = 0;
+        cartItems = {
+          ...cartItems,
+          [product._id]: product,
+        };
+      }
+      cartItems[product._id].inCart += 1
+    } else {
+      product.inCart = 1;
+      cartItems = {
+        [product._id]: product,
+      };
+    }
+    localStorage.setItem("productsInCart", JSON.stringify(cartItems));
+    setProductsInCart(localStorage.getItem("productsInCart"));
+  }
+
+  function totalCoast(product) {
+    let cartCoast = localStorage.getItem("totalCoast");
+    if (cartCoast !== null) {
+      localStorage.setItem(
+        "totalCoast",
+        +cartCoast + Number(product.price)
+      );
+      setTotalCoastGet(localStorage.getItem("totalCoast"));
+    } else {
+      localStorage.setItem("totalCoast", Number(product.price));
+      setTotalCoastGet(localStorage.getItem("totalCoast"));
+    }
+  }
+
+  function minusNumber(item) {
+    setProductNumbers(localStorage.getItem("cartNumbers"));
+    if (productNumbers) {
+      localStorage.setItem("cartNumbers", +productNumbers - 1);
+    }
+    setItemsMinus(item);
+    totalCoastMinus(item);
+    setProductNumbers(localStorage.getItem("cartNumbers"));
+  }
+
+  function setItemsMinus(product) {
+    let cartItems = localStorage.getItem("productsInCart");
+    cartItems = JSON.parse(cartItems);
+    if (cartItems != null) {
+      if (cartItems[product.id] === undefined) {
+        cartItems = {
+          ...cartItems,
+          [product.id]: product,
+        };
+      }
+      cartItems[product.id].inCart--;
+    } else {
+      product.inCart--;
+      cartItems = {
+        [product.id]: product,
+      };
+    }
+    if (cartItems[product.id].inCart < 1) {
+      delete cartItems[product.id]
+    }
+    localStorage.setItem("productsInCart", JSON.stringify(cartItems));
+    setProductsInCart(localStorage.getItem("productsInCart"));
+  }
+
+  function totalCoastMinus(product) {
+    let cartCoast = localStorage.getItem("totalCoast");
+    if (cartCoast !== null) {
+      localStorage.setItem(
+        "totalCoast",
+        +cartCoast - Number(product.price)
+      );
+      setTotalCoastGet(localStorage.getItem("totalCoast"));
+    }
+  }
 
   return (
     <div className="App" onCopy={(e) => e.preventDefault()}>
@@ -230,7 +341,13 @@ function App() {
         pauseOnHover
         theme="colored"
       />
-      {ErrorServer || <Navbar user={user} uzLanguage={uzLanguage} setUzLanguage={setUzLanguage} />}
+      {ErrorServer || <Navbar
+        user={user}
+        uzLanguage={uzLanguage}
+        setUzLanguage={setUzLanguage}
+        productNumbers={productNumbers}
+        totalCoastGet={totalCoastGet}
+      />}
       <div className="mongo_big">
         <Routes>
           <Route
@@ -263,6 +380,8 @@ function App() {
             element={
               ErrorServer ? <Navigate to="/server-error" /> :
                 <ProductMorePage
+                  cartNumbers={cartNumbers}
+                  minusNumber={minusNumber}
                   user={user}
                   setProductMore={setProductMore}
                   productMore={productMore}

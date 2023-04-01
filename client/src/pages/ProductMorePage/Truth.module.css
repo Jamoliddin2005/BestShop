@@ -16,7 +16,6 @@
 .Truth .AboutProduct span {
   font-size: 17px;
   font-family: "Lora", serif;
-  font-style: italic;
   font-weight: 500;
   color: rgb(0, 0, 0);
 }
@@ -28,6 +27,7 @@
   font-size: 16px;
   font-weight: 400;
   color: var(--color-dark);
+  margin-bottom: 10px;
 }
 
 .Truth .buttons {
@@ -51,7 +51,7 @@
   font-weight: 400;
   border: 1px solid rgb(77, 77, 77);
   border-radius: 3px;
-  background-color: red;
+  background-color: var(--color-dark);
   color: white;
   padding: 4px 0 5px;
   transition: 0.3s;
@@ -59,7 +59,7 @@
 
 .Truth .buttons button.yes {
   margin-right: 10px;
-  background-color: rgb(66, 201, 8);
+  background-color: var(--color-violet);
 }
 
 .Truth .buttons button.yes:hover {
@@ -78,7 +78,7 @@
 .Truth label {
   font-size: 17px;
   font-family: "Lora", serif;
-  font-style: italic;
+
   font-weight: 500;
   color: rgb(0, 0, 0);
   display: block;

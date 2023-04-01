@@ -27,7 +27,9 @@ function Home({
         categoryBig={categoryBig}
         setCategoryBig={setCategoryBig}
       />
-      <NewProducts ProductMore={ProductMore} setErrorServer={setErrorServer} />
+      <NewProducts
+        ProductMore={ProductMore}
+        setErrorServer={setErrorServer} />
     </div>
   );
 }

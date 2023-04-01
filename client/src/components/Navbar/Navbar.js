@@ -1,27 +1,41 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import translate from "../translate/translate";
-import axios from "axios"
+import axios from "axios";
+import NameLength from "../NameLength/NameLength";
 
-function Navbar({ user, uzLanguage, setUzLanguage }) {
-
+function Navbar({ user, uzLanguage, setUzLanguage, productNumbers,
+  totalCoastGet }) {
   const [languages, setLanguages] = useState(false);
-
+  const [search, setSearch] = useState([]);
+  const [value, setValue] = useState("");
+  const [searchBoolean, setSearchBoolean] = useState(false);
+  console.log(productNumbers);
+  console.log(totalCoastGet);
   const onScrollTop = () => {
     window.scrollTo({
       top: 0,
       left: 0,
       behavior: "smooth",
     });
-  }
+  };
 
+  const timeoutId = useRef();
   const onSearchFunction = async (e) => {
-    const test = await axios.get(`${process.env.REACT_APP_URL}/products/search/${e}`)
-    console.log(test.data.search);
-  }
+    clearTimeout(timeoutId.current);
+    setSearchBoolean(false);
 
-
+    timeoutId.current = setTimeout(async () => {
+      if (e) {
+        const { data } = await axios.get(
+          `${process.env.REACT_APP_URL}/products/search/${e}`
+        );
+        setSearchBoolean(true);
+        setSearch(data.cursor);
+      }
+    }, 300);
+  };
 
   return (
     <div className={"Navbar_big"}>
@@ -96,6 +110,15 @@ function Navbar({ user, uzLanguage, setUzLanguage }) {
           </div>
         </div>
       </div>
+      {searchBoolean && (
+        <div
+          className="search_bg"
+          onClick={() => {
+            setValue("");
+            setSearchBoolean(false);
+          }}
+        ></div>
+      )}
       <nav>
         <div className="container">
           <div className="row">
@@ -113,7 +136,11 @@ function Navbar({ user, uzLanguage, setUzLanguage }) {
                     "Поиск продуктов и категорий",
                     "Mahsulotlar va turkumlar izlash"
                   )}
-                  onChange={(e) => onSearchFunction(e.target.value)}
+                  value={value}
+                  onChange={(e) => {
+                    setValue(e.target.value);
+                    onSearchFunction(e.target.value);
+                  }}
                 />
                 <button>
                   <svg
@@ -129,11 +156,35 @@ function Navbar({ user, uzLanguage, setUzLanguage }) {
                     <path d="M26.146 27.146a.997.997 0 0 1-.707-.293l-7.694-7.694a.999.999 0 1 1 1.414-1.414l7.694 7.694a.999.999 0 0 1-.707 1.707z" />
                   </svg>
                 </button>
+                {searchBoolean && (
+                  <div className={"searchedProducts"}>
+                    {search.map((item, index) => (
+                      <Link
+                        to={`/product/more/${item._id}`}
+                        key={index}
+                        onClick={() => {
+                          window.onload();
+                          setValue("");
+                          setSearchBoolean(false);
+                        }}
+                        className="product"
+                      >
+                        <img src={`/uploads/${item.photo[0]}`} alt="" />
+                        <p>
+                          {translate(
+                            NameLength(item.name_ru, 30),
+                            NameLength(item.name_uz, 30)
+                          )}
+                        </p>
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </div>
             </ul>
             {user ? (
               <ul className="navbar_right AdminRight">
-                <li >
+                <li>
                   <Link to={"/"} onClick={() => onScrollTop()}>
                     <i className="fa-regular fa-heart"></i>
                     <span>0</span>
@@ -146,7 +197,11 @@ function Navbar({ user, uzLanguage, setUzLanguage }) {
                     <span>0</span>
                   </Link>
                 </li>
-                <Link to="/admin" className="User" onClick={() => onScrollTop()}>
+                <Link
+                  to="/admin"
+                  className="User"
+                  onClick={() => onScrollTop()}
+                >
                   {user.avatar ? (
                     <img src={user.avatar} alt="" />
                   ) : (

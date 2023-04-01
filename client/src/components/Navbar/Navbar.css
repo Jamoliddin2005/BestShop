@@ -132,12 +132,48 @@ nav .navbar_center {
   width: 60%;
 }
 
+nav .navbar_center .searchedProducts {
+  position: absolute;
+  top: 50px;
+  width: 85%;
+  border-radius: 10px;
+  overflow: hidden;
+  background: white;
+}
+
+nav .navbar_center .searchedProducts .product {
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  transition: .3s;
+  color: #1c1f22;
+}
+
+nav .navbar_center .searchedProducts .product img {
+  width: 40px;
+  margin-right: 20px;
+}
+
+.Navbar_big .search_bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, .3);
+}
+
+nav .navbar_center .searchedProducts .product:hover {
+  background-color: #dddddd;
+}
+
 nav .navbar_center.navbar_user_center {
   width: 60%;
 }
 
 .navbar_user_center .inputSearch {
   width: 100%;
+  position: relative;
 }
 
 .inputSearch {

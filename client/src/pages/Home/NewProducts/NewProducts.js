@@ -38,7 +38,7 @@ function NewProducts({ ProductMore, setErrorServer }) {
 
   return (
     <div className={classes.NewProducts}>
-      <div className={classes.container}>
+      <div className={"container"}>
         <div className={classes.top}>
           <h1 className={classes.title}>
             {translate("Новые продукты", "Yangi mahsulotlar")}

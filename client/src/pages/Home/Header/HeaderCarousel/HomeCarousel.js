@@ -8,6 +8,7 @@ import "swiper/modules/navigation/navigation.min.css";
 
 SwiperCore.use([Autoplay]);
 const HomeCarousel = ({ setErrorServer }) => {
+
   const [loading, setLoading] = useState(false);
 
   const [contacts, setContacts] = useState([

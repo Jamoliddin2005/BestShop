@@ -1,6 +1,6 @@
 .Footer {
   width: 100%;
-  background: var( --color-dark) ;
+  background: var(--color-dark);
   padding: 50px 0;
 }
 
@@ -20,7 +20,7 @@
   font-weight: 300;
   font-family: var(--font-family-roboto);
   font-size: 30px;
-  color: var( --color-white) ;
+  color: var(--color-white);
 }
 
 .Footer .Footer_Top .container .Home_Logo {
@@ -110,7 +110,7 @@ form input {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   border: 1px solid #adadad;
-  background-color: var( --color-dark) ;
+  background-color: var(--color-dark);
   color: #e4e4e4;
   background-clip: padding-box;
 }
@@ -137,4 +137,25 @@ form button {
 .footer_center .loadingio-spinner-spin-j0h89mbuyk {
   left: 20%;
   top: 70%;
+}
+
+@media(max-width:1250px) {
+  .Footer .Footer_Top .container ul {
+    width: auto;
+  }
+
+  .Footer .Footer_Top .container ul:last-child {
+    width: 250px;
+  }
+
+  .Footer .Footer_Top .container .row {
+    justify-content: space-between;
+  }
+}
+
+
+@media(max-width:850px) {
+  .Footer {
+    padding: 30px 0;
+  }
 }

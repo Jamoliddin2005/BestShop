@@ -27,7 +27,7 @@
 
 .swiper-button-prev::after,
 .swiper-button-next::after {
-  color: var(--color-violet) ;
+  color: var(--color-violet);
   font-weight: 900;
 }
 
@@ -73,7 +73,7 @@
 }
 
 .carousel .row .left h1 {
-  color: var(--color-violet) ;
+  color: var(--color-violet);
   font-family: var(--font-family-roboto);
   font-size: 48px;
   font-weight: 200 !important;
@@ -95,8 +95,8 @@
 }
 
 .carousel .row .left button {
-  background: var(--color-violet) ;
-  border: 1px solid var( --color-dark) ;
+  background: var(--color-violet);
+  border: 1px solid var(--color-dark);
   padding: 13px 35px;
   cursor: pointer;
   color: #efefef;
@@ -110,10 +110,40 @@
 }
 
 .carousel .row .left a {
-  background: var(--color-violet) ;
-  border: 1px solid var( --color-dark) ;
+  background: var(--color-violet);
+  border: 1px solid var(--color-dark);
   padding: 13px 35px;
   cursor: pointer;
   color: var(--color-snow);
   font-weight: 600;
+}
+
+@media(max-width:1230px) {
+  .swiper {
+    height: 500px !important;
+  }
+
+  .carousel .row {
+    height: 500px;
+  }
+}
+
+@media(max-width:1100px) {
+  .swiper {
+    height: 400px !important;
+  }
+
+  .carousel .row {
+    height: 400px;
+  }
+}
+
+@media(max-width:850px) {
+  .swiper {
+    height: 330px !important;
+  }
+
+  .carousel .row {
+    height: 330px;
+  }
 }

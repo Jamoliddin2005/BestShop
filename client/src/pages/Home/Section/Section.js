@@ -4,16 +4,12 @@ import classes from "./section.module.css";
 import translate from "../../../components/translate/translate"
 
 function Section({
-  setCategoryBig,
-  categoryBig,
   getCategory,
   categories,
-  setCategories,
   loading,
-  setLoading,
 }) {
   return (
-    <div className={classes.container}>
+    <div className={"container"}>
       <div className={classes.top}>
         <h1 className={classes.h1}>{translate("Категории", "Kategoriyalar")}</h1>
       </div>

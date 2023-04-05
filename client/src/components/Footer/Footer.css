@@ -50,9 +50,11 @@
 }
 
 .footer_bottom {
+  padding-top: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .footer_bottom ul {
@@ -61,7 +63,6 @@
   font-family: var(--font-family-roboto);
   font-size: 18px;
   font-weight: 300;
-  padding-top: 20px;
 }
 
 .footer_bottom ul li {
@@ -157,5 +158,58 @@ form button {
 @media(max-width:850px) {
   .Footer {
     padding: 30px 0;
+  }
+
+  .Footer .Footer_Top .container ul h3 {
+    font-size: 23px;
+  }
+
+  .Footer .Footer_Top .container ul li a {
+    font-size: 15px;
+  }
+
+  .Footer .Footer_Top .container ul:last-child {
+    width: 200px;
+  }
+}
+
+@media(max-width:630px) {
+  .footer_bottom ul li {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media(max-width:600px) {
+  .Footer .Footer_Top .container ul:last-child {
+    display: none;
+  }
+
+  .Footer .Footer_Top .container .footer_center {
+    width: 40%;
+  }
+
+  .Footer .Footer_Top .container .footer_bottom ul {
+    margin-bottom: 20px;
+  }
+
+  .footer_bottom {
+    justify-content: center;
+  }
+}
+
+@media(max-width:370px) {
+  .Footer .Footer_Top .container .row {
+    flex-direction: column;
+  }
+
+  .Footer .Footer_Top .container .footer_center {
+    width: 100%;
+    margin-top: 20px;
+    height: auto;
+  }
+
+  .Footer .Footer_Top .container .Home_Logo {
+    margin-bottom: 0;
   }
 }

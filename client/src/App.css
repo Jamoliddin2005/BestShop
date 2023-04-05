@@ -85,3 +85,18 @@
     padding-top: 100px;
   }
 }
+
+@media(max-width:700px) {
+  .mongo_big {
+    padding-top: 140px;
+  }
+
+  .swiper-horizontal>.swiper-pagination-bullets,
+  .swiper-pagination-bullets.swiper-pagination-horizontal,
+  .swiper-pagination-custom,
+  .swiper-pagination-fraction {
+    display: none;
+  }
+
+
+}

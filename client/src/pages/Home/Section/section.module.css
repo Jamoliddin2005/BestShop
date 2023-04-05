@@ -115,7 +115,6 @@
  }
 
  @media(max-width:970px) {
-
    .item {
      width: 24%;
      height: 200px;
@@ -128,5 +127,55 @@
    .images {
      border-radius: 0;
      height: 100%;
+   }
+ }
+
+ @media(max-width:700px) {
+   .h1 {
+     font-size: 35px;
+     margin-top: 20px;
+   }
+
+   .btn {
+     padding: 0.5rem 1.5rem;
+   }
+
+   .h3 {
+     font-size: 17px;
+     margin: .5rem 0;
+   }
+
+   .bottom_Categories {
+     padding-bottom: 0;
+   }
+ }
+
+ @media(max-width:600px) {
+   .item {
+     width: 48%;
+     height: auto;
+     margin-bottom: 10px;
+   }
+
+   .image {
+     width: 100% !important;
+     height: 100%;
+   }
+
+   .images {
+     height: 300px;
+   }
+
+   .btn {
+     display: none;
+   }
+
+   .bottom_Categories {
+     margin-bottom: 0;
+   }
+
+   .h1 {
+     font-size: 32px;
+     margin-top: 0;
    }
  }

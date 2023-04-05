@@ -542,11 +542,20 @@ nav ul.AdminRight .User {
 
 @media(max-width:850px) {
   nav .navbar_right li {
-    margin-left: 15px;
+    margin-left: 30px;
   }
 
   nav .navbar_right li p {
-    font-size: 16px;
+    display: none;
+  }
+
+  nav .navbar_right li i {
+    font-size: 23px;
+  }
+
+  nav .navbar_right li svg {
+    width: 27px;
+    height: 27px;
   }
 
   nav .navbar_left span {
@@ -557,6 +566,10 @@ nav ul.AdminRight .User {
     height: 40px;
   }
 
+  nav .navbar_center {
+    width: 50%;
+  }
+
   .inputSearch button {
     width: 34px;
     height: 34px;
@@ -565,6 +578,6 @@ nav ul.AdminRight .User {
   }
 
   nav {
-    padding: 4px 0;
+    padding: 5px 0;
   }
 }

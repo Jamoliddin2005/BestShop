@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Google from "../img/google.png";
-import Facebook from "../img/facebook.png";
 import Github from "../img/github.png";
 import { toast } from "react-toastify";
 import "react-phone-number-input/style.css";
@@ -9,7 +8,7 @@ import firebase from "../../firebase";
 import "./Login.css";
 import axios from "axios";
 
-const Login = ({ setUser, GetToken }) => {
+const Login = ({ GetToken }) => {
   const [value, setValue] = useState("");
   const [code, setCode] = useState("");
   const [trueFalse, SetTrueFalse] = useState(false);
@@ -87,9 +86,6 @@ const Login = ({ setUser, GetToken }) => {
   const github = () => {
     return window.open(`${process.env.REACT_APP_URL}/auth/github`, "_self");
   };
-  const facebook = () => {
-    return window.open(`${process.env.REACT_APP_URL}/auth/facebook`, "_self");
-  };
 
   const SubmitHandler = async (e) => {
     if (value.length > 10) {
@@ -147,10 +143,6 @@ const Login = ({ setUser, GetToken }) => {
           <div className="loginButton google" onClick={google}>
             <img src={Google} alt="" className="icon" />
             Google
-          </div>
-          <div className="loginButton facebook" onClick={facebook}>
-            <img src={Facebook} alt="" className="icon" />
-            Facebook
           </div>
           <div className="loginButton github" onClick={github}>
             <img src={Github} alt="" className="icon" />

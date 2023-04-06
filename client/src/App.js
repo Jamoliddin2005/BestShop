@@ -12,7 +12,7 @@ import About from "./pages/About/About";
 import Login from "./pages/Login/Login";
 import Admin from "./pages/Admin/Admin";
 import Categories from "./pages/Categories/Categories";
-import ProductMorePage from "./pages/ProductMorePage/ProductMore";
+import ProductMorePage from "./pages/More/ProductMore";
 import Contact from "./pages/Contact/Contact";
 import AdminHome from "./pages/Admin/Administrator/Home/Home";
 import Shop from "./pages/Shop/Shop";

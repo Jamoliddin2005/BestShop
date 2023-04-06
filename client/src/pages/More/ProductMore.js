@@ -52,7 +52,7 @@ const ProductMore = ({ productMore, setProductMore, user, cartNumbers, minusNumb
 
   return (
     <div className={classes.ProductMore}>
-      <div className={classes.container}>
+      <div className={"container"}>
         {loading ? (
           <Loading />
         ) : (

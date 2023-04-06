@@ -28,7 +28,7 @@ const Categories = ({
 
   return (
     <div className={classes.Categories}>
-      <div className={classes.container}>
+      <div className={"container"}>
         <div className={classes.row}>
           {categoryBig.length ? (
             categoryLoading ? (

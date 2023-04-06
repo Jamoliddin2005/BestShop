@@ -179,3 +179,10 @@
      margin-top: 0;
    }
  }
+
+
+ @media(max-width:480px) {
+   .images {
+     height: 200px;
+   }
+ }

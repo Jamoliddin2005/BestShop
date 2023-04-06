@@ -198,6 +198,21 @@ form button {
   }
 }
 
+@media(max-width:480px) {
+  .Footer {
+    overflow: hidden;
+  }
+
+  .loading_Div_footer {
+    min-height: 200px;
+  }
+
+  .footer_center .loadingio-spinner-spin-j0h89mbuyk {
+    left: 70%;
+    top: 70%;
+  }
+}
+
 @media(max-width:370px) {
   .Footer .Footer_Top .container .row {
     flex-direction: column;

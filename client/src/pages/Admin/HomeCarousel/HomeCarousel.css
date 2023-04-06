@@ -138,7 +138,15 @@
 }
 
 
+
 @media(max-width:700px) {
+  .swiper_loading {
+    min-height: 200px;
+  }
+
+  .loadingio-spinner-spin-j0h89mbuyk {
+    left: 60%;
+  }
 
   .swiper-button-prev,
   .swiper-button-next {

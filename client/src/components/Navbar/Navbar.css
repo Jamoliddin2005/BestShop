@@ -622,17 +622,19 @@ nav ul.AdminRight .User {
     margin-left: 5px;
   }
 
-  nav .navbar_right li {
-    display: none;
-  }
 
   .navbar_top ul li {
     margin: 0 5px;
   }
 
-  nav .navbar_right li:last-child {
-    display: block;
-    margin-right: 5px;
+  nav .navbar_right li {
+    margin-left: 20px;
+  }
+
+  nav .navbar_center {
+    order: 1;
+    width: 100% !important;
+    margin-bottom: 10px;
   }
 
   nav .navbar_left span {

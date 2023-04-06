@@ -78,7 +78,9 @@ export default function Footer({ categories, Abouts, loading }) {
             <ul className="footer_center">
               <h3>{translate("Категории", "Kategoriyalar")}</h3>
               {loading ? (
-                <Loading />
+                <div className="loading_Div_footer">
+                  <Loading />
+                </div>
               ) : (
                 categories.map((item, index) => (
                   item.photo &&

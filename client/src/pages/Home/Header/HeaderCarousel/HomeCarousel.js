@@ -43,7 +43,9 @@ const HomeCarousel = ({ setErrorServer }) => {
   return contacts.length ? (
     <div className="container">
       <Swiper
-        slidesPerView={1.1}
+        slidesPerView={
+          window.innerWidth > 480 ? 1.1 : 1
+        }
         spaceBetween={30}
         loop={true}
         autoplay={{
@@ -59,7 +61,9 @@ const HomeCarousel = ({ setErrorServer }) => {
         className="mySwiper"
       >
         {loading ? (
-          <Loading />
+         <div className="swiper_loading">
+           <Loading />
+         </div>
         ) : (
           contacts.map((item, index) => (
             item.post &&

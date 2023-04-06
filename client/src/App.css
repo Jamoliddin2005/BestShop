@@ -97,6 +97,10 @@
   .swiper-pagination-fraction {
     display: none;
   }
+}
 
-
+@media(max-width:480px) {
+  .mongo_big {
+    padding-top: 180px;
+  }
 }

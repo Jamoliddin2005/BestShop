@@ -15,8 +15,6 @@ const ProductMore = ({ productMore, setProductMore, user, cartNumbers, minusNumb
   const [activeImage, setImageActive] = useState(null)
   const [truth, setTruth] = useState(false)
 
-  window.scroll(0, 0);
-
   const [localstorage, setLocalstorage] = useState([
     {
       _id: "",
@@ -36,8 +34,6 @@ const ProductMore = ({ productMore, setProductMore, user, cartNumbers, minusNumb
     setProductMore(data.data);
     setLoading(false);
   };
-
-
 
   useEffect(() => {
     CategoryFind();

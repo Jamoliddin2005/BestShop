@@ -170,3 +170,84 @@
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 7;
 }
+
+
+@media(max-width:1450px) {
+
+  .buttonBuy,
+  .buttonBuyCart,
+  .buttonBuyCartAdd {
+    padding: 0;
+    width: 50%;
+    font-size: 18px;
+    height: 44px;
+    margin-top: 20px;
+  }
+
+  .name {
+    font-size: 25px;
+    margin-bottom: 20px;
+  }
+
+  .price {
+    margin-bottom: 15px;
+    font-size: 20px;
+  }
+
+  .desc {
+    font-size: 16px;
+    max-height: 290px;
+  }
+}
+
+@media(max-width:1200px) {
+
+  .left,
+  .right {
+    height: 500px;
+  }
+
+  .desc {
+    max-height: 250px;
+  }
+}
+
+@media(max-width:1100px) {
+
+  .left,
+  .right {
+    height: 400px;
+  }
+
+  .name {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .price {
+    margin-bottom: 10px;
+    font-size: 17px;
+  }
+
+  .desc {
+    max-height: 180px;
+    font-size: 15px;
+  }
+
+  .buttonBuy,
+  .buttonBuyCart,
+  .buttonBuyCartAdd {
+    font-size: 15px;
+  }
+}
+
+@media(max-width:890px) {
+  .left .Left_left {
+    width: 180px;
+  }
+
+  .left .Left_left .images_nth {
+    height: auto;
+    margin-bottom: 10px;
+  }
+}

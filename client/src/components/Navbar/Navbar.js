@@ -6,20 +6,14 @@ import axios from "axios";
 import NameLength from "../NameLength/NameLength";
 
 function Navbar({ user, uzLanguage, setUzLanguage, productNumbers,
-  totalCoastGet }) {
+  totalCoastGet,onScrollTop }) {
   const [languages, setLanguages] = useState(false);
   const [search, setSearch] = useState([]);
   const [value, setValue] = useState("");
   const [searchBoolean, setSearchBoolean] = useState(false);
   // console.log(productNumbers);
   // console.log(totalCoastGet);
-  const onScrollTop = () => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "smooth",
-    });
-  };
+
 
   const timeoutId = useRef();
   const onSearchFunction = async (e) => {

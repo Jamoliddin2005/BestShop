@@ -33,6 +33,14 @@ function App() {
   const [productsInCart, setProductsInCart] = useState("");
   const [totalCoastGet, setTotalCoastGet] = useState("");
 
+  const onScrollTop = () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
+
   const GetTranslate = () => {
     if (localStorage.getItem("language") === "ru") {
       window.localStorage.setItem("language", "ru")
@@ -342,6 +350,7 @@ function App() {
         theme="colored"
       />
       {ErrorServer || <Navbar
+        onScrollTop={onScrollTop}
         user={user}
         uzLanguage={uzLanguage}
         setUzLanguage={setUzLanguage}
@@ -355,6 +364,7 @@ function App() {
             element={
               ErrorServer ? <Navigate to="/server-error" /> :
                 <Home
+                  onScrollTop={onScrollTop}
                   setErrorServer={setErrorServer}
                   loading={loading}
                   setLoading={setLoading}
@@ -380,6 +390,7 @@ function App() {
             element={
               ErrorServer ? <Navigate to="/server-error" /> :
                 <ProductMorePage
+                  onScrollTop={onScrollTop}
                   cartNumbers={cartNumbers}
                   minusNumber={minusNumber}
                   user={user}
@@ -394,6 +405,7 @@ function App() {
               ErrorServer ? <Navigate to="/server-error" /> :
                 user ? (
                   <Admin
+                    onScrollTop={onScrollTop}
                     GetToken={GetToken}
                     Abouts={Abouts}
                     ProductMore={ProductMore}
@@ -409,13 +421,14 @@ function App() {
                 )
             }
           />
-          <Route path="/contact" element={ErrorServer ? <Navigate to="/server-error" /> : <Contact />} />
-          <Route path="/shop" element={ErrorServer ? <Navigate to="/server-error" /> : <Shop loading={loading} categories={categories} />} />
+          <Route path="/contact" element={ErrorServer ? <Navigate to="/server-error" /> : <Contact onScrollTop={onScrollTop} />} />
+          <Route path="/shop" element={ErrorServer ? <Navigate to="/server-error" /> : <Shop onScrollTop={onScrollTop} loading={loading} categories={categories} />} />
           <Route
             path="/category/:id"
             element={
               ErrorServer ? <Navigate to="/server-error" /> :
                 <Categories
+                  onScrollTop={onScrollTop}
                   moreLoading={moreLoading}
                   setMoreLoading={setMoreLoading}
                   setCategoryBig={setCategoryBig}
@@ -432,6 +445,7 @@ function App() {
             element={
               ErrorServer ? <Navigate to="/server-error" /> : user ? (
                 <AdminHome
+                  onScrollTop={onScrollTop}
                   categoryBig={categoryBig}
                   setCategoryBig={setCategoryBig}
                   categoryLoading={categoryLoading}

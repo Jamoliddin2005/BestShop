@@ -4,7 +4,7 @@ import translate from "../../../components/translate/translate";
 import Loading from "../../../components/Loading/Loading";
 import NameLength from "../../../components/NameLength/NameLength";
 import classes from "./NewProducts.module.css";
-function NewProducts({ ProductMore, setErrorServer }) {
+function NewProducts({ ProductMore, setErrorServer, onScrollTop }) {
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
   const [pages, setPages] = useState(0);
@@ -61,6 +61,7 @@ function NewProducts({ ProductMore, setErrorServer }) {
                         key={index}
                         onClick={() => {
                           ProductMore(item._id);
+                          onScrollTop()
                         }}
                       >
                         <div className={classes.image}>

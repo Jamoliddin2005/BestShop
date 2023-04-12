@@ -14,6 +14,7 @@ function Home({
   loading,
   setLoading,
   setErrorServer,
+  onScrollTop
 }) {
   return (
     <div className="about">
@@ -28,6 +29,7 @@ function Home({
         setCategoryBig={setCategoryBig}
       />
       <NewProducts
+        onScrollTop={onScrollTop}
         ProductMore={ProductMore}
         setErrorServer={setErrorServer} />
     </div>

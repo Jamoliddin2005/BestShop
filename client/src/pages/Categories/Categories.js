@@ -12,6 +12,7 @@ const Categories = ({
   setCategoryLoading,
   setCategoryBig,
   ProductMore,
+  onScrollTop
 }) => {
   useEffect(() => {
     const CategoryFind = async () => {
@@ -38,7 +39,10 @@ const Categories = ({
                 item.photo[0] && <div
                   key={index}
                   className={classes.product}
-                  onClick={() => ProductMore(item._id)}
+                  onClick={() => {
+                    ProductMore(item._id)
+                    onScrollTop()
+                  }}
                 >
                   <div className={classes.image}>
                     <img

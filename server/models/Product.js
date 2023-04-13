@@ -25,6 +25,10 @@ const Product = new Schema({
         type: String,
         required: true,
     },
+    inCart: {
+        type: Number,
+        default: 0
+    },
     categoryId: {
         ref: "categories",
         type: Schema.Types.ObjectId,

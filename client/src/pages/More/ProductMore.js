@@ -11,7 +11,6 @@ import translate from "../../components/translate/translate";
 
 const ProductMore = ({ productMore, setProductMore, user, cartNumbers, minusNumber }) => {
   const [loading, setLoading] = useState(false);
-  const [savetoCart, setSavetoCart] = useState(0);
   const [activeImage, setImageActive] = useState(null)
   const [truth, setTruth] = useState(false)
 
@@ -25,6 +24,7 @@ const ProductMore = ({ productMore, setProductMore, user, cartNumbers, minusNumb
       categoryId: "",
     },
   ]);
+
   const Winlocation = window.location.pathname;
   const CategoryFind = async () => {
     setLoading(true);
@@ -40,12 +40,11 @@ const ProductMore = ({ productMore, setProductMore, user, cartNumbers, minusNumb
   }, []);
 
   const clickHandler = async (e) => {
-    setSavetoCart(1);
     await setLocalstorage(productMore);
-    await localStorage.setItem("product", localstorage);
   };
+  // console.log(productMore);
 
-
+  const ProductCart = localStorage.getItem("productsInCart") && Object.values(JSON.parse(localStorage.getItem("productsInCart"))).find(x => x._id === productMore._id)
   return (
     <div className={classes.ProductMore}>
       <div className={"container"}>
@@ -60,6 +59,8 @@ const ProductMore = ({ productMore, setProductMore, user, cartNumbers, minusNumb
                     item && <div className={classes.images_nth} key={index} onClick={(e) => {
                       setImageActive(item)
                       window.scroll(0, 0);
+                      console.log(productMore);
+
                     }}>
                       <img src={"/uploads/" + item} alt="" width={"100%"} />
                     </div>
@@ -94,21 +95,23 @@ const ProductMore = ({ productMore, setProductMore, user, cartNumbers, minusNumb
                   <button className={classes.buttonBuy} onClick={() => {
                     setTruth(true)
                   }}>{translate("Купить в один клик", "Bir bosishda sotib olish")}</button>
-                  {savetoCart > 0 ? (
+                  {ProductCart ? (
+                    ProductCart &&
                     <button className={classes.buttonBuyCartAdd}>
                       <div
                         className={classes.minus}
                         onClick={(e) => {
-                          setSavetoCart(savetoCart - 1)
                           minusNumber(productMore)
                         }}
                       >
                         <i className="fa-solid fa-minus"></i>
                       </div>
-                      <div className={classes.center}>{savetoCart}</div>
+                      <div className={classes.center}>{ProductCart.inCart}</div>
                       <div
                         className={classes.plus}
-                        onClick={(e) => setSavetoCart(savetoCart + 1)}
+                        onClick={(e) => {
+                          cartNumbers(productMore)
+                        }}
                       >
                         <i className="fa-solid fa-plus"></i>
                       </div>

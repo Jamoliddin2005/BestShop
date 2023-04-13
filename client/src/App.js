@@ -304,21 +304,21 @@ function App() {
     let cartItems = localStorage.getItem("productsInCart");
     cartItems = JSON.parse(cartItems);
     if (cartItems != null) {
-      if (cartItems[product.id] === undefined) {
+      if (cartItems[product._id] === undefined) {
         cartItems = {
           ...cartItems,
-          [product.id]: product,
+          [product._id]: product,
         };
       }
-      cartItems[product.id].inCart--;
+      cartItems[product._id].inCart--;
     } else {
       product.inCart--;
       cartItems = {
-        [product.id]: product,
+        [product._id]: product,
       };
     }
-    if (cartItems[product.id].inCart < 1) {
-      delete cartItems[product.id]
+    if (cartItems[product._id].inCart < 1) {
+      delete cartItems[product._id]
     }
     localStorage.setItem("productsInCart", JSON.stringify(cartItems));
     setProductsInCart(localStorage.getItem("productsInCart"));

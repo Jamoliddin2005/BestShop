@@ -232,7 +232,7 @@ function Navbar({ user, uzLanguage, setUzLanguage, productNumbers,
                         fill="#141415"
                       ></path>
                     </svg>
-                    <span>0</span>
+                    <span>{productNumbers ? productNumbers : 0}</span>
                     <p>{translate("Корзина", "Savat")}</p>
                   </Link>
                 </li>

@@ -42,7 +42,6 @@ const ProductMore = ({ productMore, setProductMore, user, cartNumbers, minusNumb
   const clickHandler = async (e) => {
     await setLocalstorage(productMore);
   };
-  // console.log(productMore);
 
   const ProductCart = localStorage.getItem("productsInCart") && Object.values(JSON.parse(localStorage.getItem("productsInCart"))).find(x => x._id === productMore._id)
   return (

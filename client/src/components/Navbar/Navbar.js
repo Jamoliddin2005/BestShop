@@ -6,7 +6,7 @@ import axios from "axios";
 import NameLength from "../NameLength/NameLength";
 
 function Navbar({ user, uzLanguage, setUzLanguage, productNumbers,
-  totalCoastGet,onScrollTop }) {
+  totalCoastGet, onScrollTop }) {
   const [languages, setLanguages] = useState(false);
   const [search, setSearch] = useState([]);
   const [value, setValue] = useState("");
@@ -216,7 +216,7 @@ function Navbar({ user, uzLanguage, setUzLanguage, productNumbers,
                 </li>
 
                 <li>
-                  <Link to="/" onClick={() => onScrollTop()}>
+                  <Link to="/cart" onClick={() => onScrollTop()}>
                     <svg
                       width="24"
                       height="24"

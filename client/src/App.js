@@ -21,6 +21,7 @@ import Shop from "./pages/Shop/Shop";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import ServerError from "./pages/500/ServerError";
+import Cart from "./pages/Cart/Cart";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -423,6 +424,7 @@ function App() {
           />
           <Route path="/contact" element={ErrorServer ? <Navigate to="/server-error" /> : <Contact onScrollTop={onScrollTop} />} />
           <Route path="/shop" element={ErrorServer ? <Navigate to="/server-error" /> : <Shop onScrollTop={onScrollTop} loading={loading} categories={categories} />} />
+          <Route path="/cart" element={ErrorServer ? <Navigate to="/server-error" /> : <Cart onScrollTop={onScrollTop} loading={loading} />} />
           <Route
             path="/category/:id"
             element={

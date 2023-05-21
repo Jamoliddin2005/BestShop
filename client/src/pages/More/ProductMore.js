@@ -58,8 +58,6 @@ const ProductMore = ({ productMore, setProductMore, user, cartNumbers, minusNumb
                     item && <div className={classes.images_nth} key={index} onClick={(e) => {
                       setImageActive(item)
                       window.scroll(0, 0);
-                      console.log(productMore);
-
                     }}>
                       <img src={"/uploads/" + item} alt="" width={"100%"} />
                     </div>
@@ -82,7 +80,6 @@ const ProductMore = ({ productMore, setProductMore, user, cartNumbers, minusNumb
                   </TransformWrapper>
                 </div>
               </div>
-
               <div className={classes.right}>
                 <h2 className={classes.name}>{translate(productMore.name_ru, productMore.name_uz)}</h2>
                 <h4 className={classes.price}>{Currency(productMore.price)}</h4>

@@ -133,15 +133,17 @@ function Truth({
             })
             .then((res) => {
                 // setInput("");
+                return toast.success("Administratorga yuborildi!")
+
             })
             .catch((err) => {
+                console.log(err);
                 return toast.error("Xatolik bor!")
             })
             .finally(() => {
                 return
             });
         setTruth(false)
-        return toast.success("Administratorga yuborildi!")
     }
 
     const BtnYes = (e) => {

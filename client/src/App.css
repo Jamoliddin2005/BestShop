@@ -80,6 +80,17 @@
   }
 }
 
+@media(max-width:800px) {
+  .react-transform-wrapper {
+    width: auto !important;
+  }
+
+  .react-transform-component {
+    width: 100% !important;
+    height: 500px !important;
+  }
+}
+
 @media(max-width:850px) {
   .mongo_big {
     padding-top: 100px;
@@ -102,5 +113,10 @@
 @media(max-width:480px) {
   .mongo_big {
     padding-top: 180px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 2px;
+    border-radius: 20px;
   }
 }

@@ -11,13 +11,16 @@ function Cart({ cartNumbers, minusNumber, productNumbers, totalCoastGet }) {
     localStorage.getItem("productsInCart") &&
     Object.values(JSON.parse(localStorage.getItem("productsInCart")));
 
-  const order = document.querySelector(".order");
-  const ButtonAnimation = () => {
-    if (!order.classList.contains("animate")) {
-      order.classList.add("animate");
-      setTimeout(() => {
-        order.classList.remove("animate");
-      }, 10000);
+    
+    const ButtonAnimation = () => { 
+    const order = document.querySelector(".order");
+    if (order) {
+      if (!order.classList.contains("animate")) {
+        order.classList.add("animate");
+        setTimeout(() => {
+          order.classList.remove("animate");
+        }, 10000);
+      }
     }
   };
 
@@ -69,7 +72,7 @@ function Cart({ cartNumbers, minusNumber, productNumbers, totalCoastGet }) {
                   </div>
                 ))}
               </div>
-              <div className={classes.cartRight}>
+              <div className={`${classes.cartRight} cartRight`}>
                 <h3>{translate("Ваши заказы", "Sizning buyurtmalaringiz")}</h3>
                 <ul>
                   <li>

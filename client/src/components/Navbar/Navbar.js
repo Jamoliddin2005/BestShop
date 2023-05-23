@@ -186,9 +186,9 @@ function Navbar({ user, uzLanguage, setUzLanguage, productNumbers,
                 </li>
 
                 <li>
-                  <Link to="/" onClick={() => onScrollTop()}>
+                  <Link to="/cart" onClick={() => onScrollTop()}>
                     <i className="fa-solid fa-cart-arrow-down"></i>
-                    <span>0</span>
+                    <span>{productNumbers ? productNumbers : 0}</span>
                   </Link>
                 </li>
                 <Link

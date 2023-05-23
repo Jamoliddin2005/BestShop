@@ -424,7 +424,9 @@ function App() {
           />
           <Route path="/contact" element={ErrorServer ? <Navigate to="/server-error" /> : <Contact onScrollTop={onScrollTop} />} />
           <Route path="/shop" element={ErrorServer ? <Navigate to="/server-error" /> : <Shop onScrollTop={onScrollTop} loading={loading} categories={categories} />} />
-          <Route path="/cart" element={ErrorServer ? <Navigate to="/server-error" /> : <Cart onScrollTop={onScrollTop} loading={loading} />} />
+          <Route path="/cart" element={ErrorServer ? <Navigate to="/server-error" /> : <Cart
+            totalCoastGet={totalCoastGet} cartNumbers={cartNumbers}
+            minusNumber={minusNumber} productNumbers={productNumbers} onScrollTop={onScrollTop} loading={loading} />} />
           <Route
             path="/category/:id"
             element={

@@ -63,7 +63,7 @@ function Navbar({ user, uzLanguage, setUzLanguage, productNumbers,
               <li>
                 <a
                   target={"_blank"}
-                  href="https://t.me/BestShopWeb"
+                  href="https://t.me/jamoliddin9717"
                   rel="noopener noreferrer"
                 >
                   <i className="fa-brands fa-telegram"></i>

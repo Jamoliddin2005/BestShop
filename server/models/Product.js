@@ -35,6 +35,9 @@ const Product = new Schema({
     }
 })
 Product.index({
-    name_uz: 'text', name_ru: 'text', desc_uz: 'text', desc_ru: 'text'
+    name_uz: 'text',
+    name_ru: 'text',
+    desc_uz: 'text',
+    desc_ru: 'text'
 })
 module.exports = model("Product", Product) 

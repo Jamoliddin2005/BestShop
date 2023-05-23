@@ -6,6 +6,11 @@
     align-items: center;
 }
 
+.row {
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
 .empty img {
     width: 500px;
     height: auto;
@@ -34,4 +39,118 @@
     border: 1px solid transparent;
     text-transform: uppercase;
     color: var(--color-snow);
+}
+
+.Cart {
+    background: var(--color-blue);
+    padding: 50px 0;
+}
+
+.cartLeft {
+    width: 70%;
+    background: var(--color-snow);
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.cartRight {
+    background: var(--color-snow);
+    border-radius: 20px;
+    padding: 20px;
+    font-family: var(--font-family-roboto);
+    width: 28%;
+}
+
+
+.cartRight h3 {
+    font-size: 17px;
+    color: var(--color-dark);
+    margin-bottom: 20px;
+}
+
+.cartRight ul {
+    display: flex;
+    flex-direction: column;
+}
+
+.animateButton {
+    margin-top: 50px;
+}
+
+
+.cartRight ul li {
+    display: flex;
+    margin-bottom: 10px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cartLeft .cart {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid var(--color-violet);
+}
+
+.cartLeft .cart:last-child {
+    border-bottom: none;
+}
+
+.cartLeft .price {
+    width: 150px;
+}
+
+
+.cartLeft .cart img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+}
+
+.cart_total .cart_total_btn {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: 1px solid var(--color-dark);
+
+}
+
+.cart_total .cart_total_btn .cart_minus,
+.cart_total .cart_total_btn .cart_plus,
+.cart_total .cart_total_btn .cart_incart {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-right: 1px solid var(--color-dark);
+}
+
+.cart_total .cart_total_btn .cart_incart {
+    width: 60px;
+}
+
+.cart_total .cart_total_btn .cart_plus {
+    border-right: none;
+}
+
+.Cart h1 {
+    font-family: var(--font-family-roboto);
+    text-transform: uppercase;
+    color: var(--color-dark);
+    margin-bottom: 20px;
+}
+
+.cart_title {
+    width: 300px;
+}
+
+.cart_title a,
+.cartLeft .price,
+.cart_total .cart_incart {
+    font-family: var(--font-family-roboto);
+    color: var(--color-dark);
+    font-size: 15px;
 }

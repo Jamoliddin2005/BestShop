@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import axios from "axios";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
-
+import 'swiper/css';
 // Import css
 import "./App.css";
 
@@ -422,15 +422,48 @@ function App() {
                 )
             }
           />
-          <Route path="/contact" element={ErrorServer ? <Navigate to="/server-error" /> : <Contact onScrollTop={onScrollTop} />} />
-          <Route path="/shop" element={ErrorServer ? <Navigate to="/server-error" /> : <Shop onScrollTop={onScrollTop} loading={loading} categories={categories} />} />
-          <Route path="/cart" element={ErrorServer ? <Navigate to="/server-error" /> : <Cart
-            totalCoastGet={totalCoastGet} cartNumbers={cartNumbers}
-            minusNumber={minusNumber} productNumbers={productNumbers} onScrollTop={onScrollTop} loading={loading} />} />
+          <Route
+            path="/contact"
+            element={
+              ErrorServer
+                ? <Navigate
+                  to="/server-error"
+                />
+                : <Contact
+                  onScrollTop={onScrollTop}
+                />} />
+          <Route path="/shop"
+            element={
+              ErrorServer ?
+                <Navigate
+                  to="/server-error" />
+                : <Shop
+                  onScrollTop={onScrollTop}
+                  loading={loading}
+                  categories={categories} />
+            } />
+          <Route
+            path="/cart"
+            element={
+              ErrorServer ?
+                <Navigate
+                  to="/server-error"
+                />
+                : <Cart
+                  user={user}
+                  totalCoastGet={totalCoastGet}
+                  cartNumbers={cartNumbers}
+                  minusNumber={minusNumber}
+                  productNumbers={productNumbers}
+                  onScrollTop={onScrollTop}
+                  loading={loading} />}
+          />
           <Route
             path="/category/:id"
             element={
-              ErrorServer ? <Navigate to="/server-error" /> :
+              ErrorServer ?
+                <Navigate to="/server-error"
+                /> :
                 <Categories
                   onScrollTop={onScrollTop}
                   moreLoading={moreLoading}
@@ -447,28 +480,42 @@ function App() {
           <Route
             path="/admin/homePage"
             element={
-              ErrorServer ? <Navigate to="/server-error" /> : user ? (
-                <AdminHome
-                  onScrollTop={onScrollTop}
-                  categoryBig={categoryBig}
-                  setCategoryBig={setCategoryBig}
-                  categoryLoading={categoryLoading}
-                  setCategoryLoading={setCategoryLoading}
-                  getCategory={getCategory}
-                  ProductMore={ProductMore}
-                  user={user}
-                  loading={loading}
-                  contacts={contacts}
-                  setLoading={setLoading}
-                  setContacts={setContacts}
-                />
-              ) : (
-                <Navigate to="/" />
-              )
+              ErrorServer ?
+                <Navigate
+                  to="/server-error"
+                /> :
+                user ? (
+                  <AdminHome
+                    onScrollTop={onScrollTop}
+                    categoryBig={categoryBig}
+                    setCategoryBig={setCategoryBig}
+                    categoryLoading={categoryLoading}
+                    setCategoryLoading={setCategoryLoading}
+                    getCategory={getCategory}
+                    ProductMore={ProductMore}
+                    user={user}
+                    loading={loading}
+                    contacts={contacts}
+                    setLoading={setLoading}
+                    setContacts={setContacts}
+                  />
+                ) : (
+                  <Navigate
+                    to="/"
+                  />
+                )
 
             }
           />
-          <Route path="/server-error" element={ErrorServer ? <ServerError /> : <Navigate to="/" />} />
+          <Route
+            path="/server-error"
+            element={ErrorServer
+              ? <ServerError
+              />
+              : <Navigate to="/"
+              />
+            }
+          />
         </Routes>
         {ErrorServer || <Footer categories={categories} Abouts={Abouts} loading={loading} />}
       </div>

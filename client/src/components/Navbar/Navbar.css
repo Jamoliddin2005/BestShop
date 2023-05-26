@@ -527,10 +527,25 @@ nav ul.AdminRight .User {
   }
 }
 
+@media(max-width:1150px) {
+  nav .navbar_right img {
+    width: 30px;
+    height: 30px;
+  }
+}
 
 @media(max-width:1100px) {
   nav .navbar_right li:first-child {
     margin-left: 0;
+  }
+
+  nav ul.AdminRight .User {
+    margin-left: 18px;
+    font-size: 16px;
+  }
+
+  nav .navbar_right li {
+    margin-left: 30px;
   }
 }
 
@@ -538,11 +553,19 @@ nav ul.AdminRight .User {
   nav .navbar_right li {
     margin-left: 20px;
   }
+
+  nav ul.AdminRight .User {
+    font-size: 15px;
+  }
 }
 
 @media(max-width:850px) {
   nav .navbar_right li {
-    margin-left: 30px;
+    margin-left: 20px;
+  }
+
+  nav .navbar_right img {
+    display: none;
   }
 
   nav .navbar_right li p {

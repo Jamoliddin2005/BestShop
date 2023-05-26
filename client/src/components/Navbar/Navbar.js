@@ -11,8 +11,6 @@ function Navbar({ user, uzLanguage, setUzLanguage, productNumbers,
   const [search, setSearch] = useState([]);
   const [value, setValue] = useState("");
   const [searchBoolean, setSearchBoolean] = useState(false);
-  // console.log(productNumbers);
-  // console.log(totalCoastGet);
 
 
   const timeoutId = useRef();
@@ -202,7 +200,7 @@ function Navbar({ user, uzLanguage, setUzLanguage, productNumbers,
                     <img src="/uploads/user.png" alt="" />
                   )}
 
-                  {user.firstName ? user.firstName : user.phoneNumber}
+                  {NameLength(user.firstName ? user.firstName : user.phoneNumber, 10)}
                 </Link>
               </ul>
             ) : (

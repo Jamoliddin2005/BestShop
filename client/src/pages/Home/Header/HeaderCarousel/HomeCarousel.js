@@ -2,13 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay, Pagination, Navigation } from "swiper";
 import Loading from "../../../../components/Loading/Loading";
-import 'swiper/swiper.min.css'
-import 'swiper/modules/pagination/pagination.min.css'
-import "swiper/modules/navigation/navigation.min.css";
+
 
 SwiperCore.use([Autoplay]);
 const HomeCarousel = ({ setErrorServer }) => {
-
   const [loading, setLoading] = useState(false);
 
   const [contacts, setContacts] = useState([
@@ -49,7 +46,7 @@ const HomeCarousel = ({ setErrorServer }) => {
         spaceBetween={30}
         loop={true}
         autoplay={{
-          delay: 5000,
+          delay: 2000,
           disableOnInteraction: false,
         }}
         effect="coverflow"
@@ -61,9 +58,9 @@ const HomeCarousel = ({ setErrorServer }) => {
         className="mySwiper"
       >
         {loading ? (
-         <div className="swiper_loading">
-           <Loading />
-         </div>
+          <div className="swiper_loading">
+            <Loading />
+          </div>
         ) : (
           contacts.map((item, index) => (
             item.post &&

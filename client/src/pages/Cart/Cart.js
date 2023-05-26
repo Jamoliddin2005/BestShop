@@ -2,25 +2,35 @@ import React from "react";
 import classes from "./Cart.module.css";
 import translate from "../../components/translate/translate";
 import Currency from "../../components/Currency/Currency";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NameLength from "../../components/NameLength/NameLength";
 import "./Button.animate.css";
 
-function Cart({ cartNumbers, minusNumber, productNumbers, totalCoastGet }) {
+function Cart({ cartNumbers, minusNumber, productNumbers, totalCoastGet, user }) {
   const ProductCart =
     localStorage.getItem("productsInCart") &&
     Object.values(JSON.parse(localStorage.getItem("productsInCart")));
 
+  const navigate = useNavigate();
+
+  const SubmitToTelegram = () => {
     
-    const ButtonAnimation = () => { 
+  }
+
+
+  const ButtonAnimation = () => {
     const order = document.querySelector(".order");
-    if (order) {
-      if (!order.classList.contains("animate")) {
-        order.classList.add("animate");
-        setTimeout(() => {
-          order.classList.remove("animate");
-        }, 10000);
+    if (user) {
+      if (order) {
+        if (!order.classList.contains("animate")) {
+          order.classList.add("animate");
+          setTimeout(() => {
+            order.classList.remove("animate");
+          }, 10000);
+        }
       }
+    } else {
+      return navigate('/login');
     }
   };
 
@@ -141,6 +151,7 @@ function Cart({ cartNumbers, minusNumber, productNumbers, totalCoastGet }) {
           )}
         </div>
       </div>
+
     </div>
   );
 }

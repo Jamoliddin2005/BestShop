@@ -6,17 +6,20 @@ import { Link, useNavigate } from "react-router-dom";
 import NameLength from "../../components/NameLength/NameLength";
 import "./Button.animate.css";
 
-function Cart({ cartNumbers, minusNumber, productNumbers, totalCoastGet, user }) {
+function Cart({
+  cartNumbers,
+  minusNumber,
+  productNumbers,
+  totalCoastGet,
+  user,
+}) {
   const ProductCart =
     localStorage.getItem("productsInCart") &&
     Object.values(JSON.parse(localStorage.getItem("productsInCart")));
 
   const navigate = useNavigate();
 
-  const SubmitToTelegram = () => {
-    
-  }
-
+  const SubmitToTelegram = () => {};
 
   const ButtonAnimation = () => {
     const order = document.querySelector(".order");
@@ -30,7 +33,7 @@ function Cart({ cartNumbers, minusNumber, productNumbers, totalCoastGet, user })
         }
       }
     } else {
-      return navigate('/login');
+      return navigate("/login");
     }
   };
 
@@ -151,7 +154,6 @@ function Cart({ cartNumbers, minusNumber, productNumbers, totalCoastGet, user })
           )}
         </div>
       </div>
-
     </div>
   );
 }

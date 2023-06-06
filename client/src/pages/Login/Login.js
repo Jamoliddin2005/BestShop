@@ -18,6 +18,7 @@ const Login = ({ GetToken }) => {
   const [account, setAccount] = useState("");
   const [passwordNumber, setPasswordNumber] = useState("");
   const [accountPassword, setAccountPassword] = useState(false);
+  const [LoadingButton, setLoadingButton] = useState(false);
 
   const configureCaptcha = () => {
     window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
@@ -33,6 +34,7 @@ const Login = ({ GetToken }) => {
 
   const onSubmitOTP = async (e) => {
     e.preventDefault();
+    setLoadingButton(true);
     if (code) {
       if (code.length > 5) {
         const code1 = code;
@@ -42,14 +44,18 @@ const Login = ({ GetToken }) => {
             const user = result.user.phoneNumber;
             SetAccountCode(true);
             setAccount(user);
+            setLoadingButton(false);
           })
           .catch((error) => {
+            setLoadingButton(false);
             return toast.error("Kod xato!!!");
           });
       } else {
+        setLoadingButton(false);
         return toast.error("Kodni to'gri kiriting");
       }
     } else {
+      setLoadingButton(false);
       return toast.error("Kodni to'gri kiriting");
     }
   };
@@ -69,7 +75,7 @@ const Login = ({ GetToken }) => {
         if (data.data) {
           window.sessionStorage.setItem("token", data.data);
           GetToken();
-          return
+          return;
         }
 
         return toast.success("Success");
@@ -88,6 +94,7 @@ const Login = ({ GetToken }) => {
   };
 
   const SubmitHandler = async (e) => {
+    setLoadingButton(true);
     if (value.length > 10) {
       const { data } = await axios.post(
         `${process.env.REACT_APP_URL}/auth/userFind`,
@@ -105,6 +112,7 @@ const Login = ({ GetToken }) => {
           .signInWithPhoneNumber(phoneNumber, appVerifier)
           .then((confirmationResult) => {
             SetTrueFalse(true);
+            setLoadingButton(false);
             return (window.confirmationResult = confirmationResult);
           })
           .catch((error) => {
@@ -119,6 +127,7 @@ const Login = ({ GetToken }) => {
   };
 
   const AccountPasswordSubmitHandler = async (req, res) => {
+    setLoadingButton(true);
     const { data } = await axios.post(
       `${process.env.REACT_APP_URL}/auth/PostPasswordSubmit`,
       { phoneNumber: value, password: passwordNumber },
@@ -127,9 +136,10 @@ const Login = ({ GetToken }) => {
       }
     );
     if (data.success) {
+      setLoadingButton(false);
       window.sessionStorage.setItem("token", data.data);
       GetToken();
-      return
+      return;
     } else {
       return toast.error("Password is Incorrect");
     }
@@ -181,7 +191,9 @@ const Login = ({ GetToken }) => {
                         SetSwitcher(false);
                       }}
                     >
-                      <span role="img" aria-label="monkey">🙈</span>
+                      <span role="img" aria-label="monkey">
+                        🙈
+                      </span>
                     </div>
                   ) : (
                     <div
@@ -190,14 +202,23 @@ const Login = ({ GetToken }) => {
                         SetSwitcher(true);
                       }}
                     >
-                      <span role="img" aria-label="monkey">🐵</span>
+                      <span role="img" aria-label="monkey">
+                        🐵
+                      </span>
                     </div>
                   )}
                 </div>
               </div>
-              <button className="submit" onClick={AccountPasswordSubmitHandler}>
-                Login
-              </button>
+              {LoadingButton ? (
+                <button className="submit" disabled={true}>Loading...</button>
+              ) : (
+                <button
+                  className="submit"
+                  onClick={AccountPasswordSubmitHandler}
+                >
+                  Login
+                </button>
+              )}
             </>
           ) : (
             <>
@@ -222,7 +243,9 @@ const Login = ({ GetToken }) => {
                                 SetSwitcher(false);
                               }}
                             >
-                              <span role="img" aria-label="monkey">🙈</span>
+                              <span role="img" aria-label="monkey">
+                                🙈
+                              </span>
                             </div>
                           ) : (
                             <div
@@ -231,26 +254,34 @@ const Login = ({ GetToken }) => {
                                 SetSwitcher(true);
                               }}
                             >
-                              <span role="img" aria-label="monkey">🐵</span>
+                              <span role="img" aria-label="monkey">
+                                🐵
+                              </span>
                             </div>
                           )}
                         </div>
                       </div>
                     </>
                   ) : (
-                    <>
+                    LoadingButton ? (
+                      <button className="submit" disabled={true}>Loading...</button>
+                    ) : (
+                      <>
                       <input
                         className="input codeSubmit"
                         placeholder="Code"
                         value={code}
                         onChange={(e) => setCode(e.target.value)}
-                      />
+                      /> 
                       <button className="submit" onClick={onSubmitOTP}>
                         Login
                       </button>
                     </>
+                    )                  
                   )}
                 </>
+              ) : LoadingButton ? (
+                <button className="submit" disabled={true}>Loading...</button>
               ) : (
                 <button className="submit" onClick={SubmitHandler}>
                   Login

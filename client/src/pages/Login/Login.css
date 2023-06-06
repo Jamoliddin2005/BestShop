@@ -105,7 +105,7 @@
   outline: none;
   margin-top: 10px;
   margin-bottom: 20px;
-}
+} 
 
 .login .submit {
   width: 300px;
@@ -194,13 +194,17 @@
 .inputsLoginPass .switcher {
   position: absolute;
   right: 0;
-  top: 0;
+  top: 0;   white-space: nowrap;
+        overflow: hidden;
+        text-overflow: clip;
 }
 
 .inputsLoginPass .switcher .off,
 .inputsLoginPass .switcher .on {
   padding: 13px;
-  cursor: pointer;
+  cursor: pointer;   white-space: nowrap;
+        overflow: hidden;
+        text-overflow: clip;
 }
 
 .codeSubmit {

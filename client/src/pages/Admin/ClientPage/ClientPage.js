@@ -46,8 +46,7 @@ const ClientPage = ({ user, GetToken }) => {
           )}
         </div>
         <div className={classes.adminPagePanel}>
-          <div className={classes.itemPanele}>
-            <h4>Update account</h4>
+          <div className={classes.itemPanele}> 
             <span className={classes.logout} onClick={() => Logout()}>Logout</span>
           </div>
         </div>

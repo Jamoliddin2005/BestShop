@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const session = require("express-session");
+const MemoryStore = require('memorystore')(session)
 const passport = require("passport");
 const app = express();
 
@@ -14,10 +15,17 @@ app.use(
   session({
     secret: process.env.SessionSecretKey,
     resave: false,
-    saveUninitialized: true,
-    cookie: { maxAge: 60 * 60 * 1000 }, // 1 hour
+    saveUninitialized: false,
+    store: new MemoryStore({
+      checkPeriod: 86400000 // prune expired entries every 24h
+    }),
+    cookie: {
+      secure: false,
+      maxAge: 60 * 60 * 1000
+    }, // 1 hour
   })
 );
+
 
 require("./middleware/passport")(passport);
 app.use(passport.initialize());

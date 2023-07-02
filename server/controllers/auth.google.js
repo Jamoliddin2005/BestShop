@@ -1,7 +1,7 @@
 const passport = require("passport");
 
 exports.loginSuccess = async (req, res) => {
-  if (req.user) {
+  if (req.user) { 
     return res.status(200).json({
       success: true,
       message: "successfull",
